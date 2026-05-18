@@ -180,6 +180,127 @@ Real-world data from our platform on logo QR performance:
 
 The lift from logos far exceeds the small increase in scan failure rate, as long as the logo is sized and contrast-managed correctly.
 
+## Advanced logo techniques
+
+Beyond the basics, several advanced techniques can elevate branded QR design.
+
+**Adaptive logo sizing.** Some platforms support automatic logo sizing based on the QR's data density. Smaller payloads (shorter URLs) generate sparser QRs that can tolerate larger logos. Higher payloads need smaller logos. If your platform supports adaptive sizing, enable it for optimal balance.
+
+**Logo with translucent background.** Instead of a fully opaque logo over the QR, use a logo with partially transparent edges that blend slightly into the QR pattern. Looks more integrated but requires more careful contrast management.
+
+**Multi-element logos.** Some brands have logo combinations (icon + wordmark). For QR centers, use only the icon — wordmarks at QR sizes are illegible. Save the wordmark for the frame/CTA area outside the QR pattern.
+
+**Animated logos in digital displays.** On screens (not print), the logo in the QR center can subtly animate while the QR pattern stays static. Increases visual interest. Test thoroughly because animation can confuse some scanners.
+
+**Logo with status indicator.** Some sophisticated programs change the logo subtly based on QR status (active vs paused vs expired) to signal status visually. Advanced but useful for QRs that customers may scan multiple times.
+
+**Seasonal logo variations.** Holiday-themed logo variations can be deployed in the QR center for limited time periods. The QR pattern stays the same; only the logo changes. Easy seasonal refresh without affecting functionality.
+
+**Co-branded logos.** Partner co-marketing QRs can use combined logos. Two brands in a single logo area requires careful design to remain scannable. Keep total logo area under 20% in co-branded scenarios.
+
+These techniques add visual sophistication but require careful testing. Always verify scannability after applying advanced logo treatments.
+
+## Logo design checklist
+
+Before finalizing a branded QR with a logo, run through this checklist:
+
+- Logo is centered within the QR
+- Logo size is under 25% of QR area
+- Error correction is set to H level
+- White padding of 2–4 modules surrounds the logo
+- Logo contrast against the QR foreground is sufficient
+- Logo is in vector format (SVG) for print
+- Logo doesn't include illegible text at QR size
+- Logo background is transparent (no white box around it)
+- Logo is single-color or limited palette
+- Logo color contrasts with both QR foreground and background
+- Scannability check passes on the platform
+- QR scans reliably on iOS Camera (multiple devices)
+- QR scans reliably on Android Google Lens (multiple devices)
+- QR scans at production size (not just preview size)
+- QR scans in production lighting conditions
+- QR scans on production substrate (matte vs glossy)
+- QR scans from typical viewing distance
+- 10+ successful scans confirm consistency
+- Print proof shows the logo reproducing correctly
+- Logo doesn't dominate the visual composition (QR remains the focus)
+
+Run through this checklist for every new logo QR. Skipping items causes scan failures in production.
+
+## Industry-specific logo patterns
+
+Different industries have developed distinct logo QR conventions:
+
+**Restaurants:** Round logo in the center, frame with menu CTA, warm color palette (red, gold, brown). Visually inviting and food-associated.
+
+**Real estate:** Brokerage logo or agent photo (small) in the center, frame with property-related CTA, conservative color palette (navy, gray, gold).
+
+**Tech / SaaS:** Geometric icon or wordmark in the center, modern frame with clear CTA, bold color palette (often the brand's accent color).
+
+**Beauty:** Stylized brand icon, elegant frame, sophisticated color palette (often muted or pastel).
+
+**Healthcare:** Medical icon or facility logo, professional frame, calming color palette (blue, green, white). Conservative and trust-signaling.
+
+**Education:** Institution logo or mascot, academic-feeling frame, school colors. Branded but approachable.
+
+**Events:** Event logo or theme-based icon, energetic frame, vibrant color palette appropriate to the event genre.
+
+**Non-profit:** Cause-related symbol or organization mark, mission-aligned frame, color palette matching the cause's visual identity.
+
+Match your QR's logo treatment to your industry's conventions for instant visual recognition. Innovating against industry norms is risky and rarely improves scan rates.
+
+## Logo legal considerations
+
+Using logos in QR codes implicates trademark and brand usage rights. Considerations:
+
+**Own logos:** No legal issues if you're using your own brand's logo on your own QR codes.
+
+**Partner logos in co-branded materials:** Get permission from the partner brand before including their logo. Document the agreed terms.
+
+**Third-party logos (e.g., social media platforms):** Most platforms have brand guidelines specifying allowed uses. Follow the guidelines or skip the logo.
+
+**Trademark considerations:** Don't use trademarks of brands you don't represent. This includes near-imitation or confusingly similar marks.
+
+**Copyright on logo designs:** Logos created by external designers may have copyright restrictions. Verify your usage rights, especially for QR programs that involve commercial-scale printing.
+
+**Privacy of logos:** Some logos (employee badges, customer logos) may have privacy implications. Get permission before mass-printing.
+
+When in doubt, consult your legal team before deploying logo QRs at scale.
+
+## Common failure modes and recovery
+
+When a logo QR fails to scan, the failure usually traces to one of a few causes. Here are the most common failure modes and how to fix them.
+
+**Failure: Scanner returns "no QR detected."** Possible causes: logo is too large, error correction is too low, or print quality is poor. Recovery: shrink the logo, increase error correction to H, reprint on better stock.
+
+**Failure: Scanner detects QR but fails to decode.** Possible causes: contrast issues, color rendering problems, or QR pattern partially obscured. Recovery: increase contrast, verify color choices pass WCAG ratios, ensure quiet zone is intact.
+
+**Failure: Scanner decodes but opens wrong URL.** Possible causes: QR was modified after testing, smart redirect rules are misfiring, or destination URL was changed without re-verification. Recovery: re-test the QR thoroughly, audit smart redirect configuration, validate destination URL.
+
+**Failure: Scanner decodes intermittently — works sometimes, fails sometimes.** Possible causes: marginal contrast or sizing, environmental factors (lighting, glare), or device-specific quirks. Recovery: increase contrast, increase size by 20–30%, test on multiple devices to identify device-specific patterns.
+
+**Failure: QR scans fine in testing but fails in production.** Possible causes: print quality differs from digital proofs, substrate effects weren't accounted for, or production lighting differs from test conditions. Recovery: test on actual production samples in actual production environments before approving for mass deployment.
+
+**Failure: QR scans for some users but not others.** Possible causes: differences in scanner apps (built-in camera vs Google Lens vs third-party), older devices with weaker scanners, or scanning at non-optimal angles. Recovery: optimize for the lowest-common-denominator scanner; test with older phones.
+
+**Failure: QR scans but landing page doesn't load.** Possible causes: destination URL is broken, redirect rules are mis-configured, or platform service is degraded. Recovery: test the URL directly, audit redirect configuration, check platform status page.
+
+Most failure modes are preventable with thorough pre-production testing. Build the testing rigor into your QR program operationally.
+
+## Logo evolution over time
+
+Brands evolve. Logos change. QR codes printed years ago carry the brand's logo at the time of printing — even if the brand has since refreshed.
+
+The strategic question: do you reprint QR codes when the brand logo changes? The answer depends on:
+
+- **Visibility of the QR.** Highly visible QRs (storefront windows, billboards) reflect on the brand; reprint when logo changes meaningfully.
+- **Scale of distribution.** Reprinting millions of packages is expensive; reprinting a few storefront QRs is cheap. Match the response to the scale.
+- **Significance of the logo change.** Major brand overhauls warrant reprinting; minor logo tweaks usually don't.
+- **Lifetime of the asset.** Long-life QRs (decade+) are worth reprinting; short-life campaigns (under a year) usually aren't.
+- **Customer experience.** Outdated logos on QRs may confuse customers if the brand has visibly changed. Reprint when confusion is likely.
+
+A reasonable policy: minor logo refreshes (color tweaks, font updates) don't warrant existing QR reprints. Major rebrandings (new logo concept, name change) do warrant reprinting key visible QRs while letting low-visibility QRs gradually age out.
+
 ## Conclusion
 
 Adding a logo to a dynamic QR code is one of the highest-leverage branding investments you can make for printed marketing assets. The technology supports it (Reed-Solomon error correction at H level handles up to ~30% module damage). The design rules are straightforward (under 25% of area, centered, with white padding). The scan rate benefits are substantial (20–40% lift).

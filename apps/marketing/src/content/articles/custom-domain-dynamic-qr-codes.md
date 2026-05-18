@@ -213,6 +213,94 @@ Beyond user trust, custom domains deliver:
 
 **Impact:** Customers more likely to scan vs the previous third-party-domain QR. Operational simplicity for staff explaining the QR.
 
+## Advanced custom domain configurations
+
+Beyond basic setup, several advanced configurations are useful for sophisticated programs.
+
+**Multiple short domains on one workspace.** Some brands use different short domains for different contexts: `qr.brand.com` for general use, `try.brand.com` for trial signup QRs, `menu.brand.com` for restaurant QRs. Each domain serves a different intent and the URL itself signals what the user will find. Most modern QR platforms support multiple custom domains per workspace at the Pro or Agency tier.
+
+**Geographic short domains.** Global brands sometimes use country-specific TLDs as short domain hosts: `qr.brand.co.uk`, `qr.brand.de`, `qr.brand.jp`. This signals geographic relevance to scanners and supports country-specific QR routing. The downside is operational complexity (more DNS to manage, more SSL certs to monitor).
+
+**Sub-brand short domains.** Companies with multiple sub-brands can give each its own short domain: `qr.subbrand1.com`, `qr.subbrand2.com`. Useful when sub-brands have distinct identities and the QR experience should match.
+
+**Reserved-keyword short domains.** Some brands reserve specific short codes for high-value campaigns. For example, `qr.brand.com/sale` always points to the current sale (the destination URL changes seasonally). Users who remember the URL can navigate directly without scanning.
+
+**Vanity short URLs.** For specific high-profile campaigns, set the short code to a meaningful word rather than a random string. `qr.brand.com/launch2026` is more memorable than `qr.brand.com/x7g9k2p`. Most platforms support custom slugs on Pro and above.
+
+**Branded link previews.** Modern browsers show URL previews when users hover over links. A branded short URL with a recognizable preview reinforces trust. Configure your platform to send appropriate Open Graph metadata for short URL previews.
+
+These advanced configurations require ongoing management overhead. Most brands don't need all of them — pick the ones that align with how your audience engages with your QR codes.
+
+## Migrating from a third-party short domain
+
+Brands that started with the platform's default short domain often want to migrate to a custom domain after their program grows. The migration is straightforward but requires planning.
+
+**Step 1: Audit existing QRs.** Document every active QR using the platform's default domain. Note which are in active production (printed and deployed) vs digital-only.
+
+**Step 2: Plan the migration window.** Decide whether to migrate all QRs at once or in batches. All-at-once is cleaner but riskier; batches are safer but extend the migration period.
+
+**Step 3: Set up the custom domain.** Follow the standard setup process (CNAME, SSL provisioning, platform verification). Confirm the custom domain works with a test QR before migrating production QRs.
+
+**Step 4: Migrate digital QRs first.** These are easy to reissue. Generate new QRs with the custom domain and replace the digital deployments. Retire the old QRs.
+
+**Step 5: Address printed QRs.** Printed QRs cannot be migrated without reprinting. Decision points: (a) accept that printed QRs continue using the old domain forever, with the platform maintaining redirect support indefinitely, (b) reprint the assets, accepting the cost, (c) some platforms support legacy domain "pointers" that forward old short URLs to new ones — verify this option with your platform.
+
+**Step 6: Update internal documentation.** Marketing materials, brand guidelines, and team playbooks should reference the new custom domain going forward.
+
+**Step 7: Monitor analytics across both domains.** During the transition period, monitor scan volume on both the old and new domains. Old-domain scans should decline as printed assets are replaced or fade out of active use.
+
+Most platforms commit to maintaining legacy short URLs indefinitely as long as the account remains active. Confirm this policy with your platform before depending on it.
+
+## Custom domain troubleshooting
+
+When custom domains don't work as expected, the issues typically fall into a few categories.
+
+**DNS not propagated.** After adding the CNAME record, DNS propagation typically takes 5–30 minutes but can take up to 48 hours in unusual cases. Use a DNS lookup tool (dig, nslookup, or online DNS checker) to verify the CNAME is resolving to the expected target before troubleshooting other layers.
+
+**SSL certificate not provisioned.** Modern platforms provision SSL automatically via Let's Encrypt or similar. If SSL hasn't appeared 30 minutes after DNS verification, contact platform support. Browsers showing "Connection not secure" usually mean SSL hasn't provisioned yet.
+
+**Mixed-content warnings.** If your destination landing page loads HTTP resources (images, scripts, fonts) while the QR redirect uses HTTPS, browsers may show mixed-content warnings. Audit your landing page to ensure all resources load over HTTPS.
+
+**Caching issues.** Sometimes browser or CDN caches retain old DNS records or redirect responses. Clear browser cache, try incognito mode, or use a different network to verify behavior.
+
+**Cloudflare-specific configuration.** If your DNS is on Cloudflare and you have proxying enabled (orange cloud icon), some platforms require gray cloud (DNS-only) during verification. Toggle if you encounter issues.
+
+**Subdomain takeover risk.** When you create a CNAME pointing to a third-party service, then later cancel that service, the abandoned CNAME becomes a takeover risk if anyone else can claim the target. Audit and clean up unused custom domain CNAMEs periodically.
+
+**Conflict with existing records.** If your subdomain already has A, AAAA, or other records, the new CNAME may conflict. CNAMEs can't coexist with most other record types. Remove conflicting records before adding the CNAME.
+
+**Wildcard certificate edge cases.** Some platforms use wildcard certificates that cover specific subdomains. Verify your subdomain is covered by the platform's certificate policy.
+
+**Country-specific TLD issues.** Some country-code TLDs have unusual DNS requirements. Verify with both the registrar and the QR platform that your TLD is supported.
+
+Most issues resolve within hours of DNS propagation. Persistent issues indicate either platform configuration problems (contact support) or DNS provider quirks (check provider docs).
+
+## Enterprise considerations
+
+For larger brands with security and compliance requirements, custom domain setups have additional considerations.
+
+**Certificate authority preference.** Some enterprises prefer specific certificate authorities (e.g., DigiCert, GlobalSign) over the platform's default. Verify with your platform whether you can bring your own certificate or pin specific CAs.
+
+**Internal IT review.** Adding CNAMEs touches DNS infrastructure that typically requires internal approval. Plan time for IT review processes — often 1–2 weeks at large organizations.
+
+**Network security implications.** Custom domains route QR scan traffic through the QR platform's infrastructure. Security teams may require vendor risk assessments before approval. Have your platform's SOC 2 reports and security documentation ready.
+
+**DNSSEC.** If your domain uses DNSSEC for DNS integrity, verify that the custom domain CNAME setup works with your DNSSEC configuration. Some platforms have specific guidance for DNSSEC environments.
+
+**Internal monitoring.** Enterprise IT often monitors all DNS entries for the company's domains. Add the new CNAME to monitoring with appropriate alerting if it changes unexpectedly.
+
+**Compliance documentation.** For regulated industries (financial services, healthcare), the custom domain becomes part of compliance documentation. Document the purpose, ownership, and data flows associated with the custom domain.
+
+**Disaster recovery.** Plan for what happens if the QR platform becomes unavailable. Some enterprises maintain backup DNS configurations that can be activated in disaster scenarios. Most don't, but it's worth considering for mission-critical QR programs.
+
+**Vendor relationship management.** Custom domain setup creates ongoing operational dependency on the QR platform. Treat this as a vendor relationship with appropriate contracts, SLAs, and exit planning.
+
+For most mid-market brands, these enterprise considerations are overkill. For Fortune 500 and regulated industries, they're standard practice.
+
+## Custom domain ROI calculation
+
+Quantifying the ROI of custom domains helps justify the cost to budget owners. The simple model: custom domains improve scan completion rates by 15–25% on average (from improved user trust). For a QR program generating, say, 10,000 scans per month at a conversion-to-revenue value of $5 per scan, the custom domain captures 1,500–2,500 additional scans per month that would otherwise have backed out. That's $7,500–$12,500 per month in additional attributable revenue, against the marginal cost of the Pro plan upgrade ($27 vs Starter, or $90 vs Free) plus zero ongoing DNS cost. The payback period is typically days, not weeks. For brands with much higher QR volume or higher scan-to-revenue ratios, the ROI multiplies accordingly.
+
 ## Conclusion
 
 Custom domains are one of the highest-leverage upgrades available to dynamic QR programs. The setup is straightforward (one CNAME record), the cost is minimal (often included in plan upgrades), and the trust impact is measurable (15–25% scan completion lift).

@@ -192,6 +192,82 @@ If a designer brings you any of these, push back and explain the scannability is
 9. Test 10+ times for consistency
 10. Document the specific color values used for future reference
 
+## Color psychology and QR codes
+
+Beyond technical scannability, color choices affect user behavior. The psychology of QR color choices is well-studied in marketing research.
+
+**Black on white.** Classic, trustworthy, professional. Reads as utilitarian and reliable. Default for most contexts. Highest scan completion rates in user studies (likely because users see them as universally trusted).
+
+**Brand-color foreground on white.** Personalized, on-brand, distinctive. Reads as intentional and thoughtful. Slightly lower scan rates than pure black (about 5–10% lower in studies) but better brand recall.
+
+**Dark on light-pastel background.** Approachable, friendly, contemporary. Reads as designed rather than utilitarian. Best for consumer brands targeting younger demographics.
+
+**Reversed (light on dark).** Modern, dramatic, attention-grabbing. Reads as premium or tech-forward. Best for brands wanting to stand out. Slightly lower scan rates than dark-on-light on older devices.
+
+**High-contrast complementary colors.** Bold, energetic. Reads as urgent or attention-seeking. Best for limited-time promotions. May feel busy if overused.
+
+**Gradient effects.** Sophisticated, modern, expensive-feeling. Reads as designed and premium. Reduces scan reliability; use sparingly and test thoroughly.
+
+**Monochrome (single-color tint variations).** Cohesive, on-brand, restrained. Reads as confident and brand-consistent. Works well when used systematically across many QRs.
+
+Match your color strategy to your brand's positioning and the desired emotional response. Black on white is the safe choice; brand-color variations are reasonable upgrades; gradient and reversed are stylistic choices with trade-offs.
+
+## Cultural color considerations
+
+For international brands, color carries cultural meaning that varies by region.
+
+**Red.** In Western contexts, red signals urgency, sale, or warning. In Chinese contexts, red signals good fortune and celebration. In Middle Eastern contexts, red can signal danger. Match the connotation to the target market.
+
+**White.** In Western contexts, white signals cleanliness and minimalism. In some Asian contexts, white is associated with mourning. Use white backgrounds cautiously in markets where this association exists.
+
+**Black.** In Western contexts, black signals premium and sophistication. In some Eastern contexts, black has more negative associations. Generally safe for QR foreground worldwide.
+
+**Green.** Universal signal for environmental, natural, or financial in many markets. Cultural variations exist but are minor.
+
+**Blue.** Generally safe globally — signals trust, stability, professionalism in most cultures.
+
+**Gold/yellow.** Premium and luxury in many markets; can signal cheap or caution in others. Highly context-dependent.
+
+**Purple.** Royal, premium, mysterious. Generally positive but less common in QR contexts.
+
+For brands with global audiences, the safest color strategy uses neutral palettes (black/white/dark blue) with brand accents that work universally. Avoid color choices that could create negative associations in any major market.
+
+## Testing color combinations methodically
+
+A methodical approach to color testing reduces risk. The process:
+
+**Step 1: Define candidate color combinations.** Start with 3–5 candidates that pass the contrast ratio threshold. Prioritize brand alignment alongside scannability.
+
+**Step 2: Generate test QRs.** Create QRs in each candidate color combination using the platform's design studio.
+
+**Step 3: Run the scannability check.** The platform's automated checker should pass all candidates. Eliminate any that fail.
+
+**Step 4: Real-device testing.** Print samples at production size on production substrate. Test scan reliability with iPhone (latest iOS Camera), Android (Google Lens), and at least one older Android model.
+
+**Step 5: Environmental testing.** Test under variable lighting (bright sun, fluorescent indoor, dim restaurant). Mark any candidates that fail in specific conditions.
+
+**Step 6: User testing.** Show candidate QRs to 10–20 representative users. Capture preferences and any concerns. This isn't scientific user research, just sanity-checking.
+
+**Step 7: Decision.** Pick the candidate that balances scannability across conditions with brand alignment.
+
+**Step 8: Document.** Record the chosen color combination, the reasoning, and the test results. Future QRs use the same combination unless deliberately overridden.
+
+This methodical approach takes about a half-day of work but prevents the much larger cost of deploying a poorly-chosen color combination at scale.
+
+## Color and accessibility
+
+QR colors that scan reliably for typical users may still cause problems for users with vision impairments.
+
+**Color blindness.** About 8% of men and 0.5% of women have some form of color blindness. The most common variants (deuteranopia, protanopia) affect red-green discrimination. Avoid QR color combinations where the primary distinguishing feature is red vs green; rely on luminance contrast instead.
+
+**Low vision.** Users with reduced visual acuity need higher contrast and larger QRs than typical users. Stick to high-contrast color pairs and generous QR sizes.
+
+**Photosensitivity.** Some users have photosensitivity that makes high-contrast patterns uncomfortable. Black on white QRs are fine; gradients and animated digital QRs may not be.
+
+**Macular degeneration.** Older users with this condition struggle with detailed patterns. Larger QRs and high contrast help.
+
+Accessibility-aware QR design uses high contrast (well beyond WCAG minimums), simple color schemes, and generous sizing. These practices improve scan rates for everyone, not just users with accessibility needs.
+
 ## Conclusion
 
 Color theory for QR codes is straightforward: dark foreground on light background (or reversed), high contrast (4:1 minimum, 7:1 preferred), and conservative use of gradients and patterns. Most brand colors work fine if they pass the contrast check. The risk comes from designers prioritizing visual appeal over scannability margin.

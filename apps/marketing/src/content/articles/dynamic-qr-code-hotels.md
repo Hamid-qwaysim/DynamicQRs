@@ -277,6 +277,58 @@ A comprehensive QR program covers the entire guest journey. Map your investments
 
 This 8-stage map covers the typical guest journey. Most hotels start by deploying 2–3 QRs at high-friction stages (check-in, room service, check-out) and expand to the full journey over time.
 
+## ROI breakdown for hotel QR programs
+
+The economics for a typical mid-size hotel (150 rooms) running a comprehensive QR program:
+
+**Annual costs:**
+- Platform (Pro plan): $468/year
+- Initial setup (design, content creation): $2,000–$5,000 one-time
+- Ongoing content management: 5 hours/month at $40/hour = $2,400/year
+- Periodic refreshes (new menus, seasonal content): $1,500/year
+
+**Total annual cost:** approximately $4,500 in year one, $3,500 in subsequent years.
+
+**Annual benefits:**
+- Print cost savings (compendiums, menus, brochures): $8,000–$15,000
+- Room service order lift (28% increase × $150K baseline): $42,000
+- Spa booking lift (15% increase × $300K baseline): $45,000
+- Concierge time savings (reduced routine question handling): $20,000
+- Review volume increase driving higher OTA visibility: hard to quantify, often $30,000+
+- Guest satisfaction improvement reducing churn: long-term, often $50,000+
+
+**Net annual benefit:** typically $130,000–$200,000+ for a 150-room property.
+
+The ROI is roughly 30–50× annual cost. For larger properties and resort destinations, the absolute numbers scale up proportionally. For smaller properties (under 50 rooms), the absolute numbers are smaller but the ROI ratio remains favorable.
+
+The biggest variable is operational discipline. Hotels that fully embrace QR programs and update content regularly see the full ROI. Hotels that deploy QRs once and let them go stale see a fraction of the potential value.
+
+## Staff training requirements
+
+A successful hotel QR program requires staff familiarity with what the QRs do and how to support guests using them.
+
+**Front desk staff** need to know what each QR's destination does so they can explain to confused guests. Training is typically 30 minutes, with a one-page quick-reference card for each property location.
+
+**Concierge staff** need to know the QR system intimately because they get the most "where do I find..." questions. Training is typically 1 hour, with deep familiarity with the digital compendium that QRs link to.
+
+**Housekeeping staff** need to know to leave QR signage in place during room turnover. Training is brief — 10 minutes during routine briefings.
+
+**F&B staff** need to know how to handle QR-based room service orders (if integrated with PMS) or to verify guests are seeing current menus.
+
+**Maintenance staff** need to know to report damaged QRs immediately so they can be replaced before guest experience degrades.
+
+**General manager and operations director** need to be analytics-literate enough to interpret QR program reports and make decisions based on them.
+
+Total training investment per property: typically 6–10 hours of staff time, plus one-page reference cards in operational areas. The investment pays back within the first month of operation through reduced support questions and faster service delivery.
+
+## Brand consistency across multi-property chains
+
+Hotel chains face a particular challenge: maintaining brand consistency across QR codes deployed at hundreds or thousands of properties. The patterns that succeed include central brand template management where the corporate marketing team controls the QR design template (colors, eye style, logo placement, CTA framing) and individual properties cannot deviate. Property-level content customization allows local managers to update destinations and local content within approved templates. Quarterly brand audits verify that no property has drifted from the standard. Centralized analytics dashboards aggregate data across the chain while letting individual properties drill down to their own performance. Automated brand compliance checks flag QRs that deviate from approved standards. New property onboarding includes QR program activation as a standard step in property opening checklists. These practices balance corporate brand control with local operational flexibility — exactly what global hotel chains need.
+
+## Long-term content management
+
+Initial QR deployment is the easy part. The discipline that distinguishes successful programs from failed ones is ongoing content management. Hotels that succeed assign clear content ownership for each QR destination, with named individuals responsible for keeping content current. They establish content update cadences appropriate to each type (daily for menus, weekly for promotions, monthly for amenities, quarterly for compendium updates). They run quarterly QR portfolio audits to identify stale content, retire obsolete QRs, and verify destination URLs remain valid. They integrate QR content updates into existing operational workflows (the F&B manager updates the menu URL as part of menu changes, not as a separate task). They use the QR platform's analytics to identify low-engagement content for refresh or retirement. They maintain a small library of design templates so new QRs can be deployed in minutes rather than hours.
+
 ## Conclusion
 
 Dynamic QR codes are quickly becoming standard infrastructure for modern hotels. Guest expectations have shifted — they expect to self-serve digitally, in their language, on their schedule. Dynamic QRs deliver that experience while reducing operational costs and generating data that improves decisions.

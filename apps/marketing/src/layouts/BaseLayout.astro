@@ -104,6 +104,16 @@ const schemas = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
         font-display: swap;
         src: url('/fonts/inter-var.woff2') format('woff2-variations');
       }
+      /* Metric-overridden fallback so the swap from system font to Inter
+         produces no layout shift. Values measured against Inter v3.19. */
+      @font-face {
+        font-family: 'Inter Fallback';
+        src: local('Arial');
+        size-adjust: 107.4%;
+        ascent-override: 90%;
+        descent-override: 22.43%;
+        line-gap-override: 0%;
+      }
 
       :root {
         --bg: #ffffff;
@@ -132,7 +142,7 @@ const schemas = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
       html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
       body {
         margin: 0;
-        font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+        font-family: 'Inter', 'Inter Fallback', system-ui, -apple-system, 'Segoe UI', sans-serif;
         font-size: 16px;
         line-height: 1.6;
         color: var(--text);
