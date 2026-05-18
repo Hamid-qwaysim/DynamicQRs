@@ -11,7 +11,7 @@ compatibility_flags = ["nodejs_compat"]
 [[d1_databases]]
 binding = "DB"
 database_name = "dynamicqr-db"
-database_id = "REPLACE_WITH_REAL_D1_ID"
+database_id = "dbcbaf50-5675-4134-8db4-d00ce073c813"
 migrations_dir = "drizzle"
 
 [vars]
