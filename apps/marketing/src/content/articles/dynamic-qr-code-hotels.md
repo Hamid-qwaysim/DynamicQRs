@@ -219,6 +219,64 @@ After the initial rollout, ongoing maintenance is minimal: update destinations a
 
 **Not integrating with property management system (PMS).** Room service orders that don't flow into the PMS create operational friction.
 
+## Property type-specific strategies
+
+Different hotel categories benefit from different QR strategies. Match your investments to your property type.
+
+**Luxury resorts and 5-star hotels.** Emphasis on personalization, concierge services, and elevated experiences. Use QRs for personal concierge chat, premium amenity booking, exclusive offers for loyalty members, and curated local experiences. Visual design matters — branded QRs with elegant frames, not generic black-and-white squares. Smart redirects by guest tier deliver appropriately tiered experiences.
+
+**Business hotels.** Emphasis on efficiency, productivity, and predictable service. Use QRs for streamlined check-in, business center access, meeting room bookings, expense report tools, and WiFi. Speed matters more than visual flourish. Standardized QR templates across the chain provide brand consistency.
+
+**Boutique hotels.** Emphasis on local character, curated experiences, and personal touches. Use QRs to tell the property's story, share local recommendations from the proprietors, showcase artisan partners, and capture guest stories. Each QR can have distinct creative personality reflecting the property.
+
+**Budget hotels and motels.** Emphasis on self-service and operational efficiency. Use QRs for fast check-in, basic property information, WiFi, and review prompts. ROI comes primarily from staff time savings rather than premium service uplift.
+
+**Resorts with extensive amenities.** Use QRs to drive activity bookings (spa, golf, water sports, dining reservations), program registrations (yoga, cooking classes, kids' activities), and event tickets. Each amenity gets its own QR with destination updated dynamically based on availability and season.
+
+**Hostels and shared accommodations.** Use QRs for community building (events, common-area activities), payment of shared services, recommendation sharing among guests, and language-based communication. The QR program can become a brand differentiator in the budget-conscious traveler segment.
+
+**Vacation rentals and short-term stays.** Use QRs in welcome packets for property-specific information (WiFi, appliance instructions, local recommendations, check-out procedures). Each property gets its own QR; content is reusable across guests but specific to that property.
+
+**Conference hotels.** Use QRs for meeting room information, event schedules, attendee networking, and conference-specific services. Hybrid hotel + event QR strategy.
+
+## Integration with property management systems (PMS)
+
+The depth of QR integration with PMS systems determines how operational the program becomes. The integration tiers:
+
+**Tier 1: Standalone.** QRs link to web-based services or external systems with no PMS integration. Easiest to deploy but creates parallel operations.
+
+**Tier 2: Deep links.** QRs link directly to PMS-hosted patient-facing URLs (folio view, check-out, etc.). Modest integration; relies on the PMS having patient-facing URLs.
+
+**Tier 3: API integration.** QR platform fires webhooks to the PMS on scan events. The PMS uses these as triggers for guest service automation (e.g., a room service order from a QR-driven flow appears directly in the PMS).
+
+**Tier 4: Bi-directional sync.** QR platform and PMS exchange data continuously. Personalized QR landing pages with guest-specific content. Real-time inventory and availability shown via QR.
+
+Each tier requires more integration effort but delivers proportionally more value. Most hotels start at tier 1, move to tier 2 within 6 months, and consider tier 3+ only at multi-property scale.
+
+The PMS systems with strongest QR integration support (as of 2026) include Opera Cloud, Mews, Cloudbeds, Stayntouch, and Maestro. Most other systems support tier 1–2 integration but require custom work for tier 3+.
+
+## Guest journey QR mapping
+
+A comprehensive QR program covers the entire guest journey. Map your investments to the journey stages.
+
+**Pre-arrival.** Booking confirmation QR opens room preview, check-in time selection, and add-on services (early check-in, airport transfer, special occasions). Reduces front-desk inquiries about basic questions.
+
+**Arrival.** Welcome QR in welcome card opens digital compendium and orientation. Reduces front-desk explanations of property features.
+
+**In-stay morning.** Breakfast menu QR with order-ahead functionality. Reduces breakfast service wait times.
+
+**In-stay daytime.** Concierge chat QR for instant guest service. Activity booking QR for spa, gym, pool, off-property tours.
+
+**In-stay evening.** Restaurant menu QRs at outlets. Bar menu QR. In-room dining QR. Update menus daily without reprinting.
+
+**In-stay overnight.** Room service QR for late-night ordering. Wake-up call setup QR.
+
+**Check-out.** Self check-out QR linking to folio view, settlement, and survey. Reduces front-desk check-out queues.
+
+**Post-stay.** Review QR included in folio email links to Google or TripAdvisor review. Loyalty enrollment QR on receipt. Refer-a-friend QR for guests who enjoyed their stay.
+
+This 8-stage map covers the typical guest journey. Most hotels start by deploying 2–3 QRs at high-friction stages (check-in, room service, check-out) and expand to the full journey over time.
+
 ## Conclusion
 
 Dynamic QR codes are quickly becoming standard infrastructure for modern hotels. Guest expectations have shifted — they expect to self-serve digitally, in their language, on their schedule. Dynamic QRs deliver that experience while reducing operational costs and generating data that improves decisions.

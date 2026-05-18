@@ -144,6 +144,22 @@ const schemas = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
       img, svg, video { max-width: 100%; height: auto; display: block; }
       a { color: var(--brand); text-decoration: none; }
       a:hover { text-decoration: underline; }
+      /* WCAG 1.4.1: inline content links must be distinguishable without color alone.
+         Underline all inline links inside running text (paragraphs, quotes, table cells,
+         summaries, FAQ answers, and article bodies). Nav and footer use list-based
+         structural links and stay underline-free because their containers are excluded. */
+      p a:not(.btn), blockquote a:not(.btn), summary a:not(.btn),
+      td a:not(.btn), .answer a:not(.btn), .faq-item a:not(.btn),
+      .article-body a:not(.btn), .article-body li a,
+      .toc li a {
+        text-decoration: underline;
+        text-decoration-thickness: 1.5px;
+        text-underline-offset: 3px;
+      }
+      p a:not(.btn):hover, blockquote a:not(.btn):hover,
+      .article-body a:not(.btn):hover {
+        text-decoration-thickness: 2px;
+      }
       h1, h2, h3, h4, h5, h6 { margin: 0 0 0.5em; line-height: 1.2; letter-spacing: -0.02em; color: var(--text); }
       h1 { font-size: clamp(2rem, 4vw, 3.25rem); font-weight: 800; }
       h2 { font-size: clamp(1.6rem, 3vw, 2.25rem); font-weight: 700; }
