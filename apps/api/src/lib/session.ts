@@ -27,10 +27,11 @@ export async function createSession(
     userAgent: meta.userAgent ?? null,
   });
 
+  const isProd = env.ENVIRONMENT === 'production';
   setCookie(c, COOKIE_NAME, id, {
     httpOnly: true,
-    secure: env.ENVIRONMENT === 'production',
-    sameSite: 'Lax',
+    secure: isProd,
+    sameSite: isProd ? 'None' : 'Lax',
     path: '/',
     maxAge: SESSION_TTL_DAYS * 24 * 60 * 60,
     expires: expiresAt,

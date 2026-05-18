@@ -16,13 +16,23 @@ app.use(
   cors({
     origin: (origin, c) => {
       const site = c.env.PUBLIC_SITE_URL || 'https://dynamicqrcodelabs.com';
-      const allowed = new Set([
+      if (!origin) return site;
+      const staticAllowed = new Set([
         site,
         'http://localhost:4321',
         'http://localhost:5173',
         'http://localhost:3000',
       ]);
-      return origin && allowed.has(origin) ? origin : site;
+      if (staticAllowed.has(origin)) return origin;
+      // Allow any *.pages.dev preview/production deployment for this project
+      try {
+        const host = new URL(origin).hostname;
+        if (host === 'dynamicqrcodelabs.pages.dev') return origin;
+        if (host.endsWith('.dynamicqrcodelabs.pages.dev')) return origin;
+      } catch {
+        // fall through
+      }
+      return site;
     },
     credentials: true,
     allowMethods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
