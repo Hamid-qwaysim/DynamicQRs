@@ -240,6 +240,132 @@ Common issues we see:
 
 **Tracking is missing.** Make sure you added UTM parameters to the destination URL. The platform tracks scans automatically; downstream tools need UTMs to attribute the traffic.
 
+## Creating QRs for specific platforms and integrations
+
+Different platforms have specific patterns for QR creation.
+
+**Squarespace integration.** Squarespace sites can embed dynamic QRs via the platform's API. Create QR pointing to your Squarespace page; embed QR image directly in site sections.
+
+**Wix integration.** Similar to Squarespace; Wix supports QR embed via integrations.
+
+**WordPress integration.** Multiple WordPress plugins integrate with QR platforms. Create QRs from within WordPress admin or embed QRs from external platforms.
+
+**Shopify integration.** Shopify Apps include QR generators. For dynamic QRs across many SKUs, use the QR platform's bulk generation with CSV-based product data.
+
+**Canva integration.** Canva users can include QRs in design projects. Generate the QR on the platform, then place the image in Canva designs.
+
+**Adobe Creative Suite integration.** Designers using InDesign, Illustrator, Photoshop can place QR images directly in print designs.
+
+**Google Workspace integration.** Embed QRs in Google Docs, Slides, Sheets. Useful for internal documents and lightweight marketing materials.
+
+**Microsoft Office integration.** Same as Google Workspace for Word, PowerPoint, Excel users.
+
+**Email platform integration.** Mailchimp, Klaviyo, HubSpot Email support QR embedding in campaigns. Useful for QR-driven email-to-print workflows.
+
+These integrations make QR generation accessible regardless of which creative tools your team uses.
+
+## Bulk QR creation workflows
+
+For programs needing many QRs at once, bulk creation is essential.
+
+**CSV-based bulk generation.** Upload a CSV with destination URLs, names, and metadata. Platform generates QRs in bulk and exports as ZIP. Most platforms support this on Pro+ tiers.
+
+**API-based bulk generation.** Programmatically generate QRs via REST API. Suitable for large rollouts or recurring batch generation (e.g., new product launches).
+
+**Template-based bulk generation.** Apply a design template to all QRs in the batch. Maintains brand consistency across hundreds or thousands of QRs.
+
+**Pre-validated destinations.** Validate all destination URLs before generation. Catches typos and broken links before they reach production.
+
+**Metadata-driven workflows.** Include UTM parameters, smart redirect rules, and folder/campaign assignments in the bulk job. Generated QRs are fully configured.
+
+**Export formats.** Bulk jobs typically export ZIP containing PNG, SVG, and PDF versions of each QR. Some platforms also support print-ready compositions (e.g., 24 QRs per page).
+
+Bulk workflows reduce per-QR creation time from minutes to seconds at scale. For programs creating 50+ QRs at once, bulk generation is essential.
+
+## QR creation for specific industries
+
+**Real estate:** One QR per listing, with property-specific landing pages, automated lead capture forms, and smart redirects for buyer demographics.
+
+**Restaurants:** One QR per table with table number embedded in UTMs. Bulk generate for new locations during opening preparation.
+
+**E-commerce:** One QR per SKU on packaging. Bulk generate for new product launches. Include personalization based on customer data.
+
+**Events:** One QR per attendee for tickets. Bulk generate from registration database. Single-use behavior on check-in QRs.
+
+**Healthcare:** One QR per patient appointment (when PHI-appropriate). Generated on-demand at appointment scheduling.
+
+**SaaS:** Per-campaign QRs for events, ABM, and customer success workflows. Frequent creation as campaigns launch and conclude.
+
+Industry-specific patterns emerge over time. Match your creation workflow to your industry's specific needs.
+
+## After creation: ongoing management
+
+The QR creation step is just the beginning. Ongoing management determines long-term success.
+
+**Regular destination audits.** Quarterly check that all QR destinations still load correctly. Update broken URLs. Refresh stale content.
+
+**Performance reviews.** Monthly review of scan analytics. Identify high performers for replication and low performers for improvement.
+
+**A/B testing on a cadence.** Run at least one A/B test per QR per quarter. Continuous optimization compounds over time.
+
+**Content updates.** Match content refresh cadence to your business: daily for restaurants, weekly for retail, monthly for SaaS, quarterly for evergreen brands.
+
+**Status management.** Pause obsolete QRs. Revoke compromised ones. Archive completed campaigns. Keep the active QR portfolio focused.
+
+**Permissions reviews.** Audit who has access to the QR platform. Remove unused accounts. Update role assignments as team changes.
+
+**Vendor reviews.** Annual evaluation of the QR platform. Are pricing, features, and reliability still appropriate? When should you consider alternatives?
+
+**Documentation updates.** Keep team playbooks current. New use cases get documented; outdated approaches get retired.
+
+QR programs that operate this management discipline thrive. Programs that "set and forget" decay quickly.
+
+## Avoiding creation pitfalls
+
+A few common pitfalls during QR creation that produce downstream problems.
+
+**Skipping the scannability check.** The check catches contrast, sizing, and logo issues before they cause scan failures. Always run it.
+
+**Choosing destinations without considering mobile.** 99% of QR scans are mobile. Test the destination on a phone before publishing.
+
+**Forgetting UTM parameters.** Without UTMs, downstream attribution is impossible. Always add them.
+
+**Creating without a name.** Unnamed QRs are hard to find later. Always give meaningful names.
+
+**Not testing on real devices.** The platform's preview is accurate, but real-device testing catches issues previews miss.
+
+**Generating without metadata.** Campaign tags, folder organization, notes — all help future operations. Add them at creation time.
+
+**Treating creation as one-time.** QRs need ongoing management. Plan for it from day one.
+
+Avoiding these pitfalls produces a clean QR portfolio that's easy to manage long-term.
+
+## QR creation best practices summary
+
+A condensed checklist for QR creation that consistently produces good results:
+
+1. Pick the right QR type for your destination (URL, vCard, PDF, etc.)
+2. Use a clean, mobile-optimized destination URL
+3. Add UTM parameters for downstream attribution
+4. Customize the design with brand-aligned colors
+5. Add your logo to the center for brand recognition (under 25% of QR area)
+6. Use H-level error correction if including a logo
+7. Add a CTA frame ("Scan me", "View menu", etc.)
+8. Verify the scannability check passes
+9. Test on real iOS and Android devices
+10. Print at appropriate size for the placement (3 cm minimum for typical placements)
+11. Use vector format (SVG) for print
+12. Preserve the quiet zone in the printed asset
+13. Document the QR with a meaningful name and metadata
+14. Set up smart redirects if applicable
+15. Configure notification alerts for unusual activity
+
+Following this checklist for every QR creation reduces variance and produces consistently scannable, trackable, on-brand QRs.
+
+## Beyond the basics: programmatic QR creation
+
+For developers and technical teams, programmatic QR creation via API unlocks workflows that manual creation can't support. Use cases: integration with e-commerce platforms to auto-generate per-product QRs at SKU launch; integration with event management to auto-generate per-attendee tickets; integration with CRM to auto-generate per-customer welcome kit QRs; integration with marketing automation to embed QRs in printable assets generated on demand. Most modern QR platforms expose REST APIs with comprehensive functionality. Authentication via API keys, rate limits aligned to plan tier, webhooks for scan events, and bulk operations are standard features. The marginal cost of programmatic creation is essentially zero once the integration is built; the marginal value compounds across every campaign.
+
 ## Conclusion
 
 Creating a dynamic QR code in 2026 is a five-minute job that produces a printable, trackable, editable asset you can use for years. The platform does the heavy lifting — you just pick the type, paste the destination, customize the design, and download.

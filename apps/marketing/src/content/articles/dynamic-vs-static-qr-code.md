@@ -153,6 +153,72 @@ If you answered "no" to all of these — for example, you are putting a single Q
 
 Some campaigns use both: a static QR for the absolutely permanent payload (WiFi, vCard) and dynamic QRs for everything marketing-related. This is a perfectly reasonable architecture. There is no rule that says you have to pick one across your whole brand.
 
+## Practical migration: moving from static to dynamic
+
+If you've been running static QR codes and want to migrate to dynamic, here's the practical sequence.
+
+**Step 1: Audit your existing static QRs.** Document what URLs they point to and what assets they're printed on. This becomes your migration backlog.
+
+**Step 2: Decide migration scope.** Migrate everything? Just future campaigns? Selective migration of high-value assets? Most brands migrate selectively, starting with assets whose destinations are most likely to change.
+
+**Step 3: Set up the dynamic QR platform.** Sign up, configure custom domain if applicable, document UTM conventions.
+
+**Step 4: Generate replacement dynamic QRs.** Create one dynamic QR per static QR you're migrating, pointing at the same destination initially.
+
+**Step 5: Reprint affected assets.** This is the cost of migration — printed materials need to be reprinted with new QRs. Plan for this cost in the migration budget.
+
+**Step 6: Replace assets in field.** Stickers replaced, signage swapped, packaging transitioned at next print run. This happens over months for most assets.
+
+**Step 7: Monitor analytics.** As scans from new dynamic QRs start flowing, you'll learn things you couldn't learn from static QRs. Use these insights to improve campaigns.
+
+**Step 8: Update destinations.** Within months of migrating, you'll typically have your first destination change. The static QRs would have been dead; the dynamic QRs continue working with the new destinations.
+
+The migration cost (mostly reprinting) is real, but it's a one-time investment. After migration, you never need to reprint for destination changes again.
+
+## When migration isn't worth it
+
+A few scenarios where migrating existing static QRs isn't worth the reprint cost. End-of-life assets that will be retired within months anyway. Very low-volume placements where the dynamic features wouldn't be exercised. Compliance-locked assets where the destination is genuinely fixed forever (rare but exists). Embedded QRs in long-life products (e.g., furniture) where the static destination is acceptable for the product's expected lifetime. In these cases, leave existing static QRs in place but switch all future deployments to dynamic.
+
+## Cost comparison over time
+
+The lifecycle cost comparison between static and dynamic QR codes shifts dramatically based on time horizon. In year one, static QRs appear cheaper (no platform fee). By year two, the first destination change typically equalizes them. By year three, dynamic QRs are usually significantly cheaper than static (which would require multiple reprints by year three for any campaign with evolving content). By year five and beyond, dynamic QRs are dramatically cheaper while also delivering more value (analytics, smart routing, status controls). The break-even point varies by campaign but typically falls within 6-12 months of deployment.
+
+## Common myths and misconceptions
+
+A few persistent myths cloud the dynamic vs static decision. The myth that "dynamic QRs are slower to scan" — actually, the redirect adds 30-60ms, imperceptible to users. The myth that "dynamic QRs are less secure" — actually, the platform can detect abuse, pause QRs remotely, and provide audit logs; static QRs offer none of this. The myth that "you have to pay forever for dynamic QRs to work" — most platforms keep your QRs working on the free tier indefinitely if your account stays active. The myth that "static QRs are more reliable" — actually, the data on scan reliability is essentially identical; the dynamic QR's short URL is shorter, making the QR pattern sparser and easier to scan. The myth that "dynamic QRs leak personal data" — well-designed platforms hash IPs and use approximate location, more privacy-friendly than typical web analytics. The myth that "static QRs are required for offline scanning" — neither static nor dynamic QRs work offline if the destination is online; the QR scan works offline (it's just pattern decoding), the destination loading requires internet for both. Sorting through these myths leads most informed buyers to dynamic for almost all use cases.
+
+## Industry-specific recommendations
+
+**Restaurants:** Always dynamic. Menu changes are constant.
+
+**Real estate:** Always dynamic. Listing status changes frequently.
+
+**E-commerce:** Always dynamic. Campaigns evolve.
+
+**Events:** Always dynamic. Schedules and content change.
+
+**Healthcare:** Dynamic for patient communications; sometimes static for permanent reference info.
+
+**Education:** Dynamic for class resources; static OK for permanent reference (campus map permanent locations).
+
+**Manufacturing:** Dynamic for product packaging; static OK for permanent compliance information on durable equipment.
+
+**Retail:** Dynamic for everything customer-facing; static OK for internal inventory tracking.
+
+**B2B:** Dynamic for all marketing assets.
+
+**Personal use:** Dynamic for evolving needs (business card, portfolio); static OK for truly permanent payloads (WiFi password, personal vCard if your phone never changes).
+
+The pattern: if anything about the destination could ever change, go dynamic. The cost premium is minimal; the future flexibility is invaluable.
+
+## What happens when you cancel a dynamic QR subscription
+
+A common concern about dynamic QRs: what happens if you stop paying? Most reputable QR platforms have clear policies. Free tier downgrade: your account moves to the free tier; QRs within free tier limits keep working; QRs exceeding free limits get paused but data is retained. Account suspension: typically only if Terms of Service violations occur, not for non-payment. Data retention: typically 30-90 days after cancellation for export. Grace period: usually 30-60 days during which you can reactivate without data loss. Verify the policy with your specific platform before deploying business-critical QRs. The risk of a platform unilaterally breaking your QRs is small with reputable vendors but worth understanding.
+
+## Vendor lock-in considerations
+
+A reasonable concern: does adopting a QR platform create vendor lock-in? Some lock-in exists but it's manageable. The QR patterns themselves are universal — the QR pattern is just a URL encoded as pixels. Migrating to a different platform means changing the underlying URL, which requires reprinting or updating the QR (if using a custom domain you control, you can swap the underlying redirect platform without changing the QR). Most platforms support data export for QR records and scan history. Switching platforms is operationally significant but feasible if needed. Choose a platform that doesn't actively make migration hard, and your lock-in risk stays low.
+
 ## Conclusion
 
 The dynamic vs static QR code decision is one of the easier marketing trade-offs you will make. The cost is small, the upside is years of flexibility and a full analytics layer, and the downside of choosing static — locked into a destination that might need to change — is a real, recurring liability for any business that prints at scale.

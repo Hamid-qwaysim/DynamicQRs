@@ -268,6 +268,32 @@ QR colors that scan reliably for typical users may still cause problems for user
 
 Accessibility-aware QR design uses high contrast (well beyond WCAG minimums), simple color schemes, and generous sizing. These practices improve scan rates for everyone, not just users with accessibility needs.
 
+## Designer-developer collaboration on QR colors
+
+QR color decisions often involve both designers (who want brand alignment) and developers (who want technical reliability). The collaboration patterns that work:
+
+**Shared design system.** Document the approved color palette for QR codes as part of the broader brand design system. Designers reference it for new QR creation. Developers verify QRs conform when implementing.
+
+**Component library.** Pre-build QR design templates in the platform's design studio. Designers customize from templates rather than starting from scratch. Reduces variance and ensures all QRs meet technical standards.
+
+**Approval workflow.** Before any new QR design goes into production, both design and engineering sign off. Catches issues that either function might miss in isolation.
+
+**Annual color review.** As brand evolves, the QR color palette evolves with it. Annual review ensures alignment without ad-hoc drift.
+
+**Cross-functional retrospectives.** When QR programs underperform expectations, designers and developers debrief together to identify whether color choices contributed.
+
+These collaborations prevent the silos that produce beautiful-but-unscannable QRs (designer wins) or technically-perfect-but-ugly QRs (developer wins). The best QRs reflect both perspectives.
+
+## QR color trends 2026
+
+The state of QR color design in 2026 reflects several converging trends. Brand-color QRs (foreground in the brand's primary color) are now the norm rather than the exception — black-and-white QRs read as utilitarian or outdated to younger demographics. Gradient QRs remain a stylistic minority but are increasingly accepted on premium brand contexts where visual sophistication matters more than maximum scan reliability. Reversed-contrast QRs (light on dark) are gaining ground in tech and lifestyle brands wanting to differentiate. Eye and dot shape customization is now expected — square QRs with default dots feel generic. Frame and CTA inclusion is near-universal for marketing QRs (bare QRs without context feel unfinished). Custom-domain short URLs are pairing with branded QR design to create end-to-end brand experiences from scan to landing page. Multi-color QRs (different colors for eyes, dots, and central logo) are emerging as designers push the medium. These trends collectively raise the bar for QR design while requiring more careful technical validation. The bare minimum is no longer "scannable"; it's "scannable AND on-brand."
+
+## Print color management
+
+Color choices look one way on a designer's monitor and another way on production print. Bridging the gap requires print color management.
+
+Calibrate your monitor regularly using a hardware calibrator. Uncalibrated monitors show different colors than reality, leading to surprises in print. Use Pantone color matching when consistent brand color reproduction across multiple print runs matters. Generic CMYK conversions vary between printers; Pantone provides repeatable color regardless of printer. Always request print proofs before mass production. Digital proofs aren't sufficient — physical samples on production substrate reveal issues that monitor previews miss. Test scan reliability on physical proofs, not just visual color accuracy. Account for paper white. Different paper stocks have different baseline whiteness. Color appears differently against bright white versus warm white versus cool white papers. Specify substrate clearly. Coated vs uncoated, gloss vs matte, paper weight — all affect how color reproduces and how QRs scan. Document the chosen specifications for future reprints.
+
 ## Conclusion
 
 Color theory for QR codes is straightforward: dark foreground on light background (or reversed), high contrast (4:1 minimum, 7:1 preferred), and conservative use of gradients and patterns. Most brand colors work fine if they pass the contrast check. The risk comes from designers prioritizing visual appeal over scannability margin.

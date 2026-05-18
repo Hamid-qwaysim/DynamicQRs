@@ -244,6 +244,42 @@ Real-world performance for a well-architected dynamic QR redirect engine:
 
 These numbers are achievable on Cloudflare Workers + D1, AWS Lambda@Edge + DynamoDB, or similar edge stacks. They are NOT achievable on a single-region cloud architecture with central database.
 
+## Implementation patterns: building your own redirect engine
+
+For engineers curious about the implementation, building a basic dynamic QR redirect engine is approachable. The core components:
+
+**Database schema.** At minimum: a `qr_codes` table with `id`, `short_code` (unique indexed), `destination_url`, `status`, `created_at`, `updated_at`. Plus a `scan_events` table for analytics: `id`, `qr_code_id`, `timestamp`, `country`, `device_type`, `os`, etc.
+
+**Short code generation.** Use a cryptographic random function to generate 6-8 character alphanumeric short codes. Collision is unlikely at small scales; for large platforms, check for collisions and regenerate if needed.
+
+**Redirect endpoint.** A single endpoint `GET /q/:shortCode` that looks up the QR by short code, validates status, evaluates smart redirect rules, logs the scan event, and returns a 302 to the destination.
+
+**Async scan logging.** Use whatever async pattern your framework supports (Workers' `waitUntil`, Lambda's `context`, Node's `setImmediate`) to log scan events without blocking the redirect response.
+
+**URL validation.** Block dangerous schemes at insertion time. Validate URL format. Reject private IP ranges.
+
+**Smart redirect rule engine.** A simple JSON-based rule evaluator. Rules can be device-based, country-based, time-based, random-split, or scan-count-based.
+
+**Analytics aggregation.** Background jobs to roll up raw scan events into aggregated tables for dashboard queries.
+
+For most purposes, deploying on Cloudflare Workers + D1 produces a globally fast redirect engine in a few hundred lines of code. AWS Lambda@Edge + DynamoDB is equivalent. The technology is mature and accessible.
+
+## Why edge platforms dominate QR infrastructure
+
+Several edge compute platforms compete for QR workload: Cloudflare Workers, Fastly Compute@Edge, AWS Lambda@Edge, Vercel Edge Functions, Deno Deploy, Bun's edge runtime. Each has strengths for QR programs.
+
+**Cloudflare Workers** has the largest network (300+ datacenters), tight integration with their network products, and very competitive pricing. D1 (their SQLite-distributed database) is purpose-built for low-latency edge data access. Most modern QR platforms favor Workers.
+
+**Fastly Compute@Edge** offers WebAssembly-based execution with strong customization. Useful for QR platforms with unusual performance requirements.
+
+**AWS Lambda@Edge** integrates with the AWS ecosystem. Best when QR programs are part of larger AWS-hosted applications.
+
+**Vercel Edge Functions** offer the Next.js developer experience. Useful when QR landing pages are also built on Vercel.
+
+**Deno Deploy** offers a clean JavaScript/TypeScript runtime with global distribution. Newer than the others; smaller production track record but growing.
+
+The competitive pressure among these platforms keeps prices low and features advancing. For QR programs, the choice usually comes down to which platform best matches the surrounding application stack.
+
 ## Conclusion
 
 A dynamic QR code is two pieces of engineering bolted together: a 30-year-old ISO standard for visually encoding short URLs, and a modern edge network for serving those URLs with sub-100-ms latency, full analytics, and database-level editability. Both pieces are mature. The combination is what makes "edit a QR code without reprinting" possible.

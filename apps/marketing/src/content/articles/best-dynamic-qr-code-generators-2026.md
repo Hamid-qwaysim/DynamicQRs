@@ -169,6 +169,104 @@ The dimensions we scored on:
 - **Pricing transparency** — can you understand the pricing without a sales call?
 - **Redirect latency** — how fast is the redirect from scan to landing?
 
+## Detailed platform comparison criteria
+
+When comparing QR platforms, weight criteria by your specific needs. The criteria that matter most for typical buyers:
+
+**Watermark policy.** Non-negotiable. Platforms that watermark free or paid QRs damage your brand. Walk away.
+
+**Edit policy.** Unlimited edits should be the default. Platforms that cap edits per month or per QR are creating artificial scarcity.
+
+**Analytics retention.** 30 days minimum on free, 90+ days on paid. Some platforms cap at 7 days on free — too short to be useful.
+
+**Smart redirect rules.** Device, OS, country, language, time, scan-count, A/B split. The more rule types supported, the more flexibility.
+
+**Design studio depth.** Beyond colors and logos: eye styles, dot patterns, frames, CTA labels, brand kits, design templates.
+
+**Export formats.** PNG, SVG, PDF minimum. JPEG, WebP, EPS for more advanced use. Vector formats for print.
+
+**Print sizes.** Up to 4096 px minimum for export. Larger for billboard-scale assets.
+
+**Custom domain.** Should be supported on Pro and above. Premium feature on most platforms.
+
+**Bulk generation.** CSV upload with 1,000+ rows. Essential for multi-location or multi-SKU programs.
+
+**REST API.** Public API with comprehensive coverage. Documentation quality matters.
+
+**Webhooks.** Outbound webhook on scan events. Critical for downstream integrations.
+
+**Workspace management.** Multiple workspaces per account. Important for agencies and multi-brand operators.
+
+**Team roles.** Owner, admin, editor, viewer at minimum. SSO for enterprise.
+
+**Audit logs.** Comprehensive logging of every state-changing operation. Important for compliance.
+
+**SOC 2.** Type II report available. Standard for enterprise sales.
+
+**Pricing transparency.** Published, predictable, no hidden tiers. Avoid platforms requiring sales calls for basic pricing.
+
+**Customer support.** Email minimum. Chat or phone for higher tiers. Quality of support varies dramatically.
+
+Score platforms across these criteria for your specific weighting. The "best" platform depends on your specific use case.
+
+## Platform switching considerations
+
+When considering a platform switch, evaluate beyond features. Migration cost (reprinting if QRs are deployed in field). Data export quality (can you preserve historical analytics?). Custom domain portability (can you point your domain at a different platform?). Team training time (how steep is the learning curve?). Integration rework (CRM, analytics, marketing automation integrations need rebuilding). Contract obligations (existing platform contract terms). User adoption (familiarity with current platform interfaces). Most platform switches happen for compelling reasons — major price changes, missing critical features, security incidents at current vendor. Routine switching for marginal improvements isn't usually worth the operational cost.
+
+## Industry-specific platform recommendations
+
+Different industries have specific needs that affect platform selection.
+
+**Restaurants.** Look for: per-table QR support, menu builder templates, time-based smart redirects, multi-language support, POS integration capability. Dynamic QR Code Labs and Beaconstac both perform well here.
+
+**Real estate.** Look for: per-listing QR management, listing landing page templates, lead capture integration, MLS-friendly URL handling. Dynamic QR Code Labs and Hovercode are strong picks.
+
+**E-commerce.** Look for: bulk generation, SKU-aware workflows, packaging-design integration, e-commerce platform integrations. Dynamic QR Code Labs and Bitly both work well.
+
+**Events.** Look for: bulk attendee QR generation, single-use QR support, real-time scan dashboards, sponsor reporting. Dynamic QR Code Labs and Beaconstac are competitive.
+
+**Healthcare.** Look for: BAA support, comprehensive audit logs, strong security posture, SOC 2 and HITRUST. Beaconstac and a few enterprise-focused platforms; many consumer platforms don't fit.
+
+**Hospitality.** Look for: multi-property management, multi-language support, integration with hotel tech stack. Dynamic QR Code Labs and a few hospitality-specific platforms.
+
+**Education.** Look for: workspace management for multiple teachers/departments, FERPA-aware design, accessibility features. Dynamic QR Code Labs and several education-focused platforms.
+
+**SaaS.** Look for: API quality, webhook depth, CRM integration, multi-tenant workspace management. Dynamic QR Code Labs and a few B2B-focused platforms.
+
+**Agencies.** Look for: multi-client workspace management, white-label reporting, predictable pricing at scale. Dynamic QR Code Labs and a few agency-focused platforms.
+
+Pick the platform that best matches your industry's specific patterns. Generic "best overall" rankings can mislead for industry-specific needs.
+
+## Platform reliability and uptime
+
+For QR programs at scale, platform reliability matters more than feature lists. Consider: published uptime SLAs (99.9% minimum, 99.99% for enterprise), incident history (transparent status page with historical data), redundancy architecture (multi-region, multi-AZ deployments), DDoS protection (edge-network defense), customer support availability (24/7 for enterprise), disaster recovery posture (RTO/RPO commitments), incident response transparency (post-mortem culture). The "cheapest" platform that goes down during your major campaign is worse than a slightly more expensive platform that stays up. Prioritize reliability for mission-critical QR programs.
+
+## Pricing model analysis
+
+QR platform pricing models vary in ways that affect total cost of ownership.
+
+**Per-account flat pricing.** Most consumer platforms use this. Predictable monthly cost regardless of usage. Best for steady-state programs.
+
+**Per-user pricing.** Some enterprise platforms charge per user. Costs scale with team size, not with program scale. Bad fit for small teams running large programs.
+
+**Per-QR pricing.** A few platforms charge per active QR. Costs scale with program scale but not with team. Bad fit for many-QR-per-team programs.
+
+**Per-scan pricing.** Some platforms charge per scan above a threshold. Variable costs that scale with program success. Can produce surprising bills during viral moments.
+
+**Hybrid pricing.** Most enterprise platforms mix base fee + usage-based tiers. Complex but flexible.
+
+For most buyers, per-account flat pricing is preferable because costs are predictable. Per-scan pricing creates anxiety about success ("a viral QR could bankrupt us"). Per-user pricing penalizes team growth.
+
+When evaluating pricing, model your specific usage. Calculate total cost over 12 months under realistic assumptions. Compare across platforms on the same scenarios. The cheapest sticker price isn't always the cheapest total cost.
+
+## What to ignore in QR platform marketing
+
+Some QR platform features get heavily promoted but matter less than the marketing suggests. The number of QR styles offered (eye shapes, dot patterns) — they're all easy to implement; competing platforms have similar selections. Pre-built templates — building from scratch is fast; templates don't save much time. AI features — most are marketing-driven labels on basic functionality; evaluate the underlying capability. Mobile apps for platform management — most users manage QRs from desktops; mobile management is rarely critical. Integration count — the integrations you actually need matter; total integration count doesn't. Influencer endorsements — usually paid; ignore them. Awards and recognitions — often pay-to-play; ignore them. Focus on the underlying features that match your specific needs rather than marketing surface area.
+
+## Migration risk and platform commitment
+
+Adopting a QR platform creates a degree of vendor commitment. The risks to consider: if the platform shuts down, your QRs stop redirecting (typically with notice but not always); if the platform changes pricing dramatically, you may need to switch; if the platform's quality degrades, you may need to switch; if your needs evolve beyond what the platform supports, you may need to switch. Mitigations: pick well-funded platforms with strong track records; use custom domains where possible (lets you switch redirect engines without changing QRs); export data periodically (you have it if needed); maintain awareness of alternatives (be ready to evaluate switches if needed). Most platform commitments work out fine; major incidents are rare. But planning for the possibility reduces switching cost if it becomes necessary.
+
 ## Final recommendations
 
 - **Best overall (cost, features, free tier):** Dynamic QR Code Labs.

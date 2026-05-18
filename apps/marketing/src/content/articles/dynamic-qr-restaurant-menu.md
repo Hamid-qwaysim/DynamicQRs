@@ -175,6 +175,108 @@ The first time you change a menu price without reprinting, the platform pays for
 
 Many restaurants pair their menu QR with a "leave us a Google review" QR on the receipt or near the door. Same playbook as above — a dynamic QR pointing to your Google review link, with analytics so you know which staff shifts drive the most review prompts.
 
+## Advanced restaurant QR strategies
+
+Beyond basic menu QRs, several advanced strategies deliver outsized returns.
+
+**Smart routing by time of day.** Same QR routes to breakfast menu in mornings, lunch menu midday, dinner menu evenings, late-night menu after midnight. Eliminates customer confusion about what's available now.
+
+**Per-table dietary preferences.** Some advanced programs use per-table QRs that remember dietary preferences from prior visits. Customers see filtered menus matching their preferences.
+
+**Real-time inventory.** Integrating with kitchen inventory systems, the menu can mark items as "sold out" in real time. Customers don't order what's unavailable.
+
+**Recommended pairings.** AI-driven recommendations suggest wine pairings, dessert add-ons, or complementary dishes based on what's been ordered. Increases average ticket.
+
+**Loyalty integration.** Scanning the table QR while logged into the restaurant's loyalty app automatically applies member discounts and earns points. Drives loyalty enrollment and repeat visits.
+
+**Order-ahead for pickup.** Customers waiting for a table can use the same QR to pre-order takeout for later. Increases capacity utilization.
+
+**Reservation QRs at the door.** A QR on the host stand for walk-in customers to add themselves to the waiting list. Reduces front-of-house stress during peaks.
+
+**Review prompts based on stay duration.** Long-stay customers (likely positive experiences) get gentle review prompts via QR at meal end. Higher review volumes from satisfied customers.
+
+These advanced strategies build on the basic menu QR and produce meaningful business impact when implemented well.
+
+## Multi-location restaurant chain strategy
+
+Restaurant chains with multiple locations face specific challenges that QR programs help address.
+
+**Per-location attribution.** Each location's QRs use distinct UTM codes so per-location performance is measurable. Reveals best-performing locations and identifies underperformers for intervention.
+
+**Brand consistency across locations.** Centralized QR template management ensures all locations use approved designs. Local managers can update destinations within approved parameters.
+
+**Local content within brand framework.** Menus may vary by location (local specialties, regional pricing). Brand standards constrain creative deviation while allowing operational flexibility.
+
+**Performance benchmarking.** Per-location metrics enable comparison across the chain. Top performers' practices can be shared with underperformers.
+
+**Operational support tools.** Maintenance QRs that link to equipment manuals, kitchen workflow tools, and operational dashboards support both customer-facing and back-of-house workflows.
+
+**Multi-language for diverse markets.** Locations in diverse markets benefit from multi-language menus via smart redirect by browser language.
+
+Chain-level QR programs typically operate at the Agency tier ($129/month) with workspace separation per location and centralized analytics for corporate oversight.
+
+## Operational integration with restaurant tech stack
+
+Modern restaurants run on multiple integrated systems. QR programs deliver maximum value when integrated with the broader stack.
+
+**POS system integration.** Square, Toast, Lightspeed, and similar POS systems can integrate with QR-driven ordering flows. Customer orders via QR appear directly in the kitchen, no manual entry required.
+
+**Reservation systems.** OpenTable, Resy, Yelp Reservations integrate with QR-driven booking flows. Customers reserve future visits while at the table.
+
+**Inventory management.** Restaurant365, MarketMan, and similar inventory systems can integrate with QR menus to mark items unavailable in real-time.
+
+**Loyalty platforms.** Punchh, FiveStars, Square Loyalty connect with QR-driven loyalty workflows. Scan automatically credits points or applies tier-based discounts.
+
+**Delivery integration.** DoorDash, Uber Eats, Grubhub can be embedded into QR-driven flows. Customers ordering pickup through the table QR seamlessly hand off to delivery.
+
+**Marketing platforms.** Mailchimp, Klaviyo, Customer.io connect with QR-driven email signups. Customers join newsletters effortlessly.
+
+**Review platforms.** Google Business, Yelp, TripAdvisor integrate with QR-driven review prompts. Satisfied customers leave reviews with minimal friction.
+
+These integrations typically take 5-20 hours of one-time setup work. The compounding value over years of operation far exceeds the setup cost.
+
+## Operational training for restaurant staff
+
+A successful restaurant QR program requires staff familiarity. Training should cover:
+
+What the QR codes do and where they lead. Staff get asked this regularly; they need clear answers.
+
+How to help customers who can't scan. Some customers are unfamiliar with QR; staff should be ready to help.
+
+How to handle customer questions about the QR program. Privacy, security, "why a QR instead of a paper menu" — all should have ready answers.
+
+How to spot QR-related issues. Damaged stickers, fading prints, scan failures. Staff should report these immediately for replacement.
+
+How to use any QR-related operational tools (analytics dashboards, restaurant manager's QR workflows). Managers should understand the data their QRs generate.
+
+Most training takes 30-60 minutes per staff member. The investment pays back through reduced customer confusion and faster service.
+
+## Accessibility considerations for restaurant QR menus
+
+QR menus must serve all customers, not just smartphone-equipped tech-comfortable diners. Accessibility patterns that work:
+
+**Always offer alternatives.** Some customers can't or won't scan QRs. Keep paper menus available on request. Don't make QRs the only option.
+
+**Text-readable landing pages.** Menu pages should pass WCAG AA standards: high contrast, readable fonts, large enough text. Older customers and those with vision impairments are significant restaurant audiences.
+
+**Screen reader compatibility.** Test menus with screen readers (VoiceOver on iOS, TalkBack on Android). Many menus fail this test because they're built for visual reading.
+
+**Multi-language without language switchers.** Browser-language smart redirects deliver appropriate language without making customers find a language switcher. More accessible than menu UIs with embedded language selection.
+
+**Simple navigation.** Avoid complex menus, dropdown filters, or multi-step processes. Hungry customers want food information fast, not navigation puzzles.
+
+**Photos for everyone.** Visual customers benefit from photos. Customers with low vision benefit from alt text on photos. Both should be available.
+
+**Pricing clarity.** Hidden or ambiguous pricing damages accessibility (and trust). Show prices clearly.
+
+**Allergen information prominent.** Customers with allergies need to find safety information quickly. Make it obvious, not buried.
+
+Restaurants that lead on accessibility produce better experiences for everyone, not just customers with specific accessibility needs.
+
+## QR menu lifecycle management
+
+Restaurant QR menus require ongoing lifecycle management to stay effective. Daily updates to specials and inventory. Weekly menu refreshes for seasonal items. Monthly performance reviews to identify trending dishes. Quarterly content audits to retire stale items. Annual major refreshes that match brand evolution. Without this discipline, even the best QR menu becomes stale and customer engagement drops.
+
 ## Conclusion
 
 Dynamic QR codes are the right format for restaurant menus in 2026. They eliminate reprints, unlock table-level analytics, and let you adapt your menu to seasons, hours, languages, and customer behavior without any operational pain.

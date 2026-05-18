@@ -201,6 +201,94 @@ For digital displays, the recommended minimums are typically larger than print b
 
 **Using QR size that just barely passes.** Push the size 25% larger than the minimum for safety margin.
 
+## Size considerations for specific contexts
+
+Beyond general sizing rules, specific contexts have their own requirements.
+
+**Vending machines and kiosks.** QRs displayed on vending machine screens need to accommodate the typical 30–60 cm viewing distance and the often-suboptimal lighting in vending locations. Minimum 5 cm × 5 cm, with high contrast and matte non-reflective rendering.
+
+**Receipts.** Thermal-printed receipt QRs face two challenges: receipt paper degrades over time (fading thermal ink) and the print quality is lower than offset. Use minimum 2 cm × 2 cm with high error correction (H level) to compensate for print degradation over the receipt's lifetime.
+
+**Boarding passes and tickets.** Often printed on lower-quality stock with high-volume printers. Print at minimum 2.5 cm × 2.5 cm with substantial quiet zone. Test on actual production samples.
+
+**ID badges and lanyards.** Small format but typically scanned at very close range (5–15 cm). Can go as small as 1.5 cm × 1.5 cm if scan distance is genuinely short. Most events use 2.5 cm × 2.5 cm for safety.
+
+**Tattoos and skin marking.** Yes, this is a real (niche) use case. The skin's irregular surface and color reduce scan reliability. Minimum 4 cm × 4 cm, high contrast (typically black on light skin or white outline on dark skin), and clean lines.
+
+**Embroidery and fabric.** QRs embroidered into fabric have rougher edges than printed QRs. Minimum 3 cm × 3 cm with simple eye and dot styles. Avoid intricate patterns that don't reproduce well in thread.
+
+**Wood burning and engraving.** Wood engraving has variable contrast and can have inconsistent depth. Minimum 4 cm × 4 cm with high contrast (dark engraving on light wood, or vice versa).
+
+**Stainless steel etching.** Permanent QR marking on metal. Etch contrast must be high enough to register against the reflective steel surface. Test thoroughly; some metals don't produce sufficient contrast even with deep etching.
+
+**Glass and transparent surfaces.** QRs on glass face background-variability problems (what's behind the glass affects scannability). Use opaque backing behind the QR area to ensure consistent background, or use stencil-style QRs that mask the background.
+
+**Edible printing (food and beverage).** QRs printed on cakes, food packaging interiors, or even directly on food using edible inks. Lower print quality and color variation; use larger sizes (3 cm+) and forgiving designs.
+
+Each context has nuances. Test before deploying any non-standard format.
+
+## Distance-aware QR strategies
+
+For QRs that may be scanned from varying distances, design strategies that accommodate the range.
+
+**Layered QRs.** Some sophisticated designs use multiple QRs of different sizes at the same location — a small QR for close scanners, a larger one for distant scanners. Same destination, different optimal scan distances.
+
+**Approach-friendly placement.** Place QRs where scanners can physically approach them. A billboard QR is most effective when there's a place where viewers can park and walk closer.
+
+**Dual-distance signage.** Some installations use a "see this from far, scan from close" approach where a visible URL is displayed at long distance and a QR appears at the approach point.
+
+**Variable QR size based on placement.** Multiple QRs across the same campaign, sized for their specific contexts. The same campaign might have 3 cm QRs on flyers, 8 cm QRs on posters, and 80 cm QRs on billboards.
+
+These strategies require more setup but produce better real-world scan rates across diverse contexts.
+
+## Print production specifications
+
+When sending QRs to print, the specifications you provide affect final quality.
+
+**File format hierarchy:** SVG > PDF > PNG (300+ DPI) > PNG (less than 300 DPI) > JPG. Always send the highest available format.
+
+**Color space:** Specify the color space (CMYK vs RGB). Most print uses CMYK; ensure the QR file is converted appropriately. RGB-only files may shift in unexpected ways during the CMYK conversion.
+
+**Bleed and crop marks:** If the QR sits near a cut edge, include appropriate bleed. The quiet zone must remain intact after cutting.
+
+**Spot color vs process color:** For high-volume runs with brand color QRs, spot color provides more consistency than process color (CMYK mix).
+
+**Resolution requirements:** For raster QRs, specify minimum 300 DPI for offset printing, 600 DPI for fine print (small QRs, premium products). For vector, resolution is unlimited.
+
+**Ink specifications:** Some printers use lower-opacity inks for cost reasons. Verify ink opacity is sufficient to produce strong contrast on your chosen substrate.
+
+**Substrate samples:** Request samples of the actual substrate before approving large runs. Color and contrast vary significantly across paper stocks, films, and other materials.
+
+**Press proof testing:** For mission-critical runs, request a press proof (a sample printed on the actual press that will run the job). Reveals issues that proofing systems miss.
+
+**Color management profile:** For multi-vendor printing where consistency matters, specify the color management profile (e.g., GRACoL 2013 CRPC6, Fogra 51). Ensures color reproduces consistently across printers.
+
+**Plate-making considerations:** Some legacy print processes have plate-making constraints that affect QR fidelity. Discuss with the printer before designing.
+
+These specifications add overhead but prevent costly reprints from quality issues.
+
+## Testing protocols for QR sizing
+
+A disciplined testing protocol catches sizing issues before they reach production. The protocol that works:
+
+**Stage 1: Digital preview.** Verify the QR scans at multiple zoom levels in the platform's preview. Quick sanity check; not a replacement for physical testing.
+
+**Stage 2: Single-device print test.** Print one sample at the target production size on the target substrate. Scan with one phone (iOS or Android). Verify success.
+
+**Stage 3: Multi-device print test.** Test the same sample with multiple devices: latest iPhone, latest Android, older Android (3+ years), and one device representative of your audience's lowest common denominator. All should succeed.
+
+**Stage 4: Environmental test.** Test the sample under multiple lighting conditions: bright office, dim restaurant, outdoor sun, indoor fluorescent. All conditions should produce reliable scans.
+
+**Stage 5: Angle and distance test.** Scan from various angles (not just perfectly perpendicular) and distances (close, normal, far for the placement). Real-world scanning is rarely perfect.
+
+**Stage 6: Repetition test.** Scan 10+ times in succession. Look for intermittent failures, not just average success.
+
+**Stage 7: Time-degradation simulation.** For long-life placements, simulate wear (light scratching, exposure to sunlight for several days, water exposure for waterproof claims). Verify scan reliability after.
+
+**Stage 8: Production sample test.** Once a production run is available, sample-test before approving distribution. Catches print quality variations from the proof.
+
+This 8-stage protocol takes about half a day for a critical QR design. For high-stakes deployments (millions of packages, billboards visible to thousands), the investment is trivial relative to the cost of getting it wrong.
+
 ## Conclusion
 
 Dynamic QR code sizing is straightforward when you follow the scan-distance-divided-by-10 rule and add 20–30% safety margin. Vector formats (SVG, PDF) are best for print. Raster formats need 300+ DPI. Always preserve the quiet zone. Always test on actual production samples in production conditions.

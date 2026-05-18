@@ -275,6 +275,52 @@ QR security gets disproportionate press coverage relative to actual incident rat
 
 That said, the risks are real and growing. As QR codes become more common, attackers will target them more. Treat your QR program with the same security seriousness you treat your email and web presence.
 
+## Threat modeling for QR programs
+
+A formal threat model helps identify QR program risks systematically. The STRIDE framework adapted for QR programs:
+
+**Spoofing.** Adversary impersonates a legitimate QR (overlay attacks, fake QRs with similar branding). Mitigations: tamper-evident placement, custom branded domains, user education.
+
+**Tampering.** Adversary modifies a QR's destination (account compromise, supply chain attack). Mitigations: MFA, audit logs, change notifications.
+
+**Repudiation.** Inability to prove who did what (e.g., who changed a QR destination). Mitigations: comprehensive audit logs, user attribution on every action.
+
+**Information disclosure.** Sensitive data leaks (PHI in QR URL, raw IPs in analytics). Mitigations: PII minimization, IP hashing, access controls.
+
+**Denial of service.** Adversary makes QRs unavailable (DDoS on redirect engine). Mitigations: edge-based redirect engine, rate limiting, anycast routing.
+
+**Elevation of privilege.** Adversary gains access beyond their authorization (account takeover, API key theft). Mitigations: MFA, role-based access control, regular access reviews.
+
+Each threat category has standard mitigations. Run through the STRIDE framework for any new QR program design to identify gaps.
+
+## Incident response for QR security events
+
+When a QR security event occurs, response speed matters. The playbook:
+
+**Detection.** Anomaly alerts, user reports, or platform notifications surface the incident. Faster detection means smaller damage radius.
+
+**Assessment.** What's the scope? Single QR or multiple? Single account or multiple? PII exposed or not? Regulatory notification triggered?
+
+**Containment.** Pause affected QRs immediately. Revoke API keys if compromised. Lock affected accounts.
+
+**Investigation.** Audit logs reveal what happened. Forensic analysis if needed. Determine root cause.
+
+**Eradication.** Address root cause. Patch vulnerabilities. Update credentials. Strengthen controls.
+
+**Recovery.** Restore service. Update affected QRs. Communicate with users.
+
+**Lessons learned.** Post-incident review. Update playbooks. Train team on prevention.
+
+Most QR security incidents are contained within hours when this playbook is exercised. Without a playbook, the same incidents can drag on for days while teams figure out what to do.
+
+## Security awareness training for QR programs
+
+The weakest link in most QR programs is human behavior. Security awareness training covers the basics. The training topics that matter most: recognizing phishing QR codes (don't scan unfamiliar QRs in untrusted places), checking the URL preview before tapping through, recognizing custom domain URLs as more trustworthy than generic short links, understanding what scan analytics do and don't collect (so you can answer customer questions), spotting compromised accounts (unusual destination changes, unfamiliar logins), reporting suspicious activity to the security team promptly, following standard password hygiene with platform credentials, enabling MFA without exception, and resisting phishing attempts targeting platform credentials. Training should be brief (30-45 minutes), repeated annually, and updated as new threats emerge. Most organizations find that consistent training produces measurable reductions in security incidents.
+
+## Vendor due diligence for QR security
+
+Before adopting a QR platform, due diligence on security posture is essential. The key questions: Do you have SOC 2 Type II audit reports? When was the last penetration test? What encryption is used at rest and in transit? How is data isolated between customers? What's the access control model for platform support staff? What's the breach notification policy? What's the data retention policy? How is incident response handled? What insurance coverage exists for security incidents? Most reputable platforms have ready answers and supporting documentation. Ones that don't shouldn't be trusted with mission-critical QR programs.
+
 ## Conclusion
 
 Dynamic QR code security is well-understood, with established defenses for every major risk. The infrastructure is mature: reputable platforms provide URL validation, IP hashing, MFA, audit logs, and SOC 2 compliance out of the box. The user behavior side is where most incidents happen — and the answer there is education, custom branded domains, and good operational hygiene.

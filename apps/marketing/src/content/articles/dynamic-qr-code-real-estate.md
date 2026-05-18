@@ -223,6 +223,100 @@ This funnel lets you calculate cost-per-lead and cost-per-deal by source asset (
 
 **No follow-up automation.** Scans are leads. Without automated follow-up email or SMS, you waste most of them.
 
+## Real estate QR strategies by agent type
+
+Different real estate professionals benefit from different QR strategies based on their business model.
+
+**Solo agents.** Focus on the highest-leverage QRs: yard signs, business cards, and just-listed postcards. Free or Starter plan ($12/month) typically covers needs. Per-listing attribution drives showing-to-offer conversion improvements.
+
+**Team leaders.** Workspace QR programs across team members. Per-agent attribution within the team helps with performance management and lead distribution. Pro plan ($39/month) with custom domain.
+
+**Brokerages (independent).** Multi-agent setups with standardized templates and centralized reporting. Agency plan ($129/month) with workspaces and white-label reports. Brand consistency across all properties.
+
+**National franchise affiliates.** Brand-mandated templates from the franchise. Per-agent customization within franchise guidelines. Centralized reporting for franchise compliance and best-practice sharing.
+
+**Luxury specialists.** Premium QR design (custom domains, sophisticated landing pages, virtual tours). Higher per-listing investment justified by higher commissions.
+
+**New construction.** Builder-driven QRs on every model home, sales center, and lot. Customer journey from drive-by to model home to contract.
+
+**Commercial real estate.** Different patterns from residential. Larger properties, longer sales cycles, fewer but more valuable leads. QRs on listing sheets and building signage.
+
+**Property managers.** QRs for rental listings, tenant communications, maintenance requests. Different lifecycle than sales-focused real estate.
+
+**Real estate investors.** QRs on direct mail to potential sellers. Higher acquisition-cost contexts where QR-driven response rates matter more.
+
+Match your QR strategy to your business model. Generic QR advice doesn't always fit specific real estate niches.
+
+## MLS and listing platform integration
+
+Most real estate QR programs interact with the MLS and major listing platforms. The integration considerations:
+
+**MLS compliance.** Each MLS has rules about QR code usage. Some allow QRs on MLS listing pages; others restrict to agent-owned pages. Check your MLS's policy before deploying.
+
+**Listing platform restrictions.** Zillow, Realtor.com, Redfin, etc. each have their own rules. QRs that route to platforms-owned listings face restrictions; QRs that route to your own pages face fewer.
+
+**IDX integration.** Internet Data Exchange (IDX) sites can be the destination for QR codes. Verify IDX terms allow this usage.
+
+**Lead attribution.** Leads generated from QR-driven traffic to MLS or platform listings may not be attributed to you. Use your own listing pages whenever possible.
+
+**Multi-MLS coverage.** Agents working across multiple MLS regions face the rules of each. Standardize on practices acceptable across all MLSs.
+
+**Showing service integration.** QR-driven appointment booking can integrate with ShowingTime, ShowingSmart, and similar services. Streamlines showings.
+
+**Lead distribution integration.** For team leads, QRs that route to round-robin lead distribution save manual lead assignment work.
+
+These integrations vary by MLS and platform. Build the integrations that match your specific operational environment.
+
+## Real estate QR campaigns that consistently work
+
+Beyond the basic listing QR, several specific QR campaigns deliver outsized results in real estate.
+
+**Open house registration QR.** A QR at the door opens a one-page registration form. Captures name, phone, email of every visitor. Triggers automated follow-up. Replaces unreliable paper sign-in sheets. ROI is immediate; many agents report 3-5x more usable leads from QR-driven open house registration vs paper.
+
+**Coming-soon QR.** Before formal MLS listing, agents test market interest with "coming soon" signs containing QRs that link to teaser content (limited photos, price range, expression-of-interest form). Captures buyer demand before competitors see the listing.
+
+**Just-sold QR.** On just-sold signs, QRs link to similar-property search and seller-side content (CMA request, neighborhood market report). Captures sellers who recognize neighborhood activity.
+
+**Door-knocking QR.** Door hangers and leave-behinds with QRs leading to instant home valuation tools. Higher-converting than business cards alone.
+
+**Neighborhood farming QR.** Direct mail campaigns to specific neighborhoods with QRs linking to neighborhood-specific market reports. Hyperlocal lead generation.
+
+**Open house follow-up QR.** Thank-you cards after open houses with QRs linking to similar property recommendations and one-tap showing requests. Maintains engagement after the open house.
+
+**Listing presentation QR.** Listing presentation materials with QRs linking to the agent's case studies, sold portfolio, and testimonials. Strengthens listing pitches.
+
+**Past client retention QR.** Anniversary cards to past clients with QRs linking to current market value of their home (CMA) and referral request. Maintains relationships and generates referrals.
+
+These specific campaigns, deployed systematically, compound to substantial business impact over time.
+
+## Common real estate QR program metrics
+
+Real estate QR programs benefit from tracking specific metrics aligned to real estate KPIs.
+
+**Scans per active listing.** Indicates marketing reach per property.
+
+**Scans per dollar of marketing spend.** Compares QR-driven traffic costs to other marketing channels.
+
+**Scan-to-showing-request conversion rate.** Top of the funnel quality indicator.
+
+**Showing-to-offer conversion rate.** Mid-funnel quality (depends on landing page quality and follow-up).
+
+**Offer-to-close conversion rate.** Bottom-funnel quality (depends on listing pricing and market conditions).
+
+**Average days-on-market for QR-marketed listings vs non-QR.** Indicates QR program impact on sale velocity.
+
+**Per-marketing-source attribution.** Yard signs vs postcards vs business cards vs open house flyers — which generates the best leads?
+
+**Agent productivity metrics.** Listings per agent, transactions per agent, GCI per agent — are QR-using agents more productive?
+
+**Repeat client and referral attribution.** Are past clients re-engaging via QRs? Driving new referrals?
+
+These metrics inform investments in different QR strategies and demonstrate program value to brokerages and franchise leadership.
+
+## Brokerage adoption strategies
+
+Brokerages looking to roll out QR programs across multiple agents face adoption challenges. Strategies that work: provide a free or subsidized QR platform license to agents (removes the cost barrier), include QR training in onboarding for new agents (sets expectations from day one), share QR success stories from top-performing agents at sales meetings (builds peer pressure to participate), build the QR platform into standardized listing checklists (makes it default behavior), recognize QR-driven results in awards and recognition (cultural reinforcement), and pair early adopters with skeptics for one-on-one knowledge transfer (organic spread). Brokerages that succeed at adoption see QR programs become baseline expectations rather than optional enhancements.
+
 ## Conclusion
 
 Dynamic QR codes are a no-brainer for real estate in 2026. The cost is small ($12–$39/month for almost any agent), the setup is straightforward (30 minutes per listing), and the attribution unlocks decisions about which marketing assets actually drive deals. The single highest-impact change: one dynamic QR per yard sign, with a "Scan for details" CTA, pointing to a fast, mobile-optimized listing page with lead capture.

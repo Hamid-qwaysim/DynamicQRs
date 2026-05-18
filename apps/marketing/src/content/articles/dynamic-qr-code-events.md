@@ -269,6 +269,110 @@ The unique event patterns:
 
 **Not training staff.** Door staff need to know how to scan check-in QRs. Run a 15-minute training before doors open.
 
+## Event-specific platform requirements
+
+Selecting a QR platform for events has specific requirements beyond general criteria.
+
+**Bulk generation at scale.** Events with thousands of attendees need bulk QR generation that produces unique QRs from CSV uploads. Look for platforms supporting at least 10,000 QRs per bulk job.
+
+**One-time-use QR support.** Ticket QRs that should "burn out" after first scan require platform support for single-use behavior or external state tracking.
+
+**Real-time API.** Sponsor lead capture and check-in workflows benefit from real-time webhook firing on every scan. Latency matters during event peaks.
+
+**Reliability during peaks.** Event check-in peaks can drive 1000+ scans/minute during the first hour. Platform must handle these peaks without degraded latency. Verify with platform's published rate limits.
+
+**Multi-language support.** International events need multi-language smart redirects. Verify the platform supports your target languages.
+
+**White-label reporting.** Sponsor reports often need white-label branding. Platforms vary in white-label support quality.
+
+**Time-windowed QRs.** Event QRs often need to behave differently based on time (pre-event registration, during-event live content, post-event recordings). Smart redirect rules supporting time-windowing are essential.
+
+**Custom domains.** Events benefit from event-specific subdomains (e.g., `qr.event2026.com`). Verify the platform supports rapid setup and teardown for short-duration events.
+
+**Data retention for post-event analysis.** Some events need years of historical data for trend analysis. Verify the platform's retention defaults match your needs.
+
+**Audit trail.** Compliance-sensitive events (industry conferences, regulated industries) need detailed audit trails of every QR creation and modification.
+
+Most general-purpose QR platforms meet these requirements at their Pro or Agency tier. Verify before committing to a specific platform for a large event.
+
+## Crisis management at events
+
+Events sometimes face crises — speaker cancellations, venue issues, security incidents, weather disruptions. Dynamic QR codes can be valuable crisis management tools.
+
+**Schedule changes.** If a session moves rooms or times, the session's QR can be updated in seconds. Attendees scanning the QR see current info even if printed schedules are outdated.
+
+**Speaker substitutions.** Speaker QRs can be updated to reflect substitutes, with biographical information for the new speaker.
+
+**Venue communications.** Emergency information QRs at every signage location can be updated centrally for instant venue-wide communication.
+
+**Evacuation guidance.** Pre-positioned emergency QRs link to evacuation routes that can be updated based on real-time conditions.
+
+**Refund and rebooking.** For cancelled or significantly changed events, post-event QRs link to refund processes and rebooking options.
+
+**Communication during outages.** If the event's primary communication channels (PA system, app notifications) fail, QR-based communication on physical signage provides a backup channel.
+
+The crisis management value alone justifies investment in QR programs for any significant event. The day you need it, you'll be glad you have it.
+
+## Sponsor monetization through QR programs
+
+For event organizers, sponsor revenue depends on demonstrating value to sponsors. QR programs provide a measurement layer that makes sponsor pricing defensible.
+
+**Per-booth scan reporting.** Each sponsor sees exactly how many attendees engaged with their presence. The data justifies higher sponsorship pricing at well-attended events and informs sponsor decisions about future participation.
+
+**Per-attendee profile.** Some events offer sponsors access to (with appropriate consent) per-attendee data: company, role, interests. QRs that capture this at scan time enable richer sponsor reporting.
+
+**Lead delivery automation.** Real-time webhook to sponsor CRMs means sales teams can follow up while the event is still running. Higher conversion rates from same-week follow-up.
+
+**ROI calculators for sponsors.** Event organizers can provide sponsors with ROI calculations based on QR-attributed pipeline. Strong calculators justify renewals.
+
+**Premium sponsor tiers.** Higher-tier sponsorships can include premium QR placements (more locations, more attendee data, prioritized routing). Tier differentiation creates upgrade paths.
+
+**Year-over-year reporting.** Multi-year QR data lets organizers show sponsors trends in their booth engagement. Helps both renewal conversations and pricing increases.
+
+**Sponsor activation creative.** QRs enable sponsor creative beyond static signage: interactive trivia, sponsor-specific content, sponsor-driven promotions. Higher engagement than traditional booth approaches.
+
+Event organizers that fully embrace QR-driven sponsor measurement typically see 20-40% sponsor revenue increases over 2-3 years as the data supports premium pricing.
+
+## Hybrid event considerations
+
+Modern events often have hybrid (in-person + virtual) components. QR strategies that work well in hybrid contexts:
+
+**Bridge in-person to virtual.** QRs at the physical event link virtual attendees into related digital content. Bridges the two audiences.
+
+**Time-shifted content access.** Sessions are recorded and made available post-event. QRs that initially pointed to live streams transition to recordings.
+
+**Hybrid networking.** QRs facilitate connections between in-person and virtual attendees, who can't otherwise interact naturally.
+
+**Sponsor parity.** Sponsors deserve engagement metrics from both in-person and virtual audiences. QR programs that track both provide parity.
+
+**Engagement attribution.** Tracking which attendees engaged with which content types (in-person sessions, virtual breakouts, on-demand recordings) requires QR-based instrumentation.
+
+**Personalized agendas.** Each attendee's recommended sessions can differ based on their hybrid attendance pattern. QRs adapt routing accordingly.
+
+Hybrid events are operationally complex but QR codes simplify the measurement layer that makes hybrid sustainable.
+
+## Event QR program lifecycle
+
+A typical event runs a QR program over a 6-12 month lifecycle from planning to post-event analysis.
+
+**Months -6 to -3: Strategy.** Define use cases. Select platform. Train team. Plan budget. Sign sponsor commitments contingent on QR-enabled data.
+
+**Months -3 to -1: Build.** Generate QRs. Build landing pages. Configure smart redirects. Integrate with CRMs and event app. Test thoroughly.
+
+**Month -1 to event: Deploy.** Print signage. Distribute attendee tickets. Brief staff. Pre-event communications.
+
+**Event days: Operate.** Monitor analytics in real time. Adjust destinations as needed. Handle issues as they arise.
+
+**Week +1: Initial analysis.** Pull data. Generate sponsor reports. Initial retrospective with planning team.
+
+**Month +1: Deep analysis.** Conversion attribution from QR scans through to event objectives. Detailed sponsor reports. Begin planning next event.
+
+**Months +2-3: Renewal conversations.** Use QR-driven data to renegotiate sponsor contracts for next event.
+
+**Months +3-6: Strategic adjustments.** Apply lessons to next event's planning. Refine the QR playbook.
+
+This lifecycle treats QR programs as core event infrastructure rather than a tactical add-on. Events that follow this discipline get the most value from QR investments.
+
 ## Conclusion
 
 Dynamic QR codes are the operational backbone of modern events. They handle ticketing, check-ins, agendas, sponsor activations, sessions, surveys, and follow-ups — all from a single platform with unified analytics. The cost is modest, the setup is mostly automated via bulk generation, and the data dividends pay back for years of post-event analysis.
