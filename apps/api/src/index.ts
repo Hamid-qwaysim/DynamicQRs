@@ -19,16 +19,18 @@ app.use(
       if (!origin) return site;
       const staticAllowed = new Set([
         site,
+        'https://www.dynamicqrcodelabs.com',
         'http://localhost:4321',
         'http://localhost:5173',
         'http://localhost:3000',
       ]);
       if (staticAllowed.has(origin)) return origin;
-      // Allow any *.pages.dev preview/production deployment for this project
       try {
         const host = new URL(origin).hostname;
         if (host === 'dynamicqrcodelabs.pages.dev') return origin;
         if (host.endsWith('.dynamicqrcodelabs.pages.dev')) return origin;
+        if (host === 'dynamicqrcodelabs.com') return origin;
+        if (host === 'www.dynamicqrcodelabs.com') return origin;
       } catch {
         // fall through
       }

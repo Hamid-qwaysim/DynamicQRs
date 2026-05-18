@@ -8,6 +8,12 @@ compatibility_flags = ["nodejs_compat"]
 #   { pattern = "dynamicqrcodelabs.com/*", custom_domain = true },
 # ]
 
+# The Worker (redirect engine + API) is attached to qr.dynamicqrcodelabs.com
+# via a Workers Custom Domain (managed via the Cloudflare API, not declared
+# here). The apex dynamicqrcodelabs.com is free for the Pages marketing site.
+# QR codes encode qr.dynamicqrcodelabs.com/q/<short_code>; the Astro site
+# calls qr.dynamicqrcodelabs.com/api/* for auth and QR CRUD.
+
 [[d1_databases]]
 binding = "DB"
 database_name = "dynamicqr-db"
@@ -17,7 +23,7 @@ migrations_dir = "drizzle"
 [vars]
 ENVIRONMENT = "production"
 PUBLIC_SITE_URL = "https://dynamicqrcodelabs.com"
-SHORT_LINK_BASE = "https://dynamicqrcodelabs.com/q"
+SHORT_LINK_BASE = "https://qr.dynamicqrcodelabs.com/q"
 
 # Secrets to set via `wrangler secret put`:
 # JWT_SECRET — secret for signing session cookies
