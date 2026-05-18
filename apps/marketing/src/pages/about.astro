@@ -1,0 +1,78 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../lib/site';
+import { breadcrumbSchema } from '../lib/schema';
+
+const title = 'About Dynamic QR Code Labs — Our Story & Mission';
+const description =
+  'We build the dynamic QR code platform we wished existed — fast, modern, transparent pricing, real analytics, and a generous free plan with no watermark.';
+
+const jsonLd = breadcrumbSchema([
+  { name: 'Home', url: '/' },
+  { name: 'About', url: '/about/' },
+]);
+---
+
+<BaseLayout title={title} description={description} jsonLd={jsonLd}>
+  <div class="container">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li aria-current="page">About</li>
+      </ol>
+    </nav>
+  </div>
+
+  <section class="feature-page-hero">
+    <div class="container">
+      <h1>The dynamic QR platform we wished existed</h1>
+      <p>Fast, modern, transparently priced, and built by a team that uses its own product every day.</p>
+    </div>
+  </section>
+
+  <section class="container" style="max-width: 760px; padding-bottom: 80px;">
+    <h2>Why we built this</h2>
+    <p>
+      Most QR code platforms in 2026 fall into one of two buckets. Either they are enterprise tools with $200/month price tags, custom contracts, and sales-led signup flows — overkill for the 99% of teams who just want a working dynamic QR. Or they are consumer tools with watermarks on the free tier, low scan caps, dated UIs, and analytics that feel like they were bolted on years ago.
+    </p>
+    <p>
+      We built Dynamic QR Code Labs because we wanted a platform that was modern, fast, transparently priced, and actually generous on the free tier. We use it ourselves for restaurant menus, event tickets, product packaging, and every flyer we print. Everything in the product exists because we have personally hit the limit of the alternatives.
+    </p>
+
+    <h2>What we believe</h2>
+    <p>
+      A dynamic QR code should never have a watermark on the free tier. Analytics should be the same on every plan, not the bait-and-switch where you get a 7-day window for free and have to upgrade for anything useful. Pricing should be readable in 30 seconds, not buried in feature matrices.
+    </p>
+    <p>
+      The QR you print today should keep working forever. Period. If a platform is going to disable your QR codes when you cancel, downgrade, or stop using them for a quarter, that platform should not be trusted with anything important. Our QR codes keep working as long as your account exists, full stop.
+    </p>
+
+    <h2>The team</h2>
+    <p>
+      We are a small, distributed team of engineers, designers, and growth marketers across North America, Europe, and the Middle East. We have shipped products at agencies, restaurants, and venture-backed SaaS companies. We know what good infrastructure feels like, and we know what bad infrastructure costs.
+    </p>
+
+    <h2>Our infrastructure</h2>
+    <p>
+      The platform runs on Cloudflare Workers and D1, with edge caching for the redirect engine. Every QR scan is served from the nearest edge to the scanner, typically in 30–60 ms. We use TypeScript end-to-end, Astro for the marketing site you are reading right now, and React for the dashboard. Everything is built with performance and reliability as first-class concerns, not marketing claims.
+    </p>
+
+    <h2>Privacy and security</h2>
+    <p>
+      We hash IP addresses before storage. We use approximate location data only. We do not sell, share, or rent any user data. We block dangerous URL schemes (<code>javascript:</code>, <code>data:</code>, <code>file:</code>) at the redirect layer. We comply with GDPR and CCPA out of the box. We support SSO and audit logs on enterprise plans. We treat your data the way we would want ours to be treated — minimally collected, securely stored, instantly deletable.
+    </p>
+
+    <h2>Get in touch</h2>
+    <p>
+      Questions, partnerships, press, or just hello — email us at <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a>. We answer everything.
+    </p>
+  </section>
+
+  <section class="container">
+    <div class="cta-block">
+      <h2>Try the platform we wished existed</h2>
+      <p>Free forever plan. No credit card. No watermark. Full analytics. Make up your own mind.</p>
+      <a href="/signup/" class="btn btn-primary btn-lg">Create your first QR free</a>
+    </div>
+  </section>
+</BaseLayout>

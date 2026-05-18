@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { breadcrumbSchema } from '../lib/schema';
+
+const title = 'Free Dynamic QR Code Generator (No Watermark, No Signup Required)';
+const description =
+  'Create a free dynamic QR code instantly. Editable forever after printing, real-time analytics, branded designs, smart redirects, and PNG export included.';
+
+const jsonLd = breadcrumbSchema([
+  { name: 'Home', url: '/' },
+  { name: 'QR Code Generator', url: '/qr-code-generator/' },
+]);
+---
+
+<BaseLayout title={title} description={description} jsonLd={jsonLd}>
+  <div class="container">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li aria-current="page">QR Code Generator</li>
+      </ol>
+    </nav>
+  </div>
+
+  <section class="feature-page-hero">
+    <div class="container">
+      <h1>Free Dynamic QR Code Generator</h1>
+      <p>Create an editable, trackable, branded QR code in under a minute. PNG, SVG, and PDF export. No watermark. Free forever plan included.</p>
+      <div style="margin-top: 24px;">
+        <a href="/signup/" class="btn btn-primary btn-lg">Generate your QR code free</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="container section">
+    <div style="max-width: 760px; margin: 0 auto; color: var(--text-soft); font-size: 1.04rem; line-height: 1.75;">
+      <p>
+        Our QR code generator creates <strong>dynamic QR codes</strong> — codes that you can edit forever after printing, without changing the printed pattern. Every QR code you generate is editable, trackable, and customizable. Pick from 20+ QR types (URL, vCard, WhatsApp, WiFi, restaurant menu, PDF, multi-link, and more), brand it with your colors and logo, and export at print quality.
+      </p>
+
+      <h2 style="margin-top: 40px;">What you get</h2>
+      <ul>
+        <li><strong>Editable destination forever.</strong> Change where the QR points to as many times as you want.</li>
+        <li><strong>Real-time analytics.</strong> See scans by country, device, OS, time, and source.</li>
+        <li><strong>Branded design.</strong> Custom colors, eye shapes, dot patterns, frames, and your logo.</li>
+        <li><strong>Export PNG, SVG, PDF, JPEG, WebP.</strong> Sizes up to 4096 px for print.</li>
+        <li><strong>Smart redirects.</strong> Different visitors get sent to different destinations from the same QR.</li>
+        <li><strong>No watermark.</strong> Even on the free plan.</li>
+      </ul>
+
+      <h2>How to generate a QR code</h2>
+      <ol>
+        <li>Sign up free (no credit card needed).</li>
+        <li>Choose your QR type — URL, vCard, WhatsApp, WiFi, menu, PDF, multi-link, etc.</li>
+        <li>Enter your destination.</li>
+        <li>Customize colors, shapes, and add your logo.</li>
+        <li>Run the scannability check.</li>
+        <li>Download PNG, SVG, or PDF.</li>
+      </ol>
+
+      <p>
+        Want to learn more first? Read our deep dive on <a href="/blog/what-is-a-dynamic-qr-code/">what a dynamic QR code is and how it works</a>, or our <a href="/blog/dynamic-vs-static-qr-code/">comparison of dynamic vs static QR codes</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="cta-block">
+      <h2>Ready to generate your QR code?</h2>
+      <p>Free forever plan. No credit card. No watermark.</p>
+      <a href="/signup/" class="btn btn-primary btn-lg">Generate QR code free</a>
+    </div>
+  </section>
+</BaseLayout>

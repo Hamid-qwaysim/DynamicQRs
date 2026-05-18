@@ -1,0 +1,166 @@
+---
+import { SITE, NAV_LINKS } from '../lib/site';
+const path = Astro.url.pathname;
+---
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="/" class="brand" aria-label={`${SITE.name} home`}>
+      <svg class="brand-mark" width="32" height="32" viewBox="0 0 32 32" aria-hidden="true">
+        <rect x="2" y="2" width="10" height="10" rx="2" fill="#0a0e27"/>
+        <rect x="20" y="2" width="10" height="10" rx="2" fill="#0a0e27"/>
+        <rect x="2" y="20" width="10" height="10" rx="2" fill="#0a0e27"/>
+        <rect x="22" y="22" width="6" height="6" rx="1.5" fill="#2540ff"/>
+        <rect x="14" y="14" width="4" height="4" fill="#2540ff"/>
+      </svg>
+      <span class="brand-name">{SITE.brandShort}</span>
+    </a>
+
+    <nav class="primary-nav" aria-label="Primary">
+      <ul>
+        {NAV_LINKS.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              aria-current={path === link.href ? 'page' : undefined}
+            >
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="header-cta">
+      <a href="/login/" class="header-link">Log in</a>
+      <a href="/signup/" class="btn btn-primary">Create QR free</a>
+    </div>
+
+    <button class="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <nav id="mobile-menu" class="mobile-nav" aria-label="Mobile" hidden>
+    <ul>
+      {NAV_LINKS.map((link) => (
+        <li><a href={link.href}>{link.label}</a></li>
+      ))}
+      <li><a href="/login/">Log in</a></li>
+      <li><a href="/signup/" class="btn btn-primary">Create QR free</a></li>
+    </ul>
+  </nav>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: saturate(180%) blur(12px);
+    -webkit-backdrop-filter: saturate(180%) blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    gap: 24px;
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 800;
+    font-size: 1.05rem;
+    letter-spacing: -0.02em;
+  }
+  .brand:hover { text-decoration: none; }
+  .primary-nav ul {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .primary-nav a {
+    color: var(--text-soft);
+    font-weight: 500;
+    font-size: 0.94rem;
+  }
+  .primary-nav a:hover,
+  .primary-nav a[aria-current="page"] {
+    color: var(--text);
+    text-decoration: none;
+  }
+  .header-cta {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .header-link {
+    color: var(--text-soft);
+    font-weight: 500;
+    font-size: 0.94rem;
+  }
+  .menu-toggle {
+    display: none;
+    background: transparent;
+    border: 0;
+    width: 40px;
+    height: 40px;
+    flex-direction: column;
+    gap: 5px;
+    justify-content: center;
+    align-items: center;
+  }
+  .menu-toggle span {
+    width: 20px;
+    height: 2px;
+    background: var(--text);
+    border-radius: 1px;
+  }
+  .mobile-nav { display: none; }
+
+  @media (max-width: 880px) {
+    .primary-nav, .header-cta { display: none; }
+    .menu-toggle { display: flex; }
+    .mobile-nav[data-open="true"] {
+      display: block;
+      border-top: 1px solid var(--border);
+      background: #fff;
+    }
+    .mobile-nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .mobile-nav a {
+      display: block;
+      padding: 12px 14px;
+      border-radius: 8px;
+      color: var(--text);
+      font-weight: 500;
+    }
+    .mobile-nav a:hover { background: var(--bg-soft); text-decoration: none; }
+  }
+</style>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
+  const menu = document.querySelector<HTMLElement>('#mobile-menu');
+  toggle?.addEventListener('click', () => {
+    const open = menu?.dataset.open === 'true';
+    if (menu) {
+      menu.dataset.open = String(!open);
+      menu.hidden = open;
+    }
+    toggle.setAttribute('aria-expanded', String(!open));
+  });
+</script>

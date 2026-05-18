@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = 'Page not found (404) — Dynamic QR Code Labs';
+const description =
+  'Sorry, the page you were looking for could not be found. Browse our homepage, pricing, or QR code blog for helpful content and resources.';
+---
+
+<BaseLayout title={title} description={description} noindex={true}>
+  <section class="container" style="padding: 96px 24px; text-align: center;">
+    <p style="font-size: 5rem; line-height: 1; margin: 0; color: var(--brand); font-weight: 800; letter-spacing: -0.03em;">404</p>
+    <h1>Page not found</h1>
+    <p style="color: var(--text-soft); max-width: 480px; margin: 0 auto 28px;">The page you were looking for has moved or never existed. Try one of these instead:</p>
+    <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+      <a href="/" class="btn btn-primary">Go to homepage</a>
+      <a href="/blog/" class="btn btn-secondary">Read the blog</a>
+      <a href="/pricing/" class="btn btn-secondary">View pricing</a>
+    </div>
+  </section>
+</BaseLayout>

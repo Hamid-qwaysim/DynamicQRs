@@ -1,0 +1,543 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../lib/site';
+import {
+  organizationSchema,
+  websiteSchema,
+  softwareApplicationSchema,
+  faqSchema,
+} from '../lib/schema';
+
+const title = 'Free Dynamic QR Code Generator — Editable Forever, Live Analytics';
+const description =
+  'Create a free dynamic QR code you can edit anytime after printing. Track scans in real time, customize designs, and run smart redirects — no watermark.';
+
+const faqs = [
+  {
+    question: 'What is a dynamic QR code?',
+    answer:
+      'A dynamic QR code is a QR code whose destination URL can be changed after the QR is created and printed, because the code itself encodes a short tracking link that redirects to your real destination. Static QR codes hard-code the destination into the image, so you have to reprint the whole code to change it. Dynamic QR codes are editable, trackable, and reusable forever.',
+  },
+  {
+    question: 'Can I really change the link after I have printed the QR code?',
+    answer:
+      'Yes. The printed QR code never changes — what changes is the destination it points to inside your dashboard. The QR encodes a short URL like dynamicqrcodelabs.com/q/abc123 that always belongs to you. When someone scans it, our redirect engine looks up the current destination and forwards the visitor in milliseconds. You can update the destination as many times as you want without reprinting anything.',
+  },
+  {
+    question: 'Do dynamic QR codes expire?',
+    answer:
+      'Your QR codes never expire as long as your account is active. You can set an optional expiration date on individual QR codes for time-limited campaigns (event tickets, promo codes, sales). When a QR expires, scanners see a branded expiration page or get forwarded to a fallback URL of your choice.',
+  },
+  {
+    question: 'Can I track who scanned my QR code?',
+    answer:
+      'You get real-time analytics on every scan: total scans, unique scans, country, city, device type, operating system, browser, referrer, language, and UTM parameters. You never see personally identifying information — we hash IP addresses and store approximate locations only. All data lives inside your workspace dashboard with filters, charts, and CSV export.',
+  },
+  {
+    question: 'Can I use my own custom domain for the short links?',
+    answer:
+      'Yes. On the Pro plan and above you can connect a custom domain like qr.yourbrand.com or scan.yourbrand.com. Just add a CNAME record to your DNS, click Verify, and every QR code in your workspace will use your branded short link automatically. SSL is provisioned for you.',
+  },
+  {
+    question: 'What file formats can I download my QR code in?',
+    answer:
+      'You can export PNG, SVG, PDF, JPEG, and WebP at sizes from 512 px up to 4096 px. SVG is recommended for print because it scales to any size without losing quality. We also include print presets for business cards, table tents, stickers, posters, flyers, and product packaging — each with a built-in scannability check before download.',
+  },
+  {
+    question: 'Can I pause or revoke a dynamic QR code?',
+    answer:
+      'Any QR code can be paused (shows a branded "paused" page), revoked (permanently disabled), or archived (hidden from the dashboard but still working). This is essential if a printed QR is leaked, abused, or no longer relevant — you keep full control of every scan from the day it was created to the day you retire it.',
+  },
+  {
+    question: 'Is a dynamic QR code suitable for restaurants?',
+    answer:
+      'Restaurants are one of the strongest use cases. A single printed sticker on every table can point to a digital menu that you update daily — new prices, new dishes, today\'s specials, multi-language menus, allergen info, or seasonal offers — without reprinting anything. You can even use one unique QR per table to know exactly which table is scanning the most and at what hours.',
+  },
+];
+
+const jsonLd = [
+  organizationSchema(),
+  websiteSchema(),
+  softwareApplicationSchema(),
+  faqSchema(faqs),
+];
+---
+
+<BaseLayout title={title} description={description} jsonLd={jsonLd}>
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="eyebrow">Free dynamic QR code platform</span>
+        <h1>
+          Create a free dynamic QR code you can <span class="grad">edit forever</span>.
+        </h1>
+        <p class="lede">
+          Generate a free dynamic QR code in seconds, change the destination after it is printed, track every scan in real time, customize designs to match your brand, and run smart redirect rules — all from one fast, modern dashboard.
+        </p>
+        <div class="hero-cta">
+          <a href="/signup/" class="btn btn-primary btn-lg">Create your free QR code</a>
+          <a href="/features/" class="btn btn-secondary btn-lg">See how it works</a>
+        </div>
+        <div class="hero-trust">
+          <span>✓ <strong>100% free</strong> forever plan</span>
+          <span>✓ <strong>No credit card</strong> needed</span>
+          <span>✓ <strong>No watermark</strong></span>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="qr-mock" aria-label="Sample branded dynamic QR code preview">
+          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Dynamic QR code sample with brand colors">
+            <rect width="200" height="200" fill="#fff"/>
+            <g fill="#0a0e27">
+              <rect x="10" y="10" width="50" height="50" rx="6"/>
+              <rect x="20" y="20" width="30" height="30" rx="2" fill="#fff"/>
+              <rect x="28" y="28" width="14" height="14" rx="1.5" fill="#0a0e27"/>
+              <rect x="140" y="10" width="50" height="50" rx="6"/>
+              <rect x="150" y="20" width="30" height="30" rx="2" fill="#fff"/>
+              <rect x="158" y="28" width="14" height="14" rx="1.5" fill="#0a0e27"/>
+              <rect x="10" y="140" width="50" height="50" rx="6"/>
+              <rect x="20" y="150" width="30" height="30" rx="2" fill="#fff"/>
+              <rect x="28" y="158" width="14" height="14" rx="1.5" fill="#0a0e27"/>
+            </g>
+            <g fill="#2540ff">
+              <circle cx="75" cy="20" r="4"/><circle cx="90" cy="20" r="4"/><circle cx="110" cy="20" r="4"/><circle cx="125" cy="20" r="4"/>
+              <circle cx="75" cy="35" r="4"/><circle cx="105" cy="35" r="4"/><circle cx="125" cy="35" r="4"/>
+              <circle cx="85" cy="50" r="4"/><circle cx="100" cy="50" r="4"/><circle cx="120" cy="50" r="4"/>
+              <circle cx="20" cy="75" r="4"/><circle cx="35" cy="75" r="4"/><circle cx="55" cy="75" r="4"/><circle cx="75" cy="75" r="4"/><circle cx="100" cy="75" r="4"/><circle cx="125" cy="75" r="4"/><circle cx="150" cy="75" r="4"/><circle cx="170" cy="75" r="4"/>
+              <circle cx="20" cy="90" r="4"/><circle cx="50" cy="90" r="4"/><circle cx="70" cy="90" r="4"/><circle cx="105" cy="90" r="4"/><circle cx="135" cy="90" r="4"/><circle cx="160" cy="90" r="4"/><circle cx="180" cy="90" r="4"/>
+              <circle cx="30" cy="110" r="4"/><circle cx="60" cy="110" r="4"/><circle cx="80" cy="110" r="4"/><circle cx="125" cy="110" r="4"/><circle cx="145" cy="110" r="4"/><circle cx="175" cy="110" r="4"/>
+              <circle cx="20" cy="125" r="4"/><circle cx="40" cy="125" r="4"/><circle cx="75" cy="125" r="4"/><circle cx="95" cy="125" r="4"/><circle cx="115" cy="125" r="4"/><circle cx="140" cy="125" r="4"/><circle cx="165" cy="125" r="4"/>
+              <circle cx="75" cy="150" r="4"/><circle cx="95" cy="150" r="4"/><circle cx="120" cy="150" r="4"/><circle cx="140" cy="150" r="4"/><circle cx="165" cy="150" r="4"/><circle cx="180" cy="150" r="4"/>
+              <circle cx="80" cy="165" r="4"/><circle cx="100" cy="165" r="4"/><circle cx="125" cy="165" r="4"/><circle cx="150" cy="165" r="4"/><circle cx="170" cy="165" r="4"/>
+              <circle cx="75" cy="180" r="4"/><circle cx="95" cy="180" r="4"/><circle cx="115" cy="180" r="4"/><circle cx="135" cy="180" r="4"/><circle cx="160" cy="180" r="4"/>
+            </g>
+            <g>
+              <rect x="84" y="84" width="32" height="32" rx="6" fill="#fff"/>
+              <rect x="86" y="86" width="28" height="28" rx="4" fill="#2540ff"/>
+              <text x="100" y="106" text-anchor="middle" fill="#fff" font-family="Inter, sans-serif" font-weight="800" font-size="14">Q</text>
+            </g>
+          </svg>
+        </div>
+        <span class="qr-mock-label">Editable after print</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="trust-bar">
+    <p>
+      Built for <strong>restaurants</strong>, <strong>agencies</strong>, <strong>events</strong>, <strong>creators</strong>, <strong>retail</strong>, <strong>real estate</strong>, <strong>schools</strong>, and <strong>enterprise teams</strong>.
+    </p>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-title">
+        <span class="eyebrow">What is a dynamic QR code?</span>
+        <h2>One QR code. Infinite destinations.</h2>
+        <p>
+          A dynamic QR code separates the printed image from the destination URL. The code on the wall, sticker, or business card never changes — but you can update where it sends people as many times as you want, instantly, from any device.
+        </p>
+      </div>
+
+      <div style="max-width: 760px; margin: 32px auto 0; color: var(--text-soft); font-size: 1.04rem; line-height: 1.75;">
+        <p>
+          A traditional <strong>static QR code</strong> hard-codes a destination URL directly into the QR pattern. If you printed 10,000 stickers with a static QR pointing to <code>example.com/menu</code> and you later moved your menu to <code>example.com/new-menu</code>, every one of those stickers becomes useless. You have to reprint, redistribute, and replace all of them.
+        </p>
+        <p>
+          A <strong>dynamic QR code</strong> solves this once and for all. The printed code encodes a short, branded URL that belongs to us (or to your custom domain). When someone scans it, our high-performance redirect engine looks up the QR code in milliseconds, applies any smart redirect rules you have set up, logs an anonymized analytics event, and forwards the visitor to your current destination URL. Because the destination lives in the database — not in the printed pixels — you can change it any time, even years after the QR was printed.
+        </p>
+        <p>
+          That single architectural difference unlocks everything that makes dynamic QR codes the standard for serious print campaigns: live <a href="/blog/qr-code-analytics-guide/">scan analytics</a>, smart redirects based on device or country, branded designs, custom short domains, version history, the ability to pause or revoke a code if it is abused, and the freedom to keep one printed asset working across multiple campaigns over the years.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-bg">
+    <div class="container">
+      <div class="section-title">
+        <span class="eyebrow">100% free plan</span>
+        <h2>Why our free dynamic QR code is actually free.</h2>
+        <p>Most "free" QR generators stamp watermarks, lock analytics behind paywalls, or expire after a trial. Ours does none of that.</p>
+      </div>
+
+      <div class="cards-grid" style="margin-top: 40px;">
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <h3>No watermark</h3>
+          <p>Your free dynamic QR code is yours. Print it anywhere with no platform branding stamped onto the image.</p>
+        </article>
+
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <h3>No credit card</h3>
+          <p>Sign up free, create your first QR code, and use it as long as you want. Card only requested if you upgrade.</p>
+        </article>
+
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <h3>Full analytics included</h3>
+          <p>Every free dynamic QR code gets real-time scan tracking with country, device, OS, and time data — same as paid plans.</p>
+        </article>
+
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <h3>Editable destinations</h3>
+          <p>Free or paid, every QR code on our platform is editable forever. Change the destination as many times as you want.</p>
+        </article>
+
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <h3>Branded design studio</h3>
+          <p>Colors, eye shapes, dot patterns, frames, CTA labels, and a logo upload — all available on the free plan.</p>
+        </article>
+
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <h3>PNG download</h3>
+          <p>Export your free dynamic QR code as a high-resolution PNG. SVG and PDF unlock on the $12 Starter plan.</p>
+        </article>
+      </div>
+
+      <p style="text-align: center; margin-top: 32px; color: var(--text-soft);">
+        Free plan includes 3 dynamic QR codes and 500 scans per month, forever. <a href="/pricing/">See full pricing →</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-bg">
+    <div class="container">
+      <div class="section-title">
+        <span class="eyebrow">Why teams choose us</span>
+        <h2>Everything you need to launch, track, and scale QR campaigns.</h2>
+        <p>Nine production-ready capabilities built on a modern, fast, secure platform.</p>
+      </div>
+
+      <div class="cards-grid">
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>
+          </div>
+          <h3>Editable after print</h3>
+          <p>Change destinations, files, vCards, menus, or links instantly — without ever reprinting your QR code.</p>
+        </article>
+
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 6-6"/></svg>
+          </div>
+          <h3>Real-time scan analytics</h3>
+          <p>Total scans, unique scans, country, city, device, OS, browser, referrer, UTM — visualized in beautiful charts.</p>
+        </article>
+
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10"/></svg>
+          </div>
+          <h3>Smart redirects</h3>
+          <p>Send iOS users to the App Store, Android to Play, Jordan to Arabic, weekends to your offer — all from one QR.</p>
+        </article>
+
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 3v18"/></svg>
+          </div>
+          <h3>Branded QR designs</h3>
+          <p>Custom colors, gradients, eye shapes, logos, frames, and CTAs — exported in PNG, SVG, PDF, JPEG, or WebP.</p>
+        </article>
+
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          </div>
+          <h3>Custom domains</h3>
+          <p>Connect qr.yourbrand.com and every short link instantly looks like it belongs to your brand.</p>
+        </article>
+
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+          </div>
+          <h3>Bulk QR generation</h3>
+          <p>Upload a CSV with thousands of destinations and download a ZIP of branded QR codes ready for print.</p>
+        </article>
+
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><path d="M8 21h8M12 17v4"/></svg>
+          </div>
+          <h3>PDF & file QR codes</h3>
+          <p>Upload a PDF, image, or document, and we host it for you — your QR points to a fast, mobile-optimized viewer.</p>
+        </article>
+
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          </div>
+          <h3>Developer API</h3>
+          <p>Create, edit, and track QR codes from your own apps with a clean REST API and signed webhooks.</p>
+        </article>
+
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3>Team workspaces</h3>
+          <p>Invite teammates with owner, admin, editor, and viewer roles — perfect for agencies and enterprise teams.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-title">
+        <span class="eyebrow">Use cases</span>
+        <h2>Built for every industry that prints.</h2>
+        <p>From a single sticker on a coffee cup to enterprise rollouts across thousands of locations.</p>
+      </div>
+
+      <div class="usecase-grid">
+        <div class="usecase">
+          <span class="emoji" aria-hidden="true">🍽️</span>
+          <h3>Restaurants & cafes</h3>
+          <p>One QR per table for digital menus, branch-level analytics, daily specials, and Google review links.</p>
+        </div>
+        <div class="usecase">
+          <span class="emoji" aria-hidden="true">🏢</span>
+          <h3>Agencies</h3>
+          <p>Manage client campaigns in workspaces, white-label reports, and branded short domains for every account.</p>
+        </div>
+        <div class="usecase">
+          <span class="emoji" aria-hidden="true">🎟️</span>
+          <h3>Events & conferences</h3>
+          <p>Tickets, check-ins, agenda updates, speaker bios, and last-minute schedule changes without reprints.</p>
+        </div>
+        <div class="usecase">
+          <span class="emoji" aria-hidden="true">🛒</span>
+          <h3>Retail & e-commerce</h3>
+          <p>Product packaging QR codes for warranty registration, video instructions, and limited-time offers.</p>
+        </div>
+        <div class="usecase">
+          <span class="emoji" aria-hidden="true">🏠</span>
+          <h3>Real estate</h3>
+          <p>QR signs at properties open the listing, photo gallery, virtual tour, and agent vCard in one tap.</p>
+        </div>
+        <div class="usecase">
+          <span class="emoji" aria-hidden="true">📚</span>
+          <h3>Education</h3>
+          <p>Class resources, attendance forms, lab manuals, and assignments — updated each semester without reprinting.</p>
+        </div>
+        <div class="usecase">
+          <span class="emoji" aria-hidden="true">🏥</span>
+          <h3>Healthcare</h3>
+          <p>Appointment booking, clinic directions, post-care instructions, and prescription refill links.</p>
+        </div>
+        <div class="usecase">
+          <span class="emoji" aria-hidden="true">📸</span>
+          <h3>Creators & influencers</h3>
+          <p>One QR for all your links — social profiles, latest video, sponsor codes, newsletter — editable any time.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-bg">
+    <div class="container">
+      <div class="section-title">
+        <span class="eyebrow">Dynamic vs static</span>
+        <h2>Why dynamic QR codes always win.</h2>
+        <p>If you print, you need dynamic. Here is exactly what changes.</p>
+      </div>
+
+      <div class="compare">
+        <div class="compare-col">
+          <h3>Static QR codes</h3>
+          <ul>
+            <li>Destination is locked into the printed image</li>
+            <li>No scan analytics — you fly blind</li>
+            <li>Reprint everything if anything changes</li>
+            <li>No way to pause or revoke if abused</li>
+            <li>No device, country, or time-based routing</li>
+            <li>No version history or audit trail</li>
+            <li>Hard limit on URL length inside the QR</li>
+          </ul>
+        </div>
+        <div class="compare-col win">
+          <h3>Dynamic QR codes</h3>
+          <ul>
+            <li>Edit destination, design, and rules forever</li>
+            <li>Real-time analytics on every scan</li>
+            <li>Print once — use the same QR for years</li>
+            <li>Pause, revoke, or expire any code instantly</li>
+            <li>Smart redirects by device, country, time, A/B</li>
+            <li>Full version history with restore</li>
+            <li>Short URL works no matter how long the real one is</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-title">
+        <span class="eyebrow">How it works</span>
+        <h2>Live in under sixty seconds.</h2>
+        <p>The fastest path from idea to a printable, trackable QR code.</p>
+      </div>
+
+      <ol style="max-width: 820px; margin: 48px auto 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 18px;">
+        <li class="card" style="display: flex; gap: 20px; align-items: flex-start;">
+          <span style="flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%; background: var(--brand); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-weight: 800;">1</span>
+          <div>
+            <h3 style="margin-bottom: 4px;">Choose a QR type</h3>
+            <p style="margin:0;">URL, multi-link page, PDF, vCard, WhatsApp, WiFi, restaurant menu, app download, location, payment link, video, social profile — over twenty types.</p>
+          </div>
+        </li>
+        <li class="card" style="display: flex; gap: 20px; align-items: flex-start;">
+          <span style="flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%; background: var(--brand); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-weight: 800;">2</span>
+          <div>
+            <h3 style="margin-bottom: 4px;">Enter your destination</h3>
+            <p style="margin:0;">Paste a link, upload a file, or build a landing page inside the platform. We validate the URL is safe and reachable before publishing.</p>
+          </div>
+        </li>
+        <li class="card" style="display: flex; gap: 20px; align-items: flex-start;">
+          <span style="flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%; background: var(--brand); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-weight: 800;">3</span>
+          <div>
+            <h3 style="margin-bottom: 4px;">Customize the design</h3>
+            <p style="margin:0;">Pick colors, eye shapes, dot patterns, gradients, a CTA frame ("Scan me", "View menu"), and drop your logo in the center.</p>
+          </div>
+        </li>
+        <li class="card" style="display: flex; gap: 20px; align-items: flex-start;">
+          <span style="flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%; background: var(--brand); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-weight: 800;">4</span>
+          <div>
+            <h3 style="margin-bottom: 4px;">Configure tracking and rules</h3>
+            <p style="margin:0;">Optionally add smart redirects, password protection, scan limits, expiry dates, UTM parameters, and notification alerts.</p>
+          </div>
+        </li>
+        <li class="card" style="display: flex; gap: 20px; align-items: flex-start;">
+          <span style="flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%; background: var(--brand); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-weight: 800;">5</span>
+          <div>
+            <h3 style="margin-bottom: 4px;">Test, download, and print</h3>
+            <p style="margin:0;">Our scannability checker validates contrast, quiet zone, and logo size. Then export PNG, SVG, or PDF and ship it.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section section-bg">
+    <div class="container">
+      <div class="section-title">
+        <span class="eyebrow">Pricing</span>
+        <h2>Start free. Scale when you are ready.</h2>
+        <p>Every plan includes editable QR codes, real-time analytics, and PNG export.</p>
+      </div>
+
+      <div class="pricing-grid">
+        <div class="plan">
+          <h3>Free</h3>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin: 0;">For trying it out</p>
+          <div class="price">$0<small>/forever</small></div>
+          <ul>
+            <li>3 dynamic QR codes</li>
+            <li>500 scans / month</li>
+            <li>PNG download</li>
+            <li>30-day analytics history</li>
+            <li>Platform short domain</li>
+          </ul>
+          <a href="/signup/" class="btn btn-secondary">Start free</a>
+        </div>
+
+        <div class="plan">
+          <h3>Starter</h3>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin: 0;">For small teams</p>
+          <div class="price">$12<small>/month</small></div>
+          <ul>
+            <li>25 dynamic QR codes</li>
+            <li>10,000 scans / month</li>
+            <li>PNG, SVG, PDF download</li>
+            <li>90-day analytics history</li>
+            <li>Folders & basic campaigns</li>
+          </ul>
+          <a href="/signup/" class="btn btn-secondary">Start free trial</a>
+        </div>
+
+        <div class="plan popular">
+          <h3>Pro</h3>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin: 0;">For growing brands</p>
+          <div class="price">$39<small>/month</small></div>
+          <ul>
+            <li>250 dynamic QR codes</li>
+            <li>250,000 scans / month</li>
+            <li>Smart redirect rules</li>
+            <li>Landing page builder</li>
+            <li>Custom domain</li>
+            <li>Bulk CSV generation</li>
+            <li>Advanced analytics</li>
+          </ul>
+          <a href="/signup/" class="btn btn-primary">Start free trial</a>
+        </div>
+
+        <div class="plan">
+          <h3>Agency</h3>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin: 0;">For agencies & power users</p>
+          <div class="price">$129<small>/month</small></div>
+          <ul>
+            <li>2,000 dynamic QR codes</li>
+            <li>2,000,000 scans / month</li>
+            <li>Team workspaces</li>
+            <li>White-label reports</li>
+            <li>Full API access</li>
+            <li>Multiple custom domains</li>
+          </ul>
+          <a href="/signup/" class="btn btn-secondary">Start free trial</a>
+        </div>
+      </div>
+
+      <p style="text-align:center; margin-top: 28px; color: var(--text-muted); font-size: 0.92rem;">
+        Need enterprise SSO, audit logs, custom contracts, or higher limits? <a href="/contact/">Talk to sales →</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-title">
+        <span class="eyebrow">Frequently asked questions</span>
+        <h2>Everything to know before you create your first QR.</h2>
+      </div>
+
+      <div class="faq-list">
+        {faqs.map((faq, i) => (
+          <details class="faq-item" open={i === 0}>
+            <summary>{faq.question}</summary>
+            <div class="answer"><p>{faq.answer}</p></div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="cta-block">
+      <h2>Print once. Edit forever.</h2>
+      <p>Join thousands of brands creating QR codes that grow with their business — not against it.</p>
+      <a href="/signup/" class="btn btn-primary btn-lg">Create your first QR code free</a>
+    </div>
+  </section>
+</BaseLayout>

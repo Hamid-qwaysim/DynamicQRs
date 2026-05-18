@@ -1,0 +1,97 @@
+---
+import { SITE, FOOTER_LINKS } from '../lib/site';
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <div class="brand-row">
+        <svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true">
+          <rect x="2" y="2" width="10" height="10" rx="2" fill="#0a0e27"/>
+          <rect x="20" y="2" width="10" height="10" rx="2" fill="#0a0e27"/>
+          <rect x="2" y="20" width="10" height="10" rx="2" fill="#0a0e27"/>
+          <rect x="22" y="22" width="6" height="6" rx="1.5" fill="#2540ff"/>
+          <rect x="14" y="14" width="4" height="4" fill="#2540ff"/>
+        </svg>
+        <strong>{SITE.brandShort}</strong>
+      </div>
+      <p class="footer-tagline">{SITE.tagline}</p>
+      <p class="footer-copy">© {year} {SITE.name}. All rights reserved.</p>
+    </div>
+
+    <nav class="footer-col" aria-label="Product">
+      <p class="footer-title">Product</p>
+      <ul>
+        {FOOTER_LINKS.product.map((l) => (
+          <li><a href={l.href}>{l.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+
+    <nav class="footer-col" aria-label="Resources">
+      <p class="footer-title">Resources</p>
+      <ul>
+        {FOOTER_LINKS.resources.map((l) => (
+          <li><a href={l.href}>{l.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+
+    <nav class="footer-col" aria-label="Company">
+      <p class="footer-title">Company</p>
+      <ul>
+        {FOOTER_LINKS.company.map((l) => (
+          <li><a href={l.href}>{l.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    margin-top: 80px;
+    padding: 56px 0 32px;
+    background: var(--bg-soft);
+    border-top: 1px solid var(--border);
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    gap: 32px;
+  }
+  .brand-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.05rem;
+    margin-bottom: 12px;
+  }
+  .footer-tagline { color: var(--text-soft); max-width: 320px; margin-bottom: 16px; }
+  .footer-copy { color: var(--text-muted); font-size: 0.85rem; margin: 0; }
+  .footer-title {
+    font-weight: 700;
+    color: var(--text);
+    margin: 0 0 12px;
+    font-size: 0.92rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+  .footer-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .footer-col a {
+    color: var(--text-soft);
+    font-size: 0.92rem;
+  }
+  .footer-col a:hover { color: var(--text); }
+  @media (max-width: 768px) {
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .footer-brand { grid-column: 1 / -1; }
+  }
+</style>

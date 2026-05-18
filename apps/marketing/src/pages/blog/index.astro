@@ -1,0 +1,59 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../lib/site';
+import { breadcrumbSchema } from '../../lib/schema';
+
+const allArticles = await getCollection('articles', ({ data }) => !data.draft);
+const articles = allArticles.sort(
+  (a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf(),
+);
+
+const title = 'QR Code Blog — Guides, Tutorials & Comparisons | Dynamic QR Code Labs';
+const description =
+  'In-depth guides on dynamic QR codes, analytics, restaurant menus, smart redirects, and the best QR generators. Fresh content for marketers and developers.';
+
+const jsonLd = breadcrumbSchema([
+  { name: 'Home', url: '/' },
+  { name: 'Blog', url: '/blog/' },
+]);
+
+const fmt = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+});
+---
+
+<BaseLayout title={title} description={description} jsonLd={jsonLd}>
+  <div class="container">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li aria-current="page">Blog</li>
+      </ol>
+    </nav>
+  </div>
+
+  <section class="blog-hero container">
+    <h1>The Dynamic QR Code Blog</h1>
+    <p>Guides, tutorials, comparisons, and analytics deep-dives — everything we have learned building a serious dynamic QR platform.</p>
+  </section>
+
+  <section class="container">
+    <div class="blog-grid">
+      {articles.map((article) => (
+        <a href={`/blog/${article.id.replace(/\.md$/, '')}/`} class="blog-card">
+          <span class="tag">{article.data.category}</span>
+          <h2>{article.data.title}</h2>
+          <p>{article.data.description}</p>
+          <div class="meta">
+            <time datetime={article.data.publishedAt.toISOString()}>
+              {fmt.format(article.data.publishedAt)}
+            </time>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

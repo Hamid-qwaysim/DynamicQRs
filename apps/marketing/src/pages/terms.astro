@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { breadcrumbSchema } from '../lib/schema';
+
+const title = 'Terms of Service — Dynamic QR Code Labs';
+const description =
+  'Terms of service for Dynamic QR Code Labs. Read about your rights, account responsibilities, acceptable use, billing, and what we guarantee on uptime.';
+
+const jsonLd = breadcrumbSchema([
+  { name: 'Home', url: '/' },
+  { name: 'Terms', url: '/terms/' },
+]);
+---
+
+<BaseLayout title={title} description={description} jsonLd={jsonLd}>
+  <article class="article" style="max-width: 760px;">
+    <h1>Terms of Service</h1>
+    <p style="color: var(--text-muted);">Last updated: May 12, 2026</p>
+
+    <div class="article-body">
+      <h2>Agreement</h2>
+      <p>By using Dynamic QR Code Labs, you agree to these terms. If you disagree with any part, do not use the service.</p>
+
+      <h2>Acceptable use</h2>
+      <p>You may not use the platform to host, link to, or distribute illegal content, phishing pages, malware, content infringing third-party rights, or any material that violates applicable law. We reserve the right to suspend any QR code or account that violates these rules.</p>
+
+      <h2>Account responsibility</h2>
+      <p>You are responsible for keeping your account credentials secure. Notify us immediately of any unauthorized access. We are not liable for losses from compromised credentials.</p>
+
+      <h2>Service availability</h2>
+      <p>We target 99.9% uptime on Free, Starter, and Pro plans, and 99.99% uptime on Agency and Enterprise plans. Scheduled maintenance is announced at least 48 hours in advance.</p>
+
+      <h2>Billing</h2>
+      <p>Paid plans are billed monthly or annually in advance. Cancellations take effect at the end of the current billing period. Refunds are available within 14 days of initial purchase on annual plans.</p>
+
+      <h2>Termination</h2>
+      <p>You can delete your account at any time. We may terminate accounts that violate these terms with 30 days notice (or immediately for severe violations).</p>
+
+      <h2>Liability</h2>
+      <p>The service is provided "as is". Our liability is limited to the amount you have paid in the last 12 months.</p>
+
+      <h2>Changes</h2>
+      <p>We may update these terms with 30 days notice via email. Continued use after the notice period constitutes acceptance.</p>
+
+      <h2>Contact</h2>
+      <p>Questions: <a href="mailto:legal@dynamicqrcodelabs.com">legal@dynamicqrcodelabs.com</a>.</p>
+    </div>
+  </article>
+</BaseLayout>

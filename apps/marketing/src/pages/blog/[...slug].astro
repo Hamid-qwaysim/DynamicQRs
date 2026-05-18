@@ -1,0 +1,138 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../lib/site';
+import { articleSchema, breadcrumbSchema } from '../../lib/schema';
+
+export async function getStaticPaths() {
+  const articles = await getCollection('articles', ({ data }) => !data.draft);
+  return articles.map((article) => ({
+    params: { slug: article.id.replace(/\.md$/, '') },
+    props: { article },
+  }));
+}
+
+type Props = { article: CollectionEntry<'articles'> };
+const { article } = Astro.props as Props;
+const { Content, headings, remarkPluginFrontmatter } = await render(article);
+
+const wordCount = Math.max(
+  600,
+  Number(remarkPluginFrontmatter?.wordCount) || 1000,
+);
+
+const minutesRead = Math.max(3, Math.round(wordCount / 220));
+
+const slug = article.id.replace(/\.md$/, '');
+const url = `/blog/${slug}/`;
+
+const fmt = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+const allArticles = await getCollection('articles', ({ data }) => !data.draft);
+const related = allArticles
+  .filter((a) => a.id !== article.id)
+  .filter((a) =>
+    a.data.tags.some((t) => article.data.tags.includes(t)) ||
+    a.data.category === article.data.category
+  )
+  .slice(0, 3);
+
+const jsonLd = [
+  articleSchema({
+    title: article.data.title,
+    description: article.data.description,
+    slug,
+    publishedAt: article.data.publishedAt.toISOString(),
+    updatedAt: article.data.updatedAt?.toISOString(),
+    author: article.data.author,
+    wordCount,
+  }),
+  breadcrumbSchema([
+    { name: 'Home', url: '/' },
+    { name: 'Blog', url: '/blog/' },
+    { name: article.data.title, url },
+  ]),
+];
+
+const h2Headings = headings.filter((h) => h.depth === 2);
+---
+
+<BaseLayout
+  title={article.data.title}
+  description={article.data.description}
+  ogType="article"
+  publishedAt={article.data.publishedAt.toISOString()}
+  updatedAt={article.data.updatedAt?.toISOString()}
+  articleAuthor={article.data.author}
+  jsonLd={jsonLd}
+>
+  <div class="container">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li><a href="/blog/">Blog</a></li>
+        <li aria-current="page">{article.data.title}</li>
+      </ol>
+    </nav>
+  </div>
+
+  <article class="article">
+    <header class="article-header">
+      <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 14px;">
+        <span style="background: var(--brand-soft); color: var(--brand); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 5px 10px; border-radius: 100px;">
+          {article.data.category}
+        </span>
+      </div>
+      <h1>{article.data.title}</h1>
+      <p class="article-lede">{article.data.description}</p>
+      <div class="article-meta">
+        <span>{article.data.author}</span>
+        <span>·</span>
+        <time datetime={article.data.publishedAt.toISOString()}>
+          {fmt.format(article.data.publishedAt)}
+        </time>
+        <span>·</span>
+        <span>{minutesRead} min read</span>
+      </div>
+    </header>
+
+    {h2Headings.length >= 4 && (
+      <aside class="toc" aria-label="Table of contents">
+        <p>Table of contents</p>
+        <ol>
+          {h2Headings.map((h) => (
+            <li><a href={`#${h.slug}`}>{h.text}</a></li>
+          ))}
+        </ol>
+      </aside>
+    )}
+
+    <div class="article-body">
+      <Content />
+    </div>
+
+    {related.length > 0 && (
+      <section class="related">
+        <h2>Related reading</h2>
+        <div class="related-grid">
+          {related.map((r) => (
+            <a href={`/blog/${r.id.replace(/\.md$/, '')}/`} class="related-item">
+              <h3>{r.data.title}</h3>
+              <p>{r.data.description.slice(0, 90)}…</p>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <div class="cta-block" style="margin-top: 64px;">
+      <h2>Ready to try a dynamic QR code?</h2>
+      <p>Create your first one in under a minute. No credit card. Full analytics included on the free plan.</p>
+      <a href="/signup/" class="btn btn-primary btn-lg">Create your first QR free</a>
+    </div>
+  </article>
+</BaseLayout>

@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../lib/site';
+import { breadcrumbSchema } from '../lib/schema';
+
+const title = 'Contact Us — Dynamic QR Code Labs';
+const description =
+  'Get in touch with the Dynamic QR Code Labs team. Sales inquiries, partnership requests, support questions, and press — we answer everything within 24 hours.';
+
+const jsonLd = breadcrumbSchema([
+  { name: 'Home', url: '/' },
+  { name: 'Contact', url: '/contact/' },
+]);
+---
+
+<BaseLayout title={title} description={description} jsonLd={jsonLd}>
+  <section class="container" style="max-width: 720px; padding: 64px 24px;">
+    <h1>Get in touch</h1>
+    <p style="color: var(--text-soft); font-size: 1.05rem;">
+      Sales, support, partnerships, press — we answer everything within 24 hours.
+    </p>
+
+    <div style="margin-top: 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px;">
+      <div class="card">
+        <h3>Sales & enterprise</h3>
+        <p>Custom plans, SSO, audit logs, and SLAs.</p>
+        <p><a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a></p>
+      </div>
+      <div class="card">
+        <h3>Support</h3>
+        <p>Account, billing, or technical questions.</p>
+        <p><a href={`mailto:support@${SITE.url.replace(/^https?:\/\//, '')}`}>support@dynamicqrcodelabs.com</a></p>
+      </div>
+      <div class="card">
+        <h3>Partnerships</h3>
+        <p>Integrations, resellers, and affiliates.</p>
+        <p><a href={`mailto:partners@${SITE.url.replace(/^https?:\/\//, '')}`}>partners@dynamicqrcodelabs.com</a></p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

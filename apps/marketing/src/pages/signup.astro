@@ -1,0 +1,106 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = 'Create Your Free Account — Dynamic QR Code Labs';
+const description =
+  'Sign up free and create your first dynamic QR code in under a minute. No credit card required. Full analytics included. Free forever plan available.';
+---
+
+<BaseLayout title={title} description={description} noindex={false}>
+  <section class="container" style="max-width: 480px; padding: 80px 24px;">
+    <div style="text-align: center; margin-bottom: 32px;">
+      <h1 style="font-size: 1.8rem;">Create your free account</h1>
+      <p style="color: var(--text-soft);">Your first 3 dynamic QR codes are free forever. No credit card required.</p>
+    </div>
+
+    <form
+      id="signup-form"
+      method="post"
+      action="/api/auth/signup"
+      style="display: flex; flex-direction: column; gap: 14px; background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 32px;"
+    >
+      <label style="display: flex; flex-direction: column; gap: 6px; font-size: 0.92rem; font-weight: 600;">
+        Full name
+        <input
+          type="text"
+          name="name"
+          required
+          minlength="2"
+          maxlength="80"
+          autocomplete="name"
+          style="padding: 11px 14px; border: 1px solid var(--border-strong); border-radius: 8px; font-size: 1rem;"
+        />
+      </label>
+
+      <label style="display: flex; flex-direction: column; gap: 6px; font-size: 0.92rem; font-weight: 600;">
+        Email
+        <input
+          type="email"
+          name="email"
+          required
+          autocomplete="email"
+          style="padding: 11px 14px; border: 1px solid var(--border-strong); border-radius: 8px; font-size: 1rem;"
+        />
+      </label>
+
+      <label style="display: flex; flex-direction: column; gap: 6px; font-size: 0.92rem; font-weight: 600;">
+        Password
+        <input
+          type="password"
+          name="password"
+          required
+          minlength="10"
+          autocomplete="new-password"
+          style="padding: 11px 14px; border: 1px solid var(--border-strong); border-radius: 8px; font-size: 1rem;"
+        />
+        <span style="font-size: 0.82rem; font-weight: 400; color: var(--text-muted);">At least 10 characters.</span>
+      </label>
+
+      <button type="submit" class="btn btn-primary" style="justify-content: center; margin-top: 8px;">
+        Create my free account
+      </button>
+
+      <p id="signup-msg" role="alert" style="margin: 0; min-height: 1.2em; font-size: 0.9rem; color: var(--danger);"></p>
+
+      <p style="font-size: 0.82rem; color: var(--text-muted); text-align: center; margin: 0;">
+        By signing up you agree to our <a href="/terms/">Terms</a> and <a href="/privacy/">Privacy Policy</a>.
+      </p>
+    </form>
+
+    <p style="text-align: center; margin-top: 20px; font-size: 0.92rem; color: var(--text-soft);">
+      Already have an account? <a href="/login/">Log in</a>
+    </p>
+  </section>
+
+  <script>
+    const form = document.querySelector<HTMLFormElement>('#signup-form');
+    const msg = document.querySelector<HTMLParagraphElement>('#signup-msg');
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!form || !msg) return;
+      msg.textContent = '';
+      msg.style.color = 'var(--danger)';
+      const fd = new FormData(form);
+      const payload = Object.fromEntries(fd.entries());
+      try {
+        const apiBase = import.meta.env.PUBLIC_API_URL || '';
+        const res = await fetch(`${apiBase}/api/auth/signup`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+          body: JSON.stringify(payload),
+        });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) {
+          msg.textContent = data.error || 'Sign up failed. Please try again.';
+          return;
+        }
+        msg.style.color = 'var(--accent)';
+        msg.textContent = 'Account created. Redirecting…';
+        window.location.href = '/dashboard/';
+      } catch (err) {
+        msg.textContent = 'Network error. Please try again.';
+      }
+    });
+  </script>
+</BaseLayout>

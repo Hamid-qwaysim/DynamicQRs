@@ -1,0 +1,157 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { breadcrumbSchema } from '../lib/schema';
+
+const title = 'Use Cases — Dynamic QR Codes for Every Industry';
+const description =
+  'See how restaurants, retail, agencies, events, real estate, education, healthcare, and creators use dynamic QR codes to grow their business.';
+
+const jsonLd = breadcrumbSchema([
+  { name: 'Home', url: '/' },
+  { name: 'Use Cases', url: '/use-cases/' },
+]);
+
+const useCases = [
+  {
+    icon: '🍽️',
+    title: 'Restaurants & cafes',
+    headline: 'One QR per table. Editable menu forever.',
+    description: 'Print a sticker on every table, update the menu daily, track which tables scan most, and route customers to ordering, reviews, or WhatsApp.',
+    benefits: [
+      'Update prices and dishes without reprinting stickers',
+      'Branch-level and table-level analytics',
+      'Multi-language menus with auto-detect routing',
+      'Built-in Google review and WhatsApp CTAs',
+    ],
+  },
+  {
+    icon: '🏢',
+    title: 'Marketing agencies',
+    headline: 'Manage every client from one platform.',
+    description: 'Separate workspaces per client, white-label reports, branded short domains for every account, and bulk QR generation for campaign rollouts.',
+    benefits: [
+      'Workspaces with per-client team members',
+      'Branded short domains for each client',
+      'White-label monthly reports',
+      'Bulk CSV generation for campaign launches',
+    ],
+  },
+  {
+    icon: '🎟️',
+    title: 'Events & conferences',
+    headline: 'One QR. Live updates until the last minute.',
+    description: 'Speaker schedules, ticket check-ins, venue maps, agenda updates, and post-event resources — all updated without reprinting tickets or signage.',
+    benefits: [
+      'Update schedules after the program is printed',
+      'Per-session QR with attendance tracking',
+      'Expiring QR codes for ticket access',
+      'Scan limits for capacity control',
+    ],
+  },
+  {
+    icon: '🛒',
+    title: 'Retail & e-commerce',
+    headline: 'QR codes on every product.',
+    description: 'Print QR codes on packaging for warranty registration, video instructions, limited-time offers, and customer reviews. Update destinations seasonally.',
+    benefits: [
+      'Warranty registration without forms',
+      'Product instruction videos via QR',
+      'Seasonal offer rotation without reprinting',
+      'Track packaging engagement by SKU',
+    ],
+  },
+  {
+    icon: '🏠',
+    title: 'Real estate',
+    headline: 'Yard signs that show the full listing.',
+    description: 'A QR on every property sign opens the listing photos, virtual tour, agent contact card, and open house schedule. Track which properties drive the most scans.',
+    benefits: [
+      'Update listings without changing signs',
+      'Per-property scan analytics',
+      'Smart-route iOS to call, Android to WhatsApp',
+      'Lead capture via landing pages',
+    ],
+  },
+  {
+    icon: '📚',
+    title: 'Education',
+    headline: 'Class resources that follow the semester.',
+    description: 'Print one QR per class on syllabi, lab manuals, and attendance sheets. Update resources each semester without reprinting any of the materials.',
+    benefits: [
+      'Semester-by-semester resource updates',
+      'Attendance form QRs with time-based access',
+      'Multi-language QRs for international students',
+      'Workspace per department or faculty',
+    ],
+  },
+  {
+    icon: '🏥',
+    title: 'Healthcare',
+    headline: 'Clinic QRs that always lead the right place.',
+    description: 'Patient instruction sheets, appointment booking, clinic directions, prescription refills, and post-visit care — all editable without reprinting forms.',
+    benefits: [
+      'Update clinic info without reprinting forms',
+      'Privacy-friendly analytics (HIPAA-aware design)',
+      'Multi-language patient instructions',
+      'Pause QRs immediately on data changes',
+    ],
+  },
+  {
+    icon: '📸',
+    title: 'Creators & influencers',
+    headline: 'One QR for every link in your life.',
+    description: 'A single QR on your business card, merch, or studio that opens a multi-link page with social profiles, latest content, sponsor codes, and newsletter signup.',
+    benefits: [
+      'Multi-link landing page builder',
+      'Update featured links any time',
+      'Track which links your audience clicks most',
+      'Branded design with your aesthetic',
+    ],
+  },
+];
+---
+
+<BaseLayout title={title} description={description} jsonLd={jsonLd}>
+  <div class="container">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li aria-current="page">Use Cases</li>
+      </ol>
+    </nav>
+  </div>
+
+  <section class="feature-page-hero">
+    <div class="container">
+      <h1>Dynamic QR codes for every industry that prints</h1>
+      <p>From a single sticker on a coffee cup to enterprise rollouts across thousands of locations — see how teams use dynamic QR codes to grow.</p>
+    </div>
+  </section>
+
+  <section class="container section">
+    {useCases.map((uc) => (
+      <article class="feature-detail">
+        <div>
+          <div style="font-size: 3rem; line-height: 1; margin-bottom: 8px;">{uc.icon}</div>
+          <h2>{uc.title}</h2>
+          <p style="font-weight: 600; color: var(--text); margin-bottom: 12px;">{uc.headline}</p>
+          <p>{uc.description}</p>
+          <ul>
+            {uc.benefits.map((b) => <li>{b}</li>)}
+          </ul>
+        </div>
+        <div class="feature-visual">
+          <div style="font-size: 5rem;">{uc.icon}</div>
+        </div>
+      </article>
+    ))}
+  </section>
+
+  <section class="container">
+    <div class="cta-block">
+      <h2>Your industry not listed?</h2>
+      <p>If you print, you can use dynamic QR codes. Try it free and see what works for your team.</p>
+      <a href="/signup/" class="btn btn-primary btn-lg">Create your first QR free</a>
+    </div>
+  </section>
+</BaseLayout>

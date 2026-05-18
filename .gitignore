@@ -1,0 +1,30 @@
+node_modules/
+dist/
+.astro/
+.wrangler/
+.vercel/
+.env
+.env.local
+.env.*.local
+*.log
+.DS_Store
+coverage/
+.turbo/
+.cache/
+.dev.vars
+.mf/
+wrangler.toml.bak
+
+# Build outputs
+apps/marketing/dist/
+apps/marketing/.astro/
+apps/app/dist/
+apps/api/dist/
+
+# Drizzle
+drizzle/meta/
+
+# IDE
+.idea/
+.vscode/
+*.swp

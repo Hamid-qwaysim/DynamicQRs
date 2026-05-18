@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+Disallow: /api/
+Disallow: /q/
+Disallow: /dashboard/
+Disallow: /admin/
+Disallow: /draft/
+
+Sitemap: https://dynamicqrcodelabs.com/sitemap-index.xml

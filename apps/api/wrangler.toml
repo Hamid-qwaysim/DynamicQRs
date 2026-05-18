@@ -1,0 +1,30 @@
+name = "dynamicqr-api"
+main = "src/index.ts"
+compatibility_date = "2024-11-12"
+compatibility_flags = ["nodejs_compat"]
+
+# Custom domain for the redirect engine (recommended for SEO and trust)
+# routes = [
+#   { pattern = "dynamicqrcodelabs.com/*", custom_domain = true },
+# ]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "dynamicqr-db"
+database_id = "REPLACE_WITH_REAL_D1_ID"
+migrations_dir = "drizzle"
+
+[vars]
+ENVIRONMENT = "production"
+PUBLIC_SITE_URL = "https://dynamicqrcodelabs.com"
+SHORT_LINK_BASE = "https://dynamicqrcodelabs.com/q"
+
+# Secrets to set via `wrangler secret put`:
+# JWT_SECRET — secret for signing session cookies
+# IP_HASH_SALT — salt for hashing IP addresses
+
+[observability]
+enabled = true
+
+[placement]
+mode = "smart"

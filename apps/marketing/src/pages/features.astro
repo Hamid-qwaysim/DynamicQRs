@@ -1,0 +1,197 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { breadcrumbSchema } from '../lib/schema';
+
+const title = 'Features — Dynamic QR Code Labs';
+const description =
+  'Everything you get with our dynamic QR code platform — editable destinations, real-time analytics, smart redirects, branded designs, custom domains, and more.';
+
+const jsonLd = breadcrumbSchema([
+  { name: 'Home', url: '/' },
+  { name: 'Features', url: '/features/' },
+]);
+---
+
+<BaseLayout title={title} description={description} jsonLd={jsonLd}>
+  <div class="container">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li aria-current="page">Features</li>
+      </ol>
+    </nav>
+  </div>
+
+  <section class="feature-page-hero">
+    <div class="container">
+      <h1>Every feature you need to run real QR campaigns</h1>
+      <p>From the basics every QR generator should have, to the advanced routing and analytics that turn QR codes into a real marketing channel.</p>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="feature-detail">
+      <div>
+        <h2>Edit destinations forever</h2>
+        <p>Change where any QR points to as many times as you want — without ever reprinting. The destination lives in our database, not in the printed pixels. Update once, and every printed copy of the QR forwards to the new URL within seconds.</p>
+        <ul>
+          <li>Unlimited destination edits on every plan</li>
+          <li>Full version history with one-click rollback</li>
+          <li>Audit log of who changed what and when</li>
+          <li>Pause, revoke, or archive any QR in one click</li>
+        </ul>
+      </div>
+      <div class="feature-visual">
+        <div style="text-align: center;">
+          <div style="font-size: 3rem;">✏️</div>
+          <strong style="display: block; margin-top: 12px; font-size: 1.1rem;">Print once. Edit forever.</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="feature-detail">
+      <div>
+        <h2>Real-time scan analytics</h2>
+        <p>Every scan flows through our redirect engine, so every scan is logged. You see total scans, unique scans, country, city, device, OS, browser, language, referrer, and UTM parameters — visualized in beautiful charts and exportable as CSV or PDF reports.</p>
+        <ul>
+          <li>Live scan counters with no delay</li>
+          <li>Country, city, device, and OS breakdowns</li>
+          <li>Hourly and day-of-week heatmaps</li>
+          <li>Bot filtering on by default</li>
+          <li>Privacy-friendly: hashed IPs, approximate location only</li>
+        </ul>
+      </div>
+      <div class="feature-visual">
+        <div style="text-align: center;">
+          <div style="font-size: 3rem;">📊</div>
+          <strong style="display: block; margin-top: 12px; font-size: 1.1rem;">Know who scans, when, where.</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="feature-detail">
+      <div>
+        <h2>Smart redirect rules</h2>
+        <p>One QR, many destinations. Route iOS visitors to the App Store, Android to Google Play, desktop to your website. Send visitors from Jordan to your Arabic page and visitors from the US to your English page. Run weekend specials, business-hours rules, and A/B tests from the same printed QR.</p>
+        <ul>
+          <li>Device, OS, country, city, language, and time rules</li>
+          <li>A/B split testing with conversion tracking</li>
+          <li>Scan-count-based routing for limited offers</li>
+          <li>UTM-based and password-protected redirects</li>
+          <li>Fallback URL for any rule</li>
+        </ul>
+      </div>
+      <div class="feature-visual">
+        <div style="text-align: center;">
+          <div style="font-size: 3rem;">🎯</div>
+          <strong style="display: block; margin-top: 12px; font-size: 1.1rem;">One QR. Many paths.</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="feature-detail">
+      <div>
+        <h2>Branded QR design studio</h2>
+        <p>Customize every aspect of your QR — colors, gradients, eye shapes, dot patterns, frames, CTA labels, and a logo in the center. Export PNG, SVG, PDF, JPEG, or WebP at any size up to 4096 px. Built-in scannability checks catch contrast and quiet-zone issues before you print.</p>
+        <ul>
+          <li>20+ eye and dot style presets</li>
+          <li>Logo upload with smart error correction</li>
+          <li>Frame templates with CTA labels</li>
+          <li>Brand kit colors and saved templates</li>
+          <li>Scannability validation before download</li>
+        </ul>
+      </div>
+      <div class="feature-visual">
+        <div style="text-align: center;">
+          <div style="font-size: 3rem;">🎨</div>
+          <strong style="display: block; margin-top: 12px; font-size: 1.1rem;">QR codes that look like your brand.</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="feature-detail">
+      <div>
+        <h2>Custom branded domains</h2>
+        <p>Connect a domain like <code>qr.yourbrand.com</code> or <code>scan.yourbrand.com</code> and every short link in your workspace uses it automatically. Just add a CNAME record and we handle SSL provisioning for you. Branded short links double user trust at scan time.</p>
+        <ul>
+          <li>One custom domain on Pro, five on Agency</li>
+          <li>Automatic SSL provisioning</li>
+          <li>DNS verification in seconds</li>
+          <li>Fallback to platform domain if anything fails</li>
+        </ul>
+      </div>
+      <div class="feature-visual">
+        <div style="text-align: center;">
+          <div style="font-size: 3rem;">🌐</div>
+          <strong style="display: block; margin-top: 12px; font-size: 1.1rem;">Your domain. Our engine.</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="feature-detail">
+      <div>
+        <h2>Bulk CSV generation</h2>
+        <p>Upload a CSV with destinations and download a ZIP of branded QR codes, ready for print. Perfect for product packaging, table stickers, event tickets, and large rollouts. Validation happens before generation, so errors are caught early.</p>
+        <ul>
+          <li>CSV import with up to 10,000 rows per job</li>
+          <li>Apply a design template to the whole batch</li>
+          <li>Live progress with per-row status</li>
+          <li>ZIP download with PNG, SVG, and PDF for each QR</li>
+        </ul>
+      </div>
+      <div class="feature-visual">
+        <div style="text-align: center;">
+          <div style="font-size: 3rem;">📦</div>
+          <strong style="display: block; margin-top: 12px; font-size: 1.1rem;">Thousands of QRs. One upload.</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="feature-detail">
+      <div>
+        <h2>Developer REST API</h2>
+        <p>Create, edit, and track QR codes from your own apps. Clean REST endpoints, predictable rate limits, signed webhooks, and an SDK on the way. Build QR generation directly into your product or workflow.</p>
+        <ul>
+          <li>Full CRUD over QR codes, campaigns, and landing pages</li>
+          <li>Webhook events for scan, edit, and creation</li>
+          <li>Scoped API keys (read, write, analytics, admin)</li>
+          <li>Rate limits scale with your plan</li>
+        </ul>
+      </div>
+      <div class="feature-visual">
+        <div style="text-align: center;">
+          <div style="font-size: 3rem;">⚙️</div>
+          <strong style="display: block; margin-top: 12px; font-size: 1.1rem;">Programmable QR codes.</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="feature-detail">
+      <div>
+        <h2>Team workspaces & roles</h2>
+        <p>Invite teammates with owner, admin, editor, and viewer roles. Separate workspaces for different brands, clients, or departments. Perfect for agencies managing multiple accounts and enterprise teams with strict access controls.</p>
+        <ul>
+          <li>Unlimited team members on Agency</li>
+          <li>Owner, admin, editor, and viewer roles</li>
+          <li>Multiple workspaces per account</li>
+          <li>SSO-ready architecture for enterprise</li>
+          <li>Audit logs of every team action</li>
+        </ul>
+      </div>
+      <div class="feature-visual">
+        <div style="text-align: center;">
+          <div style="font-size: 3rem;">👥</div>
+          <strong style="display: block; margin-top: 12px; font-size: 1.1rem;">Built for teams.</strong>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="cta-block">
+      <h2>Ready to see it in action?</h2>
+      <p>Create your first dynamic QR code in under a minute. Full feature set, no credit card, free forever.</p>
+      <a href="/signup/" class="btn btn-primary btn-lg">Create your first QR free</a>
+    </div>
+  </section>
+</BaseLayout>

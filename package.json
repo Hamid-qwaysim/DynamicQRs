@@ -1,0 +1,29 @@
+{
+  "name": "dynamicqr-monorepo",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Dynamic QR Code SaaS - editable QR codes with analytics, custom designs, and smart redirects.",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:marketing": "npm run dev -w @dynamicqr/marketing",
+    "build:marketing": "npm run build -w @dynamicqr/marketing",
+    "preview:marketing": "npm run preview -w @dynamicqr/marketing",
+    "dev:api": "npm run dev -w @dynamicqr/api",
+    "build:api": "npm run build -w @dynamicqr/api",
+    "dev:app": "npm run dev -w @dynamicqr/app",
+    "build:app": "npm run build -w @dynamicqr/app",
+    "db:generate": "npm run db:generate -w @dynamicqr/api",
+    "db:migrate": "npm run db:migrate -w @dynamicqr/api",
+    "build": "npm run build:marketing && npm run build:app && npm run build:api"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

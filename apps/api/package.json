@@ -1,0 +1,28 @@
+{
+  "name": "@dynamicqr/api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "build": "tsc --noEmit",
+    "deploy": "wrangler deploy",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate:local": "wrangler d1 migrations apply dynamicqr-db --local",
+    "db:migrate:prod": "wrangler d1 migrations apply dynamicqr-db --remote",
+    "db:seed:local": "wrangler d1 execute dynamicqr-db --local --file=./drizzle/seed.sql",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "hono": "^4.6.10",
+    "drizzle-orm": "^0.36.4",
+    "zod": "^3.23.8",
+    "nanoid": "^5.0.9"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20241112.0",
+    "drizzle-kit": "^0.28.1",
+    "typescript": "^5.6.3",
+    "wrangler": "^3.86.0"
+  }
+}

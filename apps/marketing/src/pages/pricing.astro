@@ -1,0 +1,154 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../lib/site';
+import { breadcrumbSchema, faqSchema } from '../lib/schema';
+
+const title = 'Pricing — Dynamic QR Code Labs';
+const description =
+  'Simple, transparent pricing for dynamic QR codes. Free plan included. Starter, Pro, and Agency plans for teams that need more QRs, scans, and features.';
+
+const faqs = [
+  {
+    question: 'Is there a free plan?',
+    answer:
+      'Yes. The free plan includes 3 dynamic QR codes, 500 scans per month, PNG download, no watermark, and 30 days of analytics history. No credit card is required and the plan stays free forever.',
+  },
+  {
+    question: 'Can I change plans later?',
+    answer:
+      'You can upgrade, downgrade, or cancel at any time. Plan changes take effect at the start of your next billing cycle, and we prorate any difference.',
+  },
+  {
+    question: 'What counts as a scan?',
+    answer:
+      'A scan is a single successful redirect through one of your QR codes. We do not count bot scans or duplicate scans within a short window from the same device — those are filtered out before they hit your quota.',
+  },
+  {
+    question: 'What happens if I exceed my scan quota?',
+    answer:
+      'Your QR codes keep working. We notify you when you cross 80% and 100% of your quota and ask you to upgrade. We never silently break your QR codes.',
+  },
+];
+
+const jsonLd = [
+  breadcrumbSchema([
+    { name: 'Home', url: '/' },
+    { name: 'Pricing', url: '/pricing/' },
+  ]),
+  faqSchema(faqs),
+];
+---
+
+<BaseLayout title={title} description={description} jsonLd={jsonLd}>
+  <div class="container">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li aria-current="page">Pricing</li>
+      </ol>
+    </nav>
+  </div>
+
+  <section class="feature-page-hero">
+    <div class="container">
+      <h1>Pricing for every team that prints</h1>
+      <p>Start free. Scale when you outgrow it. No watermark, no surprise scan caps, no hidden enterprise paywalls.</p>
+    </div>
+  </section>
+
+  <section class="container section">
+    <div class="pricing-grid">
+      <div class="plan">
+        <h3>Free</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin: 0;">For trying it out</p>
+        <div class="price">$0<small>/forever</small></div>
+        <ul>
+          <li>3 dynamic QR codes</li>
+          <li>500 scans / month</li>
+          <li>PNG download</li>
+          <li>30-day analytics</li>
+          <li>Platform short domain</li>
+          <li>No watermark</li>
+        </ul>
+        <a href="/signup/" class="btn btn-secondary">Start free</a>
+      </div>
+
+      <div class="plan">
+        <h3>Starter</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin: 0;">For small teams</p>
+        <div class="price">$12<small>/month</small></div>
+        <ul>
+          <li>25 dynamic QR codes</li>
+          <li>10,000 scans / month</li>
+          <li>PNG, SVG, PDF, JPEG, WebP</li>
+          <li>90-day analytics</li>
+          <li>Folders & tags</li>
+          <li>Basic smart redirects</li>
+          <li>Email support</li>
+        </ul>
+        <a href="/signup/" class="btn btn-secondary">Start 14-day trial</a>
+      </div>
+
+      <div class="plan popular">
+        <h3>Pro</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin: 0;">For growing brands</p>
+        <div class="price">$39<small>/month</small></div>
+        <ul>
+          <li>250 dynamic QR codes</li>
+          <li>250,000 scans / month</li>
+          <li>All export formats</li>
+          <li>Unlimited analytics history</li>
+          <li>Full smart redirect rules</li>
+          <li>Landing page builder</li>
+          <li>1 custom branded domain</li>
+          <li>Bulk CSV generation</li>
+          <li>Priority email support</li>
+        </ul>
+        <a href="/signup/" class="btn btn-primary">Start 14-day trial</a>
+      </div>
+
+      <div class="plan">
+        <h3>Agency</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin: 0;">For agencies & power users</p>
+        <div class="price">$129<small>/month</small></div>
+        <ul>
+          <li>2,000 dynamic QR codes</li>
+          <li>2,000,000 scans / month</li>
+          <li>5 custom domains</li>
+          <li>Team workspaces</li>
+          <li>White-label reports</li>
+          <li>Full REST API access</li>
+          <li>Webhook events</li>
+          <li>Bulk operations</li>
+          <li>Live chat support</li>
+        </ul>
+        <a href="/signup/" class="btn btn-secondary">Start 14-day trial</a>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 48px; padding: 32px; background: var(--bg-soft); border-radius: 16px;">
+      <h2 style="font-size: 1.4rem; margin-bottom: 8px;">Need enterprise?</h2>
+      <p style="color: var(--text-soft); max-width: 560px; margin: 0 auto 16px;">
+        Custom limits, SSO, audit logs, dedicated support, SLA, custom contract, and on-prem deployment options.
+      </p>
+      <a href="/contact/" class="btn btn-secondary">Talk to sales</a>
+    </div>
+  </section>
+
+  <section class="section section-bg">
+    <div class="container">
+      <div class="section-title">
+        <span class="eyebrow">FAQ</span>
+        <h2>Pricing questions, answered</h2>
+      </div>
+      <div class="faq-list">
+        {faqs.map((faq, i) => (
+          <details class="faq-item" open={i === 0}>
+            <summary>{faq.question}</summary>
+            <div class="answer"><p>{faq.answer}</p></div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
