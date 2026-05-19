@@ -101,17 +101,21 @@ const schemas = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
         font-family: 'Inter';
         font-style: normal;
         font-weight: 100 900;
-        font-display: swap;
+        font-display: optional;
         src: url('/fonts/inter-var.woff2') format('woff2-variations');
       }
       /* Metric-overridden fallback so the swap from system font to Inter
-         produces no layout shift. Values measured against Inter v3.19. */
+         produces no layout shift. Values from the web.dev fallback recipe
+         for Inter v3.19 against Arial. Combined with font-display: optional
+         above, this means either Inter loads instantly from the preload
+         (no FOUT, no shift) or the metric-matched Arial is used for the
+         whole page (no shift either way). */
       @font-face {
         font-family: 'Inter Fallback';
         src: local('Arial');
-        size-adjust: 107.4%;
-        ascent-override: 90%;
-        descent-override: 22.43%;
+        size-adjust: 107.40%;
+        ascent-override: 90.20%;
+        descent-override: 22.48%;
         line-gap-override: 0%;
       }
 
