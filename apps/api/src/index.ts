@@ -5,6 +5,11 @@ import { logger } from 'hono/logger';
 import authRoutes from './routes/auth';
 import qrRoutes from './routes/qr-codes';
 import redirectRoutes from './routes/redirect';
+import passwordResetRoutes from './routes/password-reset';
+import emailVerifyRoutes from './routes/email-verify';
+import domainsRoutes from './routes/domains';
+import teamRoutes from './routes/team';
+import bulkRoutes from './routes/bulk';
 import type { Env, Variables } from './types';
 
 const app = new Hono<{ Bindings: Env; Variables: Variables }>();
@@ -20,6 +25,7 @@ app.use(
       const staticAllowed = new Set([
         site,
         'https://www.dynamicqrcodelabs.com',
+        'https://app.dynamicqrcodelabs.com',
         'http://localhost:4321',
         'http://localhost:5173',
         'http://localhost:3000',
@@ -29,8 +35,11 @@ app.use(
         const host = new URL(origin).hostname;
         if (host === 'dynamicqrcodelabs.pages.dev') return origin;
         if (host.endsWith('.dynamicqrcodelabs.pages.dev')) return origin;
+        if (host === 'dynamicqrcodelabs-app.pages.dev') return origin;
+        if (host.endsWith('.dynamicqrcodelabs-app.pages.dev')) return origin;
         if (host === 'dynamicqrcodelabs.com') return origin;
         if (host === 'www.dynamicqrcodelabs.com') return origin;
+        if (host === 'app.dynamicqrcodelabs.com') return origin;
       } catch {
         // fall through
       }
@@ -57,7 +66,12 @@ app.get('/healthz', (c) =>
 );
 
 app.route('/api/auth', authRoutes);
+app.route('/api/auth/password', passwordResetRoutes);
+app.route('/api/auth/email', emailVerifyRoutes);
 app.route('/api/qr-codes', qrRoutes);
+app.route('/api/domains', domainsRoutes);
+app.route('/api/team', teamRoutes);
+app.route('/api/bulk', bulkRoutes);
 app.route('/q', redirectRoutes);
 
 app.notFound((c) => c.json({ error: 'Not found' }, 404));

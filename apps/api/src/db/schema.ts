@@ -13,6 +13,7 @@ export const users = sqliteTable(
     passwordHash: text('password_hash').notNull(),
     avatarUrl: text('avatar_url'),
     emailVerifiedAt: text('email_verified_at'),
+    emailVerified: integer('email_verified', { mode: 'boolean' }).notNull().default(false),
     createdAt: ts(),
     updatedAt: ts(),
   },
@@ -209,6 +210,99 @@ export const auditLogs = sqliteTable(
   (t) => ({
     wsIdx: index('audit_logs_ws_idx').on(t.workspaceId),
     entityIdx: index('audit_logs_entity_idx').on(t.entityType, t.entityId),
+  }),
+);
+
+export const passwordResetTokens = sqliteTable(
+  'password_reset_tokens',
+  {
+    id: text('id').primaryKey(),
+    userId: text('user_id').notNull().references(() => users.id, { onDelete: 'cascade' }),
+    tokenHash: text('token_hash').notNull(),
+    expiresAt: text('expires_at').notNull(),
+    usedAt: text('used_at'),
+    createdAt: ts(),
+  },
+  (t) => ({
+    tokenIdx: uniqueIndex('prt_token_hash_idx').on(t.tokenHash),
+    userIdx: index('prt_user_idx').on(t.userId),
+  }),
+);
+
+export const emailVerificationTokens = sqliteTable(
+  'email_verification_tokens',
+  {
+    id: text('id').primaryKey(),
+    userId: text('user_id').notNull().references(() => users.id, { onDelete: 'cascade' }),
+    tokenHash: text('token_hash').notNull(),
+    email: text('email').notNull(),
+    expiresAt: text('expires_at').notNull(),
+    usedAt: text('used_at'),
+    createdAt: ts(),
+  },
+  (t) => ({
+    tokenIdx: uniqueIndex('evt_token_hash_idx').on(t.tokenHash),
+    userIdx: index('evt_user_idx').on(t.userId),
+  }),
+);
+
+export const customDomains = sqliteTable(
+  'custom_domains',
+  {
+    id: text('id').primaryKey(),
+    workspaceId: text('workspace_id').notNull().references(() => workspaces.id, { onDelete: 'cascade' }),
+    domain: text('domain').notNull(),
+    status: text('status').notNull().default('pending'),
+    dnsTarget: text('dns_target').notNull(),
+    verificationToken: text('verification_token'),
+    sslStatus: text('ssl_status').notNull().default('pending'),
+    createdAt: ts(),
+    verifiedAt: text('verified_at'),
+  },
+  (t) => ({
+    domainIdx: uniqueIndex('custom_domains_domain_idx').on(t.domain),
+    wsIdx: index('custom_domains_ws_idx').on(t.workspaceId),
+  }),
+);
+
+export const workspaceInvites = sqliteTable(
+  'workspace_invites',
+  {
+    id: text('id').primaryKey(),
+    workspaceId: text('workspace_id').notNull().references(() => workspaces.id, { onDelete: 'cascade' }),
+    email: text('email').notNull(),
+    role: text('role').notNull().default('viewer'),
+    tokenHash: text('token_hash').notNull(),
+    invitedBy: text('invited_by').notNull().references(() => users.id, { onDelete: 'cascade' }),
+    expiresAt: text('expires_at').notNull(),
+    acceptedAt: text('accepted_at'),
+    createdAt: ts(),
+  },
+  (t) => ({
+    tokenIdx: uniqueIndex('invites_token_idx').on(t.tokenHash),
+    wsIdx: index('invites_ws_idx').on(t.workspaceId),
+    emailIdx: index('invites_email_idx').on(t.email),
+  }),
+);
+
+export const bulkJobs = sqliteTable(
+  'bulk_jobs',
+  {
+    id: text('id').primaryKey(),
+    workspaceId: text('workspace_id').notNull().references(() => workspaces.id, { onDelete: 'cascade' }),
+    createdBy: text('created_by').notNull().references(() => users.id, { onDelete: 'cascade' }),
+    status: text('status').notNull().default('pending'),
+    totalRows: integer('total_rows').notNull().default(0),
+    successCount: integer('success_count').notNull().default(0),
+    failedCount: integer('failed_count').notNull().default(0),
+    resultJson: text('result_json'),
+    errorJson: text('error_json'),
+    createdAt: ts(),
+    completedAt: text('completed_at'),
+  },
+  (t) => ({
+    wsIdx: index('bulk_jobs_ws_idx').on(t.workspaceId),
+    statusIdx: index('bulk_jobs_status_idx').on(t.status),
   }),
 );
 

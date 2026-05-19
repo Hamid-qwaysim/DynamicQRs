@@ -11,6 +11,7 @@ import {
 } from '../db/schema';
 import { generateId, generateShortCode } from '../lib/crypto';
 import { validateDestinationUrl } from '../lib/url-validator';
+import { renderQrSvg, type QrDesign } from '../lib/qr-renderer';
 import { requireAuth } from '../middleware/auth';
 import type { Env, Variables } from '../types';
 
@@ -369,6 +370,44 @@ router.delete('/:id', async (c) => {
     .set({ deletedAt: new Date().toISOString(), status: 'archived' })
     .where(eq(qrCodes.id, id));
   return c.json({ ok: true });
+});
+
+// Render the QR pattern as SVG for download/preview. Public for the workspace owner.
+router.get('/:id/render', async (c) => {
+  const user = c.get('user')!;
+  const id = c.req.param('id');
+  const access = await userCanAccessQr(c.env, user.id, id);
+  if (!access.allowed) return c.json({ error: 'Not found' }, 404);
+
+  const db = drizzle(c.env.DB);
+  const rows = await db.select().from(qrCodes).where(eq(qrCodes.id, id)).limit(1);
+  if (rows.length === 0) return c.json({ error: 'Not found' }, 404);
+  const qr = rows[0];
+
+  const format = (c.req.query('format') || 'svg').toLowerCase();
+  const size = Math.min(4096, Math.max(128, Number(c.req.query('size')) || 1024));
+  const design: QrDesign = qr.designJson ? JSON.parse(qr.designJson) : {};
+
+  const shortUrl = `${c.env.SHORT_LINK_BASE}/${qr.shortCode}`;
+  const svg = renderQrSvg(shortUrl, design, size);
+
+  if (format === 'svg') {
+    return new Response(svg, {
+      headers: {
+        'Content-Type': 'image/svg+xml; charset=utf-8',
+        'Cache-Control': 'private, max-age=300',
+        'Content-Disposition': `inline; filename="${qr.name.replace(/[^a-z0-9._-]+/gi, '_')}.svg"`,
+      },
+    });
+  }
+  // For PNG/JPEG/etc., client-side rendering from SVG is the easiest path in Workers.
+  // We return SVG with the requested mime-type hint header for the client to handle conversion.
+  return new Response(svg, {
+    headers: {
+      'Content-Type': 'image/svg+xml; charset=utf-8',
+      'X-Requested-Format': format,
+    },
+  });
 });
 
 router.get('/:id/analytics', async (c) => {
