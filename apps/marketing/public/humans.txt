@@ -1,0 +1,17 @@
+/* TEAM */
+Dynamic QR Code Labs Team
+Site: https://dynamicqrcodelabs.com
+Contact: hello@dynamicqrcodelabs.com
+
+/* THANKS */
+Cloudflare — global edge infrastructure (Workers, Pages, D1)
+The Inter font family — Rasmus Andersson
+QR Code Standard — ISO/IEC 18004 (Denso Wave, 1994)
+
+/* SITE */
+Last update: 2026/05/19
+Language: English
+Doctype: HTML5
+Standards: HTML5, CSS3, ES2022
+IDE: VS Code + Claude Code
+Components: Astro 5, React 18, Hono, Drizzle ORM, Recharts

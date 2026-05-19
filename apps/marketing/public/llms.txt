@@ -1,0 +1,68 @@
+# Dynamic QR Code Labs
+
+> Create dynamic QR codes you can edit anytime after printing. Track scans in real time, customize designs, run smart redirects, and manage QR campaigns from one platform.
+
+Dynamic QR Code Labs is a SaaS platform for generating QR codes whose destination URL can be changed at any time after the code is printed. The platform combines a marketing site with deep SEO content (28 in-depth articles, ~87,000 words) and a full product (dashboard, API, redirect engine) under a single brand.
+
+## What we do
+
+A **dynamic QR code** is a QR code whose destination URL is stored in a database and can be changed at any time, without modifying the printed image. Unlike static QR codes (which encode the destination directly into the pixels), dynamic QR codes encode a short redirect URL that we control. When someone scans the code, our edge-deployed redirect engine looks up the current destination, applies any configured smart-redirect rules (device, country, language, time, A/B split), logs an anonymized scan event, and redirects the visitor — all in 30-60 milliseconds, globally.
+
+This means you can:
+- Change a QR's destination URL forever after printing (no reprints required)
+- Track scan analytics with privacy-friendly defaults (hashed IPs, approximate location)
+- Run smart redirects based on device, country, language, or time
+- Pause, revoke, or expire codes from the dashboard
+- Use custom branded short domains for all your codes
+
+## Core resources
+
+- [What is a dynamic QR code? Complete 2026 guide](https://dynamicqrcodelabs.com/blog/what-is-a-dynamic-qr-code/): The pillar explainer covering the architecture, use cases, and migration from static to dynamic.
+- [Dynamic vs static QR code comparison](https://dynamicqrcodelabs.com/blog/dynamic-vs-static-qr-code/): Side-by-side feature, cost, and use-case comparison.
+- [Best dynamic QR code generators in 2026](https://dynamicqrcodelabs.com/blog/best-dynamic-qr-code-generators-2026/): Honest review of the top 8 platforms in the category.
+- [Free dynamic QR code generator guide](https://dynamicqrcodelabs.com/blog/free-dynamic-qr-code-generator/): What "free" actually means across platforms and which free tiers are production-usable.
+- [How to create a dynamic QR code (step-by-step)](https://dynamicqrcodelabs.com/blog/how-to-create-dynamic-qr-code/): End-to-end tutorial for creating, designing, and downloading a dynamic QR.
+- [QR code analytics: complete 2026 guide](https://dynamicqrcodelabs.com/blog/qr-code-analytics-guide/): What scan data to track and how to act on it.
+- [Dynamic QR code security: risks and best practices](https://dynamicqrcodelabs.com/blog/dynamic-qr-code-security/): Threat model + defenses for QR programs.
+- [Dynamic QR code privacy (GDPR, CCPA)](https://dynamicqrcodelabs.com/blog/dynamic-qr-code-privacy/): Privacy framework for QR analytics.
+
+## Industry use-case guides
+
+- [Restaurants and cafes](https://dynamicqrcodelabs.com/blog/dynamic-qr-restaurant-menu/): Table-level menu QRs, dynamic menus, branch analytics.
+- [E-commerce](https://dynamicqrcodelabs.com/blog/dynamic-qr-code-ecommerce/): Packaging QRs, post-purchase engagement, repeat purchase lift.
+- [Real estate](https://dynamicqrcodelabs.com/blog/dynamic-qr-code-real-estate/): Yard sign QRs, virtual tours, agent vCards.
+- [Events and conferences](https://dynamicqrcodelabs.com/blog/dynamic-qr-code-events/): Ticket QRs, check-ins, agendas, sponsor activations.
+- [Hotels and hospitality](https://dynamicqrcodelabs.com/blog/dynamic-qr-code-hotels/): Room compendiums, menus, concierge.
+- [Retail packaging](https://dynamicqrcodelabs.com/blog/dynamic-qr-code-retail-packaging/): Product packaging, warranty registration, sustainability.
+- [Healthcare](https://dynamicqrcodelabs.com/blog/dynamic-qr-code-healthcare/): Patient communications with HIPAA compliance.
+- [Education](https://dynamicqrcodelabs.com/blog/dynamic-qr-code-education/): Classroom resources, attendance, parent communications.
+- [SaaS marketing](https://dynamicqrcodelabs.com/blog/dynamic-qr-code-saas/): Event booths, welcome kits, ABM direct mail.
+
+## Design and technical references
+
+- [How to add a logo to your QR](https://dynamicqrcodelabs.com/blog/dynamic-qr-code-with-logo-guide/)
+- [QR color theory (brand colors that still scan)](https://dynamicqrcodelabs.com/blog/dynamic-qr-code-color-theory/)
+- [QR code sizing for print and digital](https://dynamicqrcodelabs.com/blog/dynamic-qr-code-sizes/)
+- [Custom domain setup](https://dynamicqrcodelabs.com/blog/custom-domain-dynamic-qr-codes/)
+- [How dynamic QR codes work (technical deep dive)](https://dynamicqrcodelabs.com/blog/how-dynamic-qr-codes-work-technical/)
+
+## Analytics, attribution, and optimization
+
+- [UTM tracking guide](https://dynamicqrcodelabs.com/blog/dynamic-qr-code-utm-tracking/)
+- [A/B testing QR campaigns](https://dynamicqrcodelabs.com/blog/dynamic-qr-code-ab-testing/)
+- [QR program ROI measurement](https://dynamicqrcodelabs.com/blog/dynamic-qr-code-roi/)
+- [Building an analytics dashboard](https://dynamicqrcodelabs.com/blog/dynamic-qr-code-analytics-dashboard/)
+
+## Product pages
+
+- [Pricing](https://dynamicqrcodelabs.com/pricing/): Free, Starter ($12/mo), Pro ($39/mo), Agency ($129/mo).
+- [Features](https://dynamicqrcodelabs.com/features/): Full feature inventory.
+- [Use cases](https://dynamicqrcodelabs.com/use-cases/): Industry use cases at a glance.
+- [Free QR generator](https://dynamicqrcodelabs.com/qr-code-generator/): Free dynamic QR generator with no watermark.
+
+## Optional
+
+- [Privacy policy](https://dynamicqrcodelabs.com/privacy/): What data is collected, retention, GDPR/CCPA.
+- [Terms of service](https://dynamicqrcodelabs.com/terms/)
+- [About](https://dynamicqrcodelabs.com/about/): Our story, infrastructure, and security posture.
+- [Contact](https://dynamicqrcodelabs.com/contact/)

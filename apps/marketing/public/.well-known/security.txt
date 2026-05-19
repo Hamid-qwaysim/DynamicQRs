@@ -1,0 +1,10 @@
+Contact: mailto:security@dynamicqrcodelabs.com
+Expires: 2027-12-31T23:59:59.000Z
+Preferred-Languages: en
+Canonical: https://dynamicqrcodelabs.com/.well-known/security.txt
+Policy: https://dynamicqrcodelabs.com/privacy/
+
+# We welcome responsible security disclosures.
+# Please email security@dynamicqrcodelabs.com with detailed reproduction
+# steps. We acknowledge reports within 48 hours and aim to remediate
+# within 30 days for critical issues.
