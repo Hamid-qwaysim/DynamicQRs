@@ -8,6 +8,20 @@
     <title>Dashboard | Dynamic QR Code Labs</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preload" href="/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin />
+    <script>
+      // GA4 - populated at build time via VITE_GA4_ID env var
+      window.__GA4_ID__ = "%VITE_GA4_ID%";
+      if (window.__GA4_ID__ && !window.__GA4_ID__.startsWith('%')) {
+        const s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=' + window.__GA4_ID__;
+        document.head.appendChild(s);
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function() { window.dataLayer.push(arguments); };
+        window.gtag('js', new Date());
+        window.gtag('config', window.__GA4_ID__, { anonymize_ip: true, send_page_view: false });
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

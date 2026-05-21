@@ -120,6 +120,18 @@ redirect.get('/:shortCode', async (c) => {
   if (qr.status === 'revoked' || qr.status === 'archived') {
     return c.html(statusPage('revoked'), 410);
   }
+
+  // For landing-page QR types, serve the hosted landing instead of redirecting.
+  // The /p/:shortCode route renders the HTML and logs its own scan event.
+  const LANDING_TYPES = new Set([
+    'vcard', 'wifi', 'multilink', 'location', 'coupon',
+    'event', 'review', 'feedback', 'menu', 'app',
+  ]);
+  if (LANDING_TYPES.has(qr.type)) {
+    // Forward to /p/:shortCode (preserves analytics for that route)
+    const url = new URL(c.req.url);
+    return c.redirect(`${url.origin}/p/${code}`, 302);
+  }
   if (qr.expiresAt && new Date(qr.expiresAt).valueOf() < Date.now()) {
     if (qr.fallbackUrl) return c.redirect(qr.fallbackUrl, 302);
     return c.html(statusPage('expired'), 410);

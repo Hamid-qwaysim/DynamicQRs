@@ -11,6 +11,7 @@ const NAV = [
 
 const NAV_SECONDARY = [
   { to: '/settings', label: 'Settings', icon: '⚙' },
+  { to: '/api-keys', label: 'API Keys', icon: '🔑' },
   { to: '/billing', label: 'Billing', icon: '💳' },
 ];
 

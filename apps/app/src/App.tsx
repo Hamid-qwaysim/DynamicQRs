@@ -18,6 +18,7 @@ import { DomainsPage } from './pages/DomainsPage';
 import { TeamPage } from './pages/TeamPage';
 import { SettingsPage } from './pages/SettingsPage';
 import { BillingPage } from './pages/BillingPage';
+import { ApiKeysPage } from './pages/ApiKeysPage';
 
 function PrivateRoute({ children }: { children: JSX.Element }) {
   const { user, loading } = useAuth();
@@ -56,6 +57,7 @@ export default function App() {
         <Route path="/team" element={<TeamPage />} />
         <Route path="/settings" element={<SettingsPage />} />
         <Route path="/billing" element={<BillingPage />} />
+        <Route path="/api-keys" element={<ApiKeysPage />} />
       </Route>
 
       <Route path="/" element={<Navigate to="/dashboard" replace />} />

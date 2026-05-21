@@ -10,6 +10,10 @@ import emailVerifyRoutes from './routes/email-verify';
 import domainsRoutes from './routes/domains';
 import teamRoutes from './routes/team';
 import bulkRoutes from './routes/bulk';
+import apiKeysRoutes from './routes/api-keys';
+import billingRoutes from './routes/billing';
+import stripeWebhookRoutes from './routes/stripe-webhook';
+import landingRoutes from './routes/landing';
 import type { Env, Variables } from './types';
 
 const app = new Hono<{ Bindings: Env; Variables: Variables }>();
@@ -72,7 +76,11 @@ app.route('/api/qr-codes', qrRoutes);
 app.route('/api/domains', domainsRoutes);
 app.route('/api/team', teamRoutes);
 app.route('/api/bulk', bulkRoutes);
+app.route('/api/api-keys', apiKeysRoutes);
+app.route('/api/billing', billingRoutes);
+app.route('/api/webhooks/stripe', stripeWebhookRoutes);
 app.route('/q', redirectRoutes);
+app.route('/p', landingRoutes);
 
 app.notFound((c) => c.json({ error: 'Not found' }, 404));
 

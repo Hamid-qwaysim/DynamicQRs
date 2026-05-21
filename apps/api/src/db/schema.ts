@@ -46,6 +46,8 @@ export const workspaces = sqliteTable(
     slug: text('slug').notNull(),
     ownerId: text('owner_id').notNull().references(() => users.id),
     plan: text('plan').notNull().default('free'),
+    stripeCustomerId: text('stripe_customer_id'),
+    stripeSubscriptionId: text('stripe_subscription_id'),
     createdAt: ts(),
     updatedAt: ts(),
   },

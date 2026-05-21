@@ -94,6 +94,25 @@ export const api = {
     request<{ ok: boolean }>('PATCH', `/api/team/members/${id}`, { role }),
   removeMember: (id: string) => request<{ ok: boolean }>('DELETE', `/api/team/members/${id}`),
 
+  // API keys
+  listApiKeys: () => request<{ keys: ApiKey[] }>('GET', '/api/api-keys'),
+  createApiKey: (name: string, scopes: string[]) =>
+    request<{ id: string; key: string; keyPrefix: string; name: string; scopes: string[] }>(
+      'POST', '/api/api-keys', { name, scopes },
+    ),
+  revokeApiKey: (id: string) => request<{ ok: boolean }>('DELETE', `/api/api-keys/${id}`),
+
+  // Billing
+  createCheckout: (plan: 'starter' | 'pro' | 'agency') =>
+    request<{ url: string; id: string }>('POST', '/api/billing/checkout', { plan }),
+  openBillingPortal: () => request<{ url: string }>('POST', '/api/billing/portal'),
+  getSubscription: () =>
+    request<{ plan: string; status: string; currentPeriodEnd?: number; cancelAtPeriodEnd?: boolean; hasStripe?: boolean }>(
+      'GET', '/api/billing/subscription',
+    ),
+  syncSubscription: () =>
+    request<{ synced: boolean; plan?: string; status?: string }>('POST', '/api/billing/sync'),
+
   // Bulk
   listBulkJobs: () => request<{ jobs: BulkJob[] }>('GET', '/api/bulk'),
   getBulkJob: (id: string) => request<{ job: BulkJob & { resultJson: any; errorJson: any } }>(
@@ -212,4 +231,14 @@ export interface BulkJob {
   failedCount: number;
   createdAt: string;
   completedAt: string | null;
+}
+
+export interface ApiKey {
+  id: string;
+  name: string;
+  keyPrefix: string;
+  scopes: string;
+  lastUsedAt: string | null;
+  createdAt: string;
+  revokedAt: string | null;
 }

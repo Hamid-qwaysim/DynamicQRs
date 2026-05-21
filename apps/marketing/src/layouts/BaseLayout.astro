@@ -244,6 +244,24 @@ const schemas = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
       <script type="application/ld+json" set:html={JSON.stringify(s)} />
     ))}
 
+    {/* Google Analytics 4 - set PUBLIC_GA4_ID env var to enable */}
+    {import.meta.env.PUBLIC_GA4_ID && (
+      <>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${import.meta.env.PUBLIC_GA4_ID}`}></script>
+        <script is:inline define:vars={{ ga4Id: import.meta.env.PUBLIC_GA4_ID }}>
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', ga4Id, {
+              anonymize_ip: true,
+              cookie_flags: 'SameSite=None;Secure',
+            });
+          `}
+        </script>
+      </>
+    )}
+
     <slot name="head" />
   </head>
   <body>

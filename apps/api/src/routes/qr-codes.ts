@@ -55,6 +55,7 @@ const createSchema = z.object({
     .regex(/^[a-zA-Z0-9_-]{3,32}$/, 'Slug must be 3-32 alphanumeric chars')
     .optional(),
   designJson: z.record(z.unknown()).optional(),
+  destinationPayload: z.record(z.unknown()).optional(),
   redirectRulesJson: z.array(z.unknown()).optional(),
   expiresAt: z.string().datetime().optional(),
   scanLimit: z.number().int().positive().optional(),
@@ -66,6 +67,7 @@ const updateSchema = z.object({
   fallbackUrl: z.string().max(2048).optional().nullable(),
   status: z.enum(['active', 'paused', 'revoked', 'archived']).optional(),
   designJson: z.record(z.unknown()).optional(),
+  destinationPayload: z.record(z.unknown()).optional().nullable(),
   redirectRulesJson: z.array(z.unknown()).optional(),
   expiresAt: z.string().datetime().optional().nullable(),
   scanLimit: z.number().int().positive().optional().nullable(),
@@ -185,6 +187,7 @@ router.post('/', async (c) => {
     status: 'active',
     destinationUrl,
     fallbackUrl: data.fallbackUrl ?? null,
+    destinationPayload: data.destinationPayload ? JSON.stringify(data.destinationPayload) : null,
     designJson: data.designJson ? JSON.stringify(data.designJson) : null,
     redirectRulesJson: data.redirectRulesJson
       ? JSON.stringify(data.redirectRulesJson)
@@ -281,6 +284,9 @@ router.patch('/:id', async (c) => {
   }
   if (data.designJson !== undefined) {
     update.designJson = JSON.stringify(data.designJson);
+  }
+  if (data.destinationPayload !== undefined) {
+    update.destinationPayload = data.destinationPayload === null ? null : JSON.stringify(data.destinationPayload);
   }
   if (data.redirectRulesJson !== undefined) {
     update.redirectRulesJson = JSON.stringify(data.redirectRulesJson);

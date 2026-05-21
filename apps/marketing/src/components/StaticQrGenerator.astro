@@ -1,0 +1,373 @@
+---
+// Free static QR code generator - no signup, no analytics, no editing
+// Renders QR client-side using qrcode-generator (bundled by Astro/Vite)
+---
+
+<section class="section" id="free-static-generator">
+  <div class="container">
+    <div class="section-title">
+      <span class="eyebrow">Free static QR generator</span>
+      <h2>Try a free QR code right now — no signup.</h2>
+      <p>Generate a static QR code instantly in your browser. Want it editable, trackable, and brandable forever? <a href="/signup/">Sign up free →</a></p>
+    </div>
+
+    <div class="qr-gen-wrap">
+      <div class="qr-gen-form card">
+        <div class="qr-gen-tabs" role="tablist" aria-label="QR type">
+          <button class="qr-gen-tab active" data-type="url" role="tab">URL</button>
+          <button class="qr-gen-tab" data-type="text" role="tab">Text</button>
+          <button class="qr-gen-tab" data-type="wifi" role="tab">WiFi</button>
+          <button class="qr-gen-tab" data-type="email" role="tab">Email</button>
+          <button class="qr-gen-tab" data-type="phone" role="tab">Phone</button>
+          <button class="qr-gen-tab" data-type="sms" role="tab">SMS</button>
+        </div>
+
+        <div class="qr-gen-fields" data-active="url">
+          <div data-field="url" class="qr-field">
+            <label>Website URL</label>
+            <input type="url" id="qr-url" placeholder="https://example.com" value="https://" />
+          </div>
+          <div data-field="text" class="qr-field" hidden>
+            <label>Plain text</label>
+            <textarea id="qr-text" placeholder="Anything…" rows="3"></textarea>
+          </div>
+          <div data-field="wifi" class="qr-field" hidden>
+            <label>Network name (SSID)</label>
+            <input type="text" id="qr-wifi-ssid" placeholder="MyNetwork" />
+            <label style="margin-top: 10px;">Password</label>
+            <input type="text" id="qr-wifi-pass" placeholder="password" />
+            <label style="margin-top: 10px;">Security</label>
+            <select id="qr-wifi-sec">
+              <option value="WPA">WPA/WPA2/WPA3</option>
+              <option value="WEP">WEP</option>
+              <option value="nopass">No password</option>
+            </select>
+          </div>
+          <div data-field="email" class="qr-field" hidden>
+            <label>Email address</label>
+            <input type="email" id="qr-email-to" placeholder="hello@example.com" />
+            <label style="margin-top: 10px;">Subject (optional)</label>
+            <input type="text" id="qr-email-subj" />
+            <label style="margin-top: 10px;">Body (optional)</label>
+            <textarea id="qr-email-body" rows="2"></textarea>
+          </div>
+          <div data-field="phone" class="qr-field" hidden>
+            <label>Phone number</label>
+            <input type="tel" id="qr-phone" placeholder="+962790000000" />
+          </div>
+          <div data-field="sms" class="qr-field" hidden>
+            <label>Phone number</label>
+            <input type="tel" id="qr-sms-phone" placeholder="+962790000000" />
+            <label style="margin-top: 10px;">Pre-filled message (optional)</label>
+            <textarea id="qr-sms-msg" rows="2"></textarea>
+          </div>
+        </div>
+
+        <div class="qr-gen-style-row">
+          <div class="qr-gen-style">
+            <label>Foreground</label>
+            <input type="color" id="qr-fg" value="#0a0e27" />
+          </div>
+          <div class="qr-gen-style">
+            <label>Background</label>
+            <input type="color" id="qr-bg" value="#ffffff" />
+          </div>
+          <div class="qr-gen-style">
+            <label>Size</label>
+            <select id="qr-size">
+              <option value="512">512px</option>
+              <option value="1024" selected>1024px</option>
+              <option value="2048">2048px</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="qr-gen-upgrade">
+          <strong>⚠ This QR is static.</strong> The data is permanently encoded in the image. You can't change it after printing. Need editable forever? <a href="/signup/">Create a free dynamic QR account →</a>
+        </div>
+      </div>
+
+      <div class="qr-gen-preview card">
+        <div class="qr-gen-preview-box">
+          <div id="qr-preview-render"></div>
+        </div>
+        <div class="qr-gen-download">
+          <button class="btn btn-primary" id="qr-download-png">Download PNG</button>
+          <button class="btn btn-secondary" id="qr-download-svg">Download SVG</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .qr-gen-wrap {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 24px;
+    max-width: 940px;
+    margin: 32px auto 0;
+  }
+  .qr-gen-form { padding: 22px 24px; }
+  .qr-gen-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 18px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 12px;
+  }
+  .qr-gen-tab {
+    padding: 7px 14px;
+    border-radius: 100px;
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    color: var(--text-soft);
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 500;
+    font-family: inherit;
+  }
+  .qr-gen-tab.active {
+    background: var(--brand);
+    color: #fff;
+    border-color: var(--brand);
+  }
+  .qr-field label {
+    display: block;
+    font-size: 0.86rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+  .qr-field input, .qr-field textarea, .qr-field select {
+    width: 100%;
+    padding: 9px 12px;
+    border: 1px solid var(--border-strong);
+    border-radius: 8px;
+    font-size: 0.94rem;
+    font-family: inherit;
+    background: #fff;
+    color: var(--text);
+  }
+  .qr-field textarea { resize: vertical; min-height: 60px; }
+  .qr-gen-style-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin-top: 18px;
+  }
+  .qr-gen-style label {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--text-soft);
+    margin-bottom: 4px;
+  }
+  .qr-gen-style input[type="color"] {
+    width: 100%;
+    height: 38px;
+    padding: 2px;
+    border: 1px solid var(--border-strong);
+    border-radius: 8px;
+    cursor: pointer;
+    background: transparent;
+  }
+  .qr-gen-style select {
+    width: 100%;
+    padding: 9px 10px;
+    border: 1px solid var(--border-strong);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 0.9rem;
+  }
+  .qr-gen-upgrade {
+    margin-top: 18px;
+    padding: 12px 14px;
+    background: #fff7ed;
+    border: 1px solid #fed7aa;
+    border-radius: 8px;
+    color: #92400e;
+    font-size: 0.84rem;
+    line-height: 1.5;
+  }
+  .qr-gen-upgrade a { color: #92400e; text-decoration: underline; font-weight: 600; }
+  .qr-gen-preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    position: sticky;
+    top: 80px;
+    height: max-content;
+  }
+  .qr-gen-preview-box {
+    width: 100%;
+    max-width: 320px;
+    aspect-ratio: 1;
+    margin-bottom: 18px;
+  }
+  #qr-preview-render svg { width: 100%; height: 100%; display: block; }
+  .qr-gen-download {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  @media (max-width: 768px) {
+    .qr-gen-wrap { grid-template-columns: 1fr; }
+    .qr-gen-preview { position: relative; top: 0; }
+  }
+</style>
+
+<script>
+  import qrcode from 'qrcode-generator';
+
+  type QrType = 'url' | 'text' | 'wifi' | 'email' | 'phone' | 'sms';
+
+  const $ = <T extends Element>(s: string) => document.querySelector(s) as T | null;
+  const $$ = (s: string) => document.querySelectorAll(s);
+
+  let currentType: QrType = 'url';
+  let currentDataString = 'https://';
+  const fields = $('.qr-gen-fields');
+  const fgInput = $('#qr-fg') as HTMLInputElement;
+  const bgInput = $('#qr-bg') as HTMLInputElement;
+  const sizeInput = $('#qr-size') as HTMLSelectElement;
+  const renderBox = $('#qr-preview-render');
+
+  function buildDataString(): string {
+    switch (currentType) {
+      case 'url':
+        return ($('#qr-url') as HTMLInputElement)?.value || '';
+      case 'text':
+        return ($('#qr-text') as HTMLTextAreaElement)?.value || '';
+      case 'wifi': {
+        const ssid = ($('#qr-wifi-ssid') as HTMLInputElement)?.value || '';
+        const pass = ($('#qr-wifi-pass') as HTMLInputElement)?.value || '';
+        const sec = ($('#qr-wifi-sec') as HTMLSelectElement)?.value || 'WPA';
+        const esc = (s: string) => s.replace(/([\\;,:"])/g, '\\$1');
+        if (sec === 'nopass') return `WIFI:T:nopass;S:${esc(ssid)};;`;
+        return `WIFI:T:${sec};S:${esc(ssid)};P:${esc(pass)};;`;
+      }
+      case 'email': {
+        const to = ($('#qr-email-to') as HTMLInputElement)?.value || '';
+        const subj = encodeURIComponent(($('#qr-email-subj') as HTMLInputElement)?.value || '');
+        const body = encodeURIComponent(($('#qr-email-body') as HTMLTextAreaElement)?.value || '');
+        let s = `mailto:${to}`;
+        const parts: string[] = [];
+        if (subj) parts.push(`subject=${subj}`);
+        if (body) parts.push(`body=${body}`);
+        if (parts.length) s += `?${parts.join('&')}`;
+        return s;
+      }
+      case 'phone':
+        return `tel:${($('#qr-phone') as HTMLInputElement)?.value || ''}`;
+      case 'sms': {
+        const phone = ($('#qr-sms-phone') as HTMLInputElement)?.value || '';
+        const msg = encodeURIComponent(($('#qr-sms-msg') as HTMLTextAreaElement)?.value || '');
+        return msg ? `sms:${phone}?body=${msg}` : `sms:${phone}`;
+      }
+    }
+  }
+
+  function buildSvgString(data: string, fg: string, bg: string, size: number): string {
+    if (!data || data === 'https://' || data.length < 2) {
+      return `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}"><rect width="${size}" height="${size}" fill="${bg}"/><text x="50%" y="50%" text-anchor="middle" fill="#a3a3a3" font-size="14" font-family="sans-serif" dy=".3em">Fill in the fields to preview</text></svg>`;
+    }
+    try {
+      const qr = qrcode(0, 'M');
+      qr.addData(data, 'Byte');
+      qr.make();
+      const count: number = qr.getModuleCount();
+      const margin = 4;
+      const total = count + margin * 2;
+      const moduleSize = size / total;
+      let cells = '';
+      for (let r = 0; r < count; r++) {
+        for (let c = 0; c < count; c++) {
+          if (!qr.isDark(r, c)) continue;
+          const x = (c + margin) * moduleSize;
+          const y = (r + margin) * moduleSize;
+          cells += `<rect x="${x}" y="${y}" width="${moduleSize}" height="${moduleSize}"/>`;
+        }
+      }
+      return `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" shape-rendering="crispEdges"><rect width="${size}" height="${size}" fill="${bg}"/><g fill="${fg}">${cells}</g></svg>`;
+    } catch (e) {
+      console.error(e);
+      return `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}"><rect width="${size}" height="${size}" fill="${bg}"/><text x="50%" y="50%" text-anchor="middle" fill="#dc2626" font-size="14" dy=".3em">Cannot encode (too long)</text></svg>`;
+    }
+  }
+
+  function rerender() {
+    currentDataString = buildDataString();
+    const svg = buildSvgString(currentDataString, fgInput.value, bgInput.value, 1024);
+    // Display a scaled-down preview
+    const preview = buildSvgString(currentDataString, fgInput.value, bgInput.value, 320);
+    if (renderBox) renderBox.innerHTML = preview;
+  }
+
+  // Tab switching
+  $$('.qr-gen-tab').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      $$('.qr-gen-tab').forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentType = btn.getAttribute('data-type') as QrType;
+      $$('.qr-field').forEach((f) => ((f as HTMLElement).hidden = true));
+      const target = $(`[data-field="${currentType}"]`);
+      if (target) (target as HTMLElement).hidden = false;
+      rerender();
+    });
+  });
+
+  // Field changes
+  $$('input, textarea, select').forEach((el) => {
+    el.addEventListener('input', rerender);
+    el.addEventListener('change', rerender);
+  });
+
+  // Download SVG
+  $('#qr-download-svg')?.addEventListener('click', () => {
+    const svg = buildSvgString(currentDataString, fgInput.value, bgInput.value, Number(sizeInput.value));
+    const blob = new Blob([svg], { type: 'image/svg+xml' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `qr-${Date.now()}.svg`;
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  });
+
+  // Download PNG (via canvas)
+  $('#qr-download-png')?.addEventListener('click', () => {
+    const sizeNum = Number(sizeInput.value);
+    const svg = buildSvgString(currentDataString, fgInput.value, bgInput.value, sizeNum);
+    const img = new Image();
+    const blob = new Blob([svg], { type: 'image/svg+xml' });
+    const url = URL.createObjectURL(blob);
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      canvas.width = sizeNum;
+      canvas.height = sizeNum;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+      ctx.drawImage(img, 0, 0);
+      canvas.toBlob((png) => {
+        if (!png) return;
+        const pngUrl = URL.createObjectURL(png);
+        const a = document.createElement('a');
+        a.href = pngUrl;
+        a.download = `qr-${Date.now()}.png`;
+        a.click();
+        setTimeout(() => {
+          URL.revokeObjectURL(pngUrl);
+          URL.revokeObjectURL(url);
+        }, 1000);
+      }, 'image/png');
+    };
+    img.src = url;
+  });
+
+  rerender();
+</script>

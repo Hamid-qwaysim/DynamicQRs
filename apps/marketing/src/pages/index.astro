@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import StaticQrGenerator from '../components/StaticQrGenerator.astro';
 import { SITE } from '../lib/site';
 import {
   organizationSchema,
@@ -129,6 +130,8 @@ const jsonLd = [
       Built for <strong>restaurants</strong>, <strong>agencies</strong>, <strong>events</strong>, <strong>creators</strong>, <strong>retail</strong>, <strong>real estate</strong>, <strong>schools</strong>, and <strong>enterprise teams</strong>.
     </p>
   </div>
+
+  <StaticQrGenerator />
 
   <section class="section">
     <div class="container">

@@ -5,6 +5,12 @@ export interface Env {
   SHORT_LINK_BASE: string;
   JWT_SECRET?: string;
   IP_HASH_SALT?: string;
+  STRIPE_SECRET_KEY?: string;
+  STRIPE_WEBHOOK_SECRET?: string;
+  STRIPE_PRICE_STARTER?: string;
+  STRIPE_PRICE_PRO?: string;
+  STRIPE_PRICE_AGENCY?: string;
+  GA4_MEASUREMENT_ID?: string;
   EMAIL?: {
     send: (msg: {
       to: string;

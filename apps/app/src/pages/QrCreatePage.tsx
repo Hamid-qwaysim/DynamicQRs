@@ -2,44 +2,129 @@ import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { api, ApiError } from '../api/client';
 import { QrPreview, type QrDesign } from '../components/QrPreview';
+import { events } from '../lib/analytics';
 
 type QrType =
-  | 'url'
-  | 'multilink'
-  | 'vcard'
-  | 'whatsapp'
-  | 'email'
-  | 'sms'
-  | 'phone'
-  | 'wifi'
-  | 'location'
-  | 'menu'
-  | 'pdf'
-  | 'app'
-  | 'social'
-  | 'event';
+  | 'url' | 'multilink' | 'vcard' | 'whatsapp' | 'email' | 'sms' | 'phone'
+  | 'wifi' | 'location' | 'menu' | 'pdf' | 'app' | 'social' | 'event'
+  | 'coupon' | 'review' | 'feedback';
 
-const TYPES: Array<{ value: QrType; label: string; icon: string; description: string }> = [
+const TYPES: Array<{ value: QrType; label: string; icon: string; description: string; landing?: boolean }> = [
   { value: 'url', label: 'Website URL', icon: '🔗', description: 'Open any web link' },
-  { value: 'vcard', label: 'vCard', icon: '👤', description: 'Save contact info' },
+  { value: 'multilink', label: 'Multi-link page', icon: '🌐', description: 'Linktree-style page', landing: true },
+  { value: 'vcard', label: 'vCard', icon: '👤', description: 'Save contact info', landing: true },
   { value: 'whatsapp', label: 'WhatsApp', icon: '💬', description: 'Open chat with you' },
   { value: 'email', label: 'Email', icon: '✉️', description: 'Pre-filled email' },
   { value: 'sms', label: 'SMS', icon: '💭', description: 'Pre-filled text message' },
   { value: 'phone', label: 'Phone call', icon: '📞', description: 'Tap to call' },
-  { value: 'wifi', label: 'WiFi', icon: '📶', description: 'Auto-connect to your network' },
-  { value: 'location', label: 'Map location', icon: '📍', description: 'Open in Maps' },
-  { value: 'menu', label: 'Restaurant menu', icon: '🍽️', description: 'Digital menu link' },
+  { value: 'wifi', label: 'WiFi', icon: '📶', description: 'Connect to your network', landing: true },
+  { value: 'location', label: 'Map location', icon: '📍', description: 'Open in Maps', landing: true },
+  { value: 'menu', label: 'Restaurant menu', icon: '🍽️', description: 'Digital menu', landing: true },
+  { value: 'app', label: 'App download', icon: '📱', description: 'Smart-route to App Store/Play', landing: true },
+  { value: 'event', label: 'Event invite', icon: '📅', description: 'Calendar event (.ics)', landing: true },
+  { value: 'coupon', label: 'Coupon / promo', icon: '🎟️', description: 'Promo code page', landing: true },
+  { value: 'review', label: 'Review request', icon: '⭐', description: 'Google/Yelp review prompts', landing: true },
+  { value: 'feedback', label: 'Feedback form', icon: '📝', description: 'Star rating + comment', landing: true },
   { value: 'pdf', label: 'PDF / File', icon: '📄', description: 'Link to hosted file' },
-  { value: 'app', label: 'App download', icon: '📱', description: 'Smart-route to App Store/Play' },
-  { value: 'social', label: 'Social profile', icon: '🌐', description: 'Open your social page' },
+  { value: 'social', label: 'Social profile', icon: '📸', description: 'Single social URL' },
 ];
 
-function buildDestination(type: QrType, fields: Record<string, string>): string {
+const LANDING_TYPES = new Set(['vcard', 'wifi', 'multilink', 'location', 'coupon', 'event', 'review', 'feedback', 'menu', 'app']);
+
+function buildPayload(type: QrType, fields: Record<string, any>): Record<string, any> {
+  switch (type) {
+    case 'vcard':
+      return {
+        name: fields.name,
+        firstName: fields.firstName,
+        lastName: fields.lastName,
+        organization: fields.organization,
+        title: fields.title,
+        phone: fields.phone,
+        email: fields.email,
+        website: fields.website,
+        address: fields.address,
+        avatarUrl: fields.avatarUrl,
+      };
+    case 'wifi':
+      return {
+        ssid: fields.ssid,
+        password: fields.password,
+        security: fields.security || 'WPA',
+      };
+    case 'multilink':
+      return {
+        title: fields.title,
+        subtitle: fields.subtitle,
+        avatarUrl: fields.avatarUrl,
+        links: fields.links || [],
+      };
+    case 'location':
+      return {
+        name: fields.locationName,
+        address: fields.address,
+        lat: fields.lat,
+        lng: fields.lng,
+      };
+    case 'coupon':
+      return {
+        title: fields.couponTitle,
+        code: fields.couponCode,
+        description: fields.couponDescription,
+        expiresAt: fields.couponExpiresAt,
+        ctaUrl: fields.couponCtaUrl,
+        ctaLabel: fields.couponCtaLabel,
+      };
+    case 'event':
+      return {
+        title: fields.eventTitle,
+        startsAt: fields.startsAt,
+        endsAt: fields.endsAt,
+        location: fields.eventLocation,
+        description: fields.eventDescription,
+      };
+    case 'review':
+      return {
+        businessName: fields.businessName,
+        googlePlaceUrl: fields.googlePlaceUrl,
+        yelpUrl: fields.yelpUrl,
+        tripadvisorUrl: fields.tripadvisorUrl,
+        trustpilotUrl: fields.trustpilotUrl,
+      };
+    case 'feedback':
+      return {
+        title: fields.feedbackTitle || 'How was your experience?',
+        subtitle: fields.feedbackSubtitle,
+      };
+    case 'menu':
+      return {
+        restaurantName: fields.restaurantName,
+        subtitle: fields.menuSubtitle,
+        categories: fields.categories || [],
+      };
+    case 'app':
+      return {
+        appName: fields.appName,
+        description: fields.appDescription,
+        appStoreUrl: fields.appStoreUrl,
+        playStoreUrl: fields.playStoreUrl,
+        websiteUrl: fields.websiteUrl,
+      };
+    default:
+      return {};
+  }
+}
+
+function buildDestination(type: QrType, fields: Record<string, any>): string {
+  // For landing types, the actual URL will be /p/:shortCode (set by /q/ redirect)
+  // We just need any valid placeholder URL - backend will keep destinationUrl as-is.
+  // For non-landing types, build the external URL directly.
+  if (LANDING_TYPES.has(type)) {
+    return 'https://qr.dynamicqrcodelabs.com/p/placeholder';
+  }
   switch (type) {
     case 'url':
-    case 'menu':
     case 'pdf':
-    case 'app':
     case 'social':
       return fields.url || '';
     case 'whatsapp': {
@@ -53,14 +138,6 @@ function buildDestination(type: QrType, fields: Record<string, string>): string 
       return `sms:${fields.phone}?body=${encodeURIComponent(fields.message || '')}`;
     case 'phone':
       return `tel:${fields.phone}`;
-    case 'wifi':
-      // We'll send a hosted landing page URL since QR readers vary on WIFI: handling
-      return fields.landingUrl || `https://qr.dynamicqrcodelabs.com/wifi-info?ssid=${encodeURIComponent(fields.ssid || '')}&pass=${encodeURIComponent(fields.password || '')}&t=${fields.security || 'WPA'}`;
-    case 'location':
-      return `https://www.google.com/maps?q=${encodeURIComponent(fields.address || '')}`;
-    case 'vcard':
-      // Build a hosted contact card page so dynamic edits work
-      return fields.landingUrl || 'https://example.com/vcard';
     default:
       return fields.url || '';
   }
@@ -71,7 +148,7 @@ export function QrCreatePage() {
   const [step, setStep] = useState(1);
   const [type, setType] = useState<QrType>('url');
   const [name, setName] = useState('');
-  const [fields, setFields] = useState<Record<string, string>>({});
+  const [fields, setFields] = useState<Record<string, any>>({});
   const [design, setDesign] = useState<QrDesign>({
     foregroundColor: '#0a0e27',
     backgroundColor: '#ffffff',
@@ -84,23 +161,26 @@ export function QrCreatePage() {
   const [submitting, setSubmitting] = useState(false);
 
   const destination = useMemo(() => buildDestination(type, fields), [type, fields]);
+  const payload = useMemo(() => buildPayload(type, fields), [type, fields]);
   const previewData = destination || 'https://example.com/preview';
 
-  const valid =
-    name.trim().length >= 1 &&
-    destination &&
-    destination !== 'https://example.com/vcard'; // require real vcard URL
+  const valid = name.trim().length >= 1 && destination.length > 0;
 
   async function submit() {
     setError(null);
     setSubmitting(true);
     try {
-      const res = await api.createQr({
+      const body: any = {
         name: name.trim(),
         type,
         destinationUrl: destination,
         designJson: design as any,
-      });
+      };
+      if (LANDING_TYPES.has(type)) {
+        body.destinationPayload = payload;
+      }
+      const res = await api.createQr(body);
+      events.qrCreated(type);
       navigate(`/qr/${res.qrCode.id}`);
     } catch (err) {
       setError(err instanceof ApiError ? err.message : 'Failed to create');
@@ -155,6 +235,7 @@ export function QrCreatePage() {
                       <div className="icon">{t.icon}</div>
                       <div>{t.label}</div>
                       <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: 4 }}>{t.description}</div>
+                      {t.landing && <div style={{ fontSize: '0.7rem', color: 'var(--accent)', marginTop: 4, fontWeight: 600 }}>+ landing page</div>}
                     </div>
                   ))}
                 </div>
@@ -203,11 +284,9 @@ export function QrCreatePage() {
                   <tbody>
                     <tr><td><strong>Name</strong></td><td>{name}</td></tr>
                     <tr><td><strong>Type</strong></td><td>{type}</td></tr>
-                    <tr><td><strong>Destination</strong></td><td><code style={{ fontSize: '0.82rem', wordBreak: 'break-all' }}>{destination}</code></td></tr>
+                    <tr><td><strong>Destination</strong></td><td><code style={{ fontSize: '0.82rem', wordBreak: 'break-all' }}>{LANDING_TYPES.has(type) ? '(hosted landing page)' : destination}</code></td></tr>
                     <tr><td><strong>Foreground</strong></td><td>{design.foregroundColor}</td></tr>
                     <tr><td><strong>Background</strong></td><td>{design.backgroundColor}</td></tr>
-                    <tr><td><strong>Eye style</strong></td><td>{design.eyeStyle}</td></tr>
-                    <tr><td><strong>Dot style</strong></td><td>{design.dotStyle}</td></tr>
                   </tbody>
                 </table>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -227,7 +306,7 @@ export function QrCreatePage() {
               </h3>
               <QrPreview data={previewData} design={design} />
               <div style={{ marginTop: 12, fontSize: '0.78rem', color: 'var(--text-muted)', textAlign: 'center', wordBreak: 'break-all' }}>
-                {destination || '(enter destination above)'}
+                {LANDING_TYPES.has(type) ? 'Hosted landing page' : destination || '(enter destination above)'}
               </div>
             </div>
           </div>
@@ -237,29 +316,46 @@ export function QrCreatePage() {
   );
 }
 
-function TypeFields({
-  type,
-  fields,
-  setFields,
-}: {
-  type: QrType;
-  fields: Record<string, string>;
-  setFields: (v: Record<string, string>) => void;
-}) {
-  const set = (k: string, v: string) => setFields({ ...fields, [k]: v });
+function TypeFields({ type, fields, setFields }: { type: QrType; fields: any; setFields: (v: any) => void }) {
+  const set = (k: string, v: any) => setFields({ ...fields, [k]: v });
 
   switch (type) {
     case 'url':
-    case 'menu':
     case 'pdf':
     case 'social':
-    case 'app':
       return (
         <div className="field">
-          <label>{type === 'app' ? 'Destination URL (we will smart-redirect)' : 'URL'}</label>
+          <label>URL</label>
           <input type="url" value={fields.url || ''} onChange={(e) => set('url', e.target.value)} placeholder="https://" />
         </div>
       );
+
+    case 'app':
+      return (
+        <>
+          <div className="field">
+            <label>App name</label>
+            <input value={fields.appName || ''} onChange={(e) => set('appName', e.target.value)} placeholder="My App" />
+          </div>
+          <div className="field">
+            <label>Short description</label>
+            <input value={fields.appDescription || ''} onChange={(e) => set('appDescription', e.target.value)} />
+          </div>
+          <div className="field">
+            <label>App Store URL (iOS)</label>
+            <input type="url" value={fields.appStoreUrl || ''} onChange={(e) => set('appStoreUrl', e.target.value)} placeholder="https://apps.apple.com/app/..." />
+          </div>
+          <div className="field">
+            <label>Google Play URL (Android)</label>
+            <input type="url" value={fields.playStoreUrl || ''} onChange={(e) => set('playStoreUrl', e.target.value)} placeholder="https://play.google.com/store/apps/..." />
+          </div>
+          <div className="field">
+            <label>Website fallback (desktop scans)</label>
+            <input type="url" value={fields.websiteUrl || ''} onChange={(e) => set('websiteUrl', e.target.value)} />
+          </div>
+        </>
+      );
+
     case 'whatsapp':
       return (
         <>
@@ -273,6 +369,7 @@ function TypeFields({
           </div>
         </>
       );
+
     case 'email':
       return (
         <>
@@ -290,90 +387,178 @@ function TypeFields({
           </div>
         </>
       );
+
     case 'sms':
       return (
         <>
-          <div className="field">
-            <label>Phone number</label>
-            <input value={fields.phone || ''} onChange={(e) => set('phone', e.target.value)} />
-          </div>
-          <div className="field">
-            <label>Pre-filled message</label>
-            <textarea value={fields.message || ''} onChange={(e) => set('message', e.target.value)} />
-          </div>
+          <div className="field"><label>Phone number</label><input value={fields.phone || ''} onChange={(e) => set('phone', e.target.value)} /></div>
+          <div className="field"><label>Pre-filled message</label><textarea value={fields.message || ''} onChange={(e) => set('message', e.target.value)} /></div>
         </>
       );
+
     case 'phone':
-      return (
-        <div className="field">
-          <label>Phone number</label>
-          <input value={fields.phone || ''} onChange={(e) => set('phone', e.target.value)} placeholder="+962790000000" />
-        </div>
-      );
+      return <div className="field"><label>Phone number</label><input value={fields.phone || ''} onChange={(e) => set('phone', e.target.value)} placeholder="+962790000000" /></div>;
+
     case 'wifi':
       return (
         <>
+          <div className="field"><label>Network name (SSID)</label><input value={fields.ssid || ''} onChange={(e) => set('ssid', e.target.value)} /></div>
+          <div className="field"><label>Password</label><input value={fields.password || ''} onChange={(e) => set('password', e.target.value)} /></div>
           <div className="field">
-            <label>Network name (SSID)</label>
-            <input value={fields.ssid || ''} onChange={(e) => set('ssid', e.target.value)} />
-          </div>
-          <div className="field">
-            <label>Password</label>
-            <input value={fields.password || ''} onChange={(e) => set('password', e.target.value)} />
-          </div>
-          <div className="field">
-            <label>Encryption</label>
+            <label>Security</label>
             <select value={fields.security || 'WPA'} onChange={(e) => set('security', e.target.value)}>
               <option value="WPA">WPA/WPA2/WPA3</option>
               <option value="WEP">WEP</option>
               <option value="nopass">No password</option>
             </select>
           </div>
-          <p className="hint">QR opens a landing page with credentials and a "Copy" button. Some camera apps support direct WiFi join.</p>
+          <p className="hint">Customers see a landing page with the WiFi credentials + a "Connect" button. Some camera apps support direct join.</p>
         </>
       );
+
     case 'location':
       return (
-        <div className="field">
-          <label>Address or place name</label>
-          <input value={fields.address || ''} onChange={(e) => set('address', e.target.value)} placeholder="e.g. 1600 Amphitheatre Pkwy, Mountain View" />
-        </div>
+        <>
+          <div className="field"><label>Place name</label><input value={fields.locationName || ''} onChange={(e) => set('locationName', e.target.value)} placeholder="Our office" /></div>
+          <div className="field"><label>Address</label><input value={fields.address || ''} onChange={(e) => set('address', e.target.value)} placeholder="1600 Amphitheatre Pkwy, Mountain View, CA" /></div>
+          <div className="field"><label>Latitude (optional)</label><input value={fields.lat || ''} onChange={(e) => set('lat', e.target.value)} placeholder="37.4220" /></div>
+          <div className="field"><label>Longitude (optional)</label><input value={fields.lng || ''} onChange={(e) => set('lng', e.target.value)} placeholder="-122.0841" /></div>
+        </>
       );
+
     case 'vcard':
       return (
         <>
-          <div className="field">
-            <label>Landing page URL for your contact info</label>
-            <input
-              type="url"
-              value={fields.landingUrl || ''}
-              onChange={(e) => set('landingUrl', e.target.value)}
-              placeholder="https://yourbrand.com/contact-card"
-            />
-            <span className="hint">A vCard landing page builder is coming soon. For now, host the vCard URL yourself.</span>
-          </div>
+          <div className="field"><label>Full name</label><input value={fields.name || ''} onChange={(e) => set('name', e.target.value)} /></div>
+          <div className="field"><label>Job title</label><input value={fields.title || ''} onChange={(e) => set('title', e.target.value)} /></div>
+          <div className="field"><label>Organization</label><input value={fields.organization || ''} onChange={(e) => set('organization', e.target.value)} /></div>
+          <div className="field"><label>Phone</label><input value={fields.phone || ''} onChange={(e) => set('phone', e.target.value)} /></div>
+          <div className="field"><label>Email</label><input type="email" value={fields.email || ''} onChange={(e) => set('email', e.target.value)} /></div>
+          <div className="field"><label>Website</label><input type="url" value={fields.website || ''} onChange={(e) => set('website', e.target.value)} /></div>
+          <div className="field"><label>Address (optional)</label><input value={fields.address || ''} onChange={(e) => set('address', e.target.value)} /></div>
+          <div className="field"><label>Avatar URL (optional)</label><input type="url" value={fields.avatarUrl || ''} onChange={(e) => set('avatarUrl', e.target.value)} /></div>
         </>
       );
+
+    case 'multilink':
+      return (
+        <>
+          <div className="field"><label>Page title</label><input value={fields.title || ''} onChange={(e) => set('title', e.target.value)} /></div>
+          <div className="field"><label>Subtitle (optional)</label><input value={fields.subtitle || ''} onChange={(e) => set('subtitle', e.target.value)} /></div>
+          <div className="field"><label>Avatar URL (optional)</label><input type="url" value={fields.avatarUrl || ''} onChange={(e) => set('avatarUrl', e.target.value)} /></div>
+          <MultilinkLinks links={fields.links || []} onChange={(l) => set('links', l)} />
+        </>
+      );
+
+    case 'coupon':
+      return (
+        <>
+          <div className="field"><label>Title</label><input value={fields.couponTitle || ''} onChange={(e) => set('couponTitle', e.target.value)} placeholder="20% off your next order" /></div>
+          <div className="field"><label>Promo code</label><input value={fields.couponCode || ''} onChange={(e) => set('couponCode', e.target.value)} placeholder="SAVE20" style={{ textTransform: 'uppercase' }} /></div>
+          <div className="field"><label>Description</label><textarea value={fields.couponDescription || ''} onChange={(e) => set('couponDescription', e.target.value)} /></div>
+          <div className="field"><label>Expires at (optional)</label><input type="date" value={fields.couponExpiresAt || ''} onChange={(e) => set('couponExpiresAt', e.target.value)} /></div>
+          <div className="field"><label>Redeem CTA URL (optional)</label><input type="url" value={fields.couponCtaUrl || ''} onChange={(e) => set('couponCtaUrl', e.target.value)} /></div>
+          <div className="field"><label>CTA label</label><input value={fields.couponCtaLabel || 'Redeem now'} onChange={(e) => set('couponCtaLabel', e.target.value)} /></div>
+        </>
+      );
+
+    case 'event':
+      return (
+        <>
+          <div className="field"><label>Event title</label><input value={fields.eventTitle || ''} onChange={(e) => set('eventTitle', e.target.value)} /></div>
+          <div className="field"><label>Starts at</label><input type="datetime-local" value={fields.startsAt || ''} onChange={(e) => set('startsAt', e.target.value)} /></div>
+          <div className="field"><label>Ends at</label><input type="datetime-local" value={fields.endsAt || ''} onChange={(e) => set('endsAt', e.target.value)} /></div>
+          <div className="field"><label>Location</label><input value={fields.eventLocation || ''} onChange={(e) => set('eventLocation', e.target.value)} /></div>
+          <div className="field"><label>Description</label><textarea value={fields.eventDescription || ''} onChange={(e) => set('eventDescription', e.target.value)} /></div>
+        </>
+      );
+
+    case 'review':
+      return (
+        <>
+          <div className="field"><label>Business name</label><input value={fields.businessName || ''} onChange={(e) => set('businessName', e.target.value)} /></div>
+          <div className="field"><label>Google review URL</label><input type="url" value={fields.googlePlaceUrl || ''} onChange={(e) => set('googlePlaceUrl', e.target.value)} placeholder="https://g.page/r/..." /></div>
+          <div className="field"><label>Yelp URL (optional)</label><input type="url" value={fields.yelpUrl || ''} onChange={(e) => set('yelpUrl', e.target.value)} /></div>
+          <div className="field"><label>TripAdvisor URL (optional)</label><input type="url" value={fields.tripadvisorUrl || ''} onChange={(e) => set('tripadvisorUrl', e.target.value)} /></div>
+          <div className="field"><label>Trustpilot URL (optional)</label><input type="url" value={fields.trustpilotUrl || ''} onChange={(e) => set('trustpilotUrl', e.target.value)} /></div>
+        </>
+      );
+
+    case 'feedback':
+      return (
+        <>
+          <div className="field"><label>Title</label><input value={fields.feedbackTitle || ''} onChange={(e) => set('feedbackTitle', e.target.value)} placeholder="How was your experience?" /></div>
+          <div className="field"><label>Subtitle</label><input value={fields.feedbackSubtitle || ''} onChange={(e) => set('feedbackSubtitle', e.target.value)} placeholder="Your feedback helps us improve" /></div>
+        </>
+      );
+
+    case 'menu':
+      return (
+        <>
+          <div className="field"><label>Restaurant name</label><input value={fields.restaurantName || ''} onChange={(e) => set('restaurantName', e.target.value)} /></div>
+          <div className="field"><label>Subtitle (e.g. "Lunch menu")</label><input value={fields.menuSubtitle || ''} onChange={(e) => set('menuSubtitle', e.target.value)} /></div>
+          <p className="hint" style={{ marginTop: 8 }}>Use the QR detail page after creation to add menu categories and items.</p>
+        </>
+      );
+
     default:
       return null;
   }
 }
 
+function MultilinkLinks({ links, onChange }: { links: Array<{label: string; url: string}>; onChange: (l: any) => void }) {
+  return (
+    <div className="field">
+      <label>Links</label>
+      {links.map((link, i) => (
+        <div key={i} style={{ display: 'flex', gap: 6, marginBottom: 6 }}>
+          <input
+            placeholder="Label"
+            value={link.label}
+            onChange={(e) => {
+              const next = [...links];
+              next[i] = { ...next[i], label: e.target.value };
+              onChange(next);
+            }}
+            style={{ width: 130 }}
+          />
+          <input
+            type="url"
+            placeholder="https://"
+            value={link.url}
+            onChange={(e) => {
+              const next = [...links];
+              next[i] = { ...next[i], url: e.target.value };
+              onChange(next);
+            }}
+            style={{ flex: 1 }}
+          />
+          <button
+            className="btn btn-sm btn-ghost"
+            type="button"
+            onClick={() => onChange(links.filter((_, j) => j !== i))}
+          >×</button>
+        </div>
+      ))}
+      <button
+        className="btn btn-sm btn-secondary"
+        type="button"
+        onClick={() => onChange([...links, { label: '', url: 'https://' }])}
+        style={{ marginTop: 6 }}
+      >+ Add link</button>
+    </div>
+  );
+}
+
 function DesignFields({ design, setDesign }: { design: QrDesign; setDesign: (d: QrDesign) => void }) {
   return (
     <div className="design-grid">
-      <div className="field">
-        <label>Foreground color</label>
-        <input type="color" value={design.foregroundColor || '#0a0e27'} onChange={(e) => setDesign({ ...design, foregroundColor: e.target.value })} />
-      </div>
-      <div className="field">
-        <label>Background color</label>
-        <input type="color" value={design.backgroundColor || '#ffffff'} onChange={(e) => setDesign({ ...design, backgroundColor: e.target.value })} />
-      </div>
+      <div className="field"><label>Foreground</label><input type="color" value={design.foregroundColor || '#0a0e27'} onChange={(e) => setDesign({ ...design, foregroundColor: e.target.value })} /></div>
+      <div className="field"><label>Background</label><input type="color" value={design.backgroundColor || '#ffffff'} onChange={(e) => setDesign({ ...design, backgroundColor: e.target.value })} /></div>
       <div className="field">
         <label>Eye style</label>
         <select value={design.eyeStyle} onChange={(e) => setDesign({ ...design, eyeStyle: e.target.value as any })}>
-          <option value="square">Square (classic)</option>
+          <option value="square">Square</option>
           <option value="rounded">Rounded</option>
           <option value="circle">Circle</option>
         </select>
@@ -392,28 +577,13 @@ function DesignFields({ design, setDesign }: { design: QrDesign; setDesign: (d: 
           <option value="L">Low (~7%)</option>
           <option value="M">Medium (~15%)</option>
           <option value="Q">Quartile (~25%)</option>
-          <option value="H">High (~30%) — recommended with logo</option>
+          <option value="H">High (~30%)</option>
         </select>
       </div>
-      <div className="field">
-        <label>Quiet zone (margin)</label>
-        <input
-          type="number"
-          min={0}
-          max={10}
-          value={design.margin ?? 4}
-          onChange={(e) => setDesign({ ...design, margin: Number(e.target.value) })}
-        />
-      </div>
+      <div className="field"><label>Margin</label><input type="number" min={0} max={10} value={design.margin ?? 4} onChange={(e) => setDesign({ ...design, margin: Number(e.target.value) })} /></div>
       <div className="field" style={{ gridColumn: '1 / -1' }}>
         <label>Logo URL (optional)</label>
-        <input
-          type="url"
-          value={design.logoUrl || ''}
-          onChange={(e) => setDesign({ ...design, logoUrl: e.target.value || null })}
-          placeholder="https://yourbrand.com/logo.png"
-        />
-        <span className="hint">PNG/SVG with transparent background works best. Keep it small (under 25% of QR area).</span>
+        <input type="url" value={design.logoUrl || ''} onChange={(e) => setDesign({ ...design, logoUrl: e.target.value || null })} placeholder="https://yourbrand.com/logo.png" />
       </div>
     </div>
   );
