@@ -40,8 +40,8 @@ export function ResetPasswordPage() {
         )}
         <div className="field">
           <label>New password</label>
-          <input type="password" required minLength={10} value={password} onChange={(e) => setPassword(e.target.value)} />
-          <span className="hint">At least 10 characters.</span>
+          <input type="password" required minLength={6} value={password} onChange={(e) => setPassword(e.target.value)} />
+          <span className="hint">At least 6 characters.</span>
         </div>
         <button type="submit" className="btn btn-primary" style={{ width: '100%', justifyContent: 'center' }} disabled={loading}>
           {loading ? 'Resetting…' : 'Reset password'}

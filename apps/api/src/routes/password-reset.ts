@@ -19,7 +19,7 @@ const requestSchema = z.object({
 
 const resetSchema = z.object({
   token: z.string().min(20).max(200),
-  password: z.string().min(10).max(200),
+  password: z.string().min(6).max(200),
 });
 
 // Always returns 200 to avoid email enumeration attacks.

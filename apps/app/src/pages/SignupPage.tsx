@@ -45,8 +45,8 @@ export function SignupPage() {
         </div>
         <div className="field">
           <label>Password</label>
-          <input type="password" required minLength={10} autoComplete="new-password" value={password} onChange={(e) => setPassword(e.target.value)} />
-          <span className="hint">At least 10 characters.</span>
+          <input type="password" required minLength={6} autoComplete="new-password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          <span className="hint">At least 6 characters.</span>
         </div>
         <button type="submit" className="btn btn-primary" style={{ width: '100%', justifyContent: 'center' }} disabled={loading}>
           {loading ? 'Creating account…' : 'Create my free account'}
