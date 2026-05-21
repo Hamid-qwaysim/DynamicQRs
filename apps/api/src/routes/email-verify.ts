@@ -4,6 +4,7 @@ import { and, eq, gt, isNull } from 'drizzle-orm';
 import { drizzle } from 'drizzle-orm/d1';
 import { users, emailVerificationTokens } from '../db/schema';
 import { generateId, generateSessionId, hashApiKey } from '../lib/crypto';
+import { sendEmail, emailVerificationTemplate } from '../lib/email';
 import { requireAuth } from '../middleware/auth';
 import type { Env, Variables } from '../types';
 
@@ -34,14 +35,14 @@ router.post('/send', requireAuth, async (c) => {
     expiresAt,
   });
 
-  // TODO: When SendGrid is configured, send email here.
-  //   Verification URL is:
-  //   `${env.PUBLIC_SITE_URL}/verify-email/?token=${rawToken}`
-  console.log(`[email-verify] Send to ${u.email}: token=${rawToken}`);
+  const verifyUrl = `https://app.dynamicqrcodelabs.com/verify-email?token=${rawToken}`;
+  const tpl = emailVerificationTemplate({ verifyUrl, recipientName: u.name });
+  const result = await sendEmail(c.env, { ...tpl, to: u.email });
 
   const response: Record<string, unknown> = { ok: true };
-  if (c.env.ENVIRONMENT !== 'production') {
+  if (!result.sent && c.env.ENVIRONMENT !== 'production') {
     response.devToken = rawToken;
+    response.devReason = result.reason;
   }
   return c.json(response, 200);
 });

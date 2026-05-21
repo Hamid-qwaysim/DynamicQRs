@@ -13,6 +13,7 @@ import {
   generateSessionId,
   hashApiKey,
 } from '../lib/crypto';
+import { sendEmail, teamInviteTemplate } from '../lib/email';
 import { requireAuth } from '../middleware/auth';
 import type { Env, Variables } from '../types';
 
@@ -143,11 +144,20 @@ router.post('/invites', async (c) => {
     expiresAt,
   });
 
-  // TODO: send invite email via SendGrid
-  console.log(`[team] Invite ${parsed.data.email}: ${c.env.PUBLIC_SITE_URL}/invite/?token=${rawToken}`);
+  const inviteUrl = `https://app.dynamicqrcodelabs.com/invite?token=${rawToken}`;
+  const tpl = teamInviteTemplate({
+    inviteUrl,
+    workspaceName: ws.name,
+    inviterName: user.name,
+    role: parsed.data.role,
+  });
+  const result = await sendEmail(c.env, { ...tpl, to: parsed.data.email });
 
   const response: Record<string, unknown> = { ok: true };
-  if (c.env.ENVIRONMENT !== 'production') response.devToken = rawToken;
+  if (!result.sent && c.env.ENVIRONMENT !== 'production') {
+    response.devToken = rawToken;
+    response.devReason = result.reason;
+  }
   return c.json(response);
 });
 

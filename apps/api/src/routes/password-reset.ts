@@ -9,6 +9,7 @@ import {
   generateSessionId,
   hashApiKey,
 } from '../lib/crypto';
+import { sendEmail, passwordResetTemplate } from '../lib/email';
 import type { Env, Variables } from '../types';
 
 const router = new Hono<{ Bindings: Env; Variables: Variables }>();
@@ -49,15 +50,16 @@ router.post('/request', async (c) => {
     expiresAt,
   });
 
-  // TODO: When SendGrid is configured, send email here.
-  //   The reset link is:
-  //   `${env.PUBLIC_SITE_URL}/reset-password/?token=${rawToken}`
-  console.log(`[password-reset] Email to ${email}: token=${rawToken}`);
+  const resetUrl = `https://app.dynamicqrcodelabs.com/reset-password?token=${rawToken}`;
+  const tpl = passwordResetTemplate({ resetUrl, recipientName: user.name });
+  const result = await sendEmail(c.env, { ...tpl, to: email });
 
   const response: Record<string, unknown> = { ok: true };
-  if (c.env.ENVIRONMENT !== 'production') {
-    // Surface the token in non-prod for testing without an email provider configured.
+  // Surface the token if email could not actually be sent so the user can
+  // still complete the reset flow (helpful in dev and during outage).
+  if (!result.sent && c.env.ENVIRONMENT !== 'production') {
     response.devToken = rawToken;
+    response.devReason = result.reason;
   }
   return c.json(response, 200);
 });

@@ -5,6 +5,16 @@ export interface Env {
   SHORT_LINK_BASE: string;
   JWT_SECRET?: string;
   IP_HASH_SALT?: string;
+  EMAIL?: {
+    send: (msg: {
+      to: string;
+      from: string;
+      subject: string;
+      html: string;
+      text?: string;
+      replyTo?: string;
+    }) => Promise<void>;
+  };
 }
 
 export interface SessionUser {
